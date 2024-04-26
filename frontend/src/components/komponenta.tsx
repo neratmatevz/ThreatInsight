@@ -5,17 +5,22 @@ const Komponenta = () => {
     const [demo, setDemo] = useState<string>("");
 
     useEffect(() => {
-        axios.get('http://localhost:3001/demo')
-            .then(function (response) {
-                console.log(response.data);
-                setDemo(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    },[])
 
-    return(
+        axios({
+            method: 'get',
+            url: `${process.env.API_URL}/demo`
+        })
+        .then(function (response) {
+            console.log(response.data);
+            setDemo(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    }, [])
+
+    return (
         <>
             {demo}
         </>
