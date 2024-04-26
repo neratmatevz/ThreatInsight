@@ -6,12 +6,11 @@ const Komponenta = () => {
 
     useEffect(() => {
 
-        axios({
-            method: 'get',
-            url: `${process.env.API_URL}/demo`
-        })
+        axios.get(
+            `${process.env.REACT_APP_API_URL}/demo`
+        )
         .then(function (response) {
-            console.log(response.data);
+            
             setDemo(response.data);
         })
         .catch(function (error) {
