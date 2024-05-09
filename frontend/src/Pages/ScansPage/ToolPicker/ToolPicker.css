@@ -1,0 +1,6 @@
+.toolpicker-container {
+    border: 1px solid #00152c; /* Light blue border */
+    background-color: #e1eeff; /* Light blue background */
+    padding: 15px;
+    border-radius: 3px;
+}

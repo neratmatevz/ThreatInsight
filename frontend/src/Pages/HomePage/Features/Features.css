@@ -1,0 +1,24 @@
+.row {
+    display: flex;
+    justify-content: center; 
+}
+
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    max-width: 1200px; 
+}
+
+.fa {
+    color: #003366; 
+}

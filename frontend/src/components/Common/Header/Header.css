@@ -1,0 +1,24 @@
+
+.navbar {
+    background-color: #f8f9fa; 
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    color: #003366; 
+    font-weight: bold; 
+}
+
+.navbar-brand:hover, .navbar-brand:focus {
+    color: #001a33; 
+}
+
+.nav-link {
+    color: #003366; 
+    font-size: 16px;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #001a33; 
+}

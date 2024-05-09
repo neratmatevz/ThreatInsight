@@ -1,0 +1,14 @@
+
+/*CELOTEN OKVIR*/
+.scans-container {
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+.results-container {
+    border: 1px solid #00152c; /* Light blue border */
+    background-color: #e1eeff; /* Light blue background */
+    padding: 15px;
+    border-radius: 3px;
+}
