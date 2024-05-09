@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let nmapAPIcall = () =>{
+const nmapAPIcall = (scan_type, command, options, schedule, target, target_end) =>{
     
     axios({
         method: "GET",

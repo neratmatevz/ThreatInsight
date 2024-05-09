@@ -1,0 +1,18 @@
+{
+    "nmap": {
+        "choosen": true,
+        "scan_type": "single",
+        "command": [
+            "normal (navaden -sS TCP SYN scan -- nmap [hostname]",
+            "fast (skeniranje top 100 portov -- nmap -F [hostname])",
+            "ping (ping skeniranje preveri online status hosta -- nmap -sP [hostname])",
+            "port (TCP scan FTP(21), SSH(22), SMTP(25), HTTP(80), POP(110), IMAP(143), HTTPS(443), SMB(445) -- nmap -sV -p 21,22,25,80,110,143,443,445 [hostname] ",
+            "osinfo (skeniranje OS na hostu -- nmap -A [hostname]",
+            "osdetect (remote OS detection z version control in script scanning -- nmap -O [hostname]"
+        ],
+        "options": "samo za normal command in PLAČLJIVO, tak da prazno vedno",
+        "schedule": "now",
+        "target": "domena ali IP",
+        "target_end": ""
+    }
+}
