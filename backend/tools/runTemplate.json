@@ -1,6 +1,6 @@
 {
     "nmap": {
-        "choosen": true,
+        "choosen": false,
         "scan_type": "single",
         "command": [
             "normal (navaden -sS TCP SYN scan -- nmap [hostname]",
@@ -14,5 +14,23 @@
         "schedule": "now",
         "target": "domena ali IP",
         "target_end": ""
+    },
+    "WhoIs": {
+        "choosen": false
+    },
+    "HaveIBeenPwned": {
+        "choosen": false
+    },
+    "IpGeolocation": {
+        "choosen": false
+    },
+    "TLS-DNSSec": {
+        "choosen": false
+    },
+    "EmailVerifiers": {
+        "choosen": false
+    },
+    "EmailPermutator": {
+        "choosen": false
     }
 }

@@ -1,0 +1,16 @@
+{
+    "choosen": true,
+    "scan_type": "single",
+    "command": [
+        "normal",
+        "fast",
+        "ping",
+        "port",
+        "osinfo",
+        "osdetect"
+    ],
+    "options": "",
+    "schedule": "now",
+    "target": "",
+    "target_end": ""
+}
