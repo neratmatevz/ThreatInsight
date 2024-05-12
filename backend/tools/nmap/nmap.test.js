@@ -56,4 +56,5 @@ describe('nmap function', () => {
         }).toThrow("Options parameter is not empty!");
     });
 
+    
 });

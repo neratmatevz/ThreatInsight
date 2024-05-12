@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const nmapAPIcall = require('./nmapAPI');
+
 /*
     Function reads the parameters that are JS object encoded 
     and recognizes the parameters important for the API call
@@ -22,6 +24,7 @@ const nmap = (nmapJsonData) => {
     }catch(e){
         throw new Error(e);
     }
+    
     const supportedRequestData = JSON.parse(supportedRequestJSON);
     const supportedRequestCommands = supportedRequestData.command;
     const supportedRequestScanType = supportedRequestData.scan_type;
@@ -31,36 +34,40 @@ const nmap = (nmapJsonData) => {
         throw new Error("Parameters for nmap not provided!");
     }
 
-    //setup parameters for nmapAPIcall()
+    //Setup parameters for nmapAPIcall()
     const { scan_type, command, options, schedule, target, target_end } = nmapJsonData;
 
     //Check the correctness of all the parameters
-    if (scan_type !== supportedRequestScanType) {
-        throw new Error(`Scan type ${scan_type} is not supported!`);
-    }
+        if (scan_type !== supportedRequestScanType) {
+            throw new Error(`Scan type ${scan_type} is not supported!`);
+        }
 
-    if ((!supportedRequestCommands.includes(command)) || command === "") {
-        throw new Error(`Command parameter ${command} is not supported!`);
-    }
+        if ((!supportedRequestCommands.includes(command)) || command === "") {
+            throw new Error(`Command parameter ${command} is not supported!`);
+        }
 
-    if (options !== null && options !== undefined && options !== "") {
-        throw new Error("Options parameter is not empty!");
-    }
+        if (options !== null && options !== undefined && options !== "") {
+            throw new Error("Options parameter is not empty!");
+        }
 
-    if (schedule !== supportedRequestSchedule) {
-        throw new Error(`Schedule ${schedule} is not supported!`);
-    }
+        if (schedule !== supportedRequestSchedule) {
+            throw new Error(`Schedule ${schedule} is not supported!`);
+        }
 
-    if (!target || target.trim() === "") {
-        throw new Error("Target cannot be empty!");
-    }
+        if (!target || target.trim() === "") {
+            throw new Error("Target cannot be empty!");
+        }
 
-    if (target_end !== null && target_end !== undefined && target_end !== "") {
-        throw new Error("Target end parameter is not empty!");
-    }
-
-    //TODO: call the nmapAPIcall()
-    //TODO: save the result to database 
+        if (target_end !== null && target_end !== undefined && target_end !== "") {
+            throw new Error("Target end parameter is not empty!");
+        }
+    
+    //Function returns an ID of that call
+    let scanID = nmapAPIcall(scan_type, command, options, schedule, target, target_end);
+    
+    //TODO: call API if scan is finished(call until it actually is finished)
+    //TODO: make structure for json to save in database
+    //TODO: save the result to database(need id of the whole "search in database") 
     //TODO: return that the result is saved to database and search for this tool is over
 }
 
