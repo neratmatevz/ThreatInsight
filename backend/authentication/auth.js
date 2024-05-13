@@ -87,4 +87,19 @@ const createCustomToken = async (uid) => {
 }
 
 
-module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken };
+// GENERIRAJ VERIFIKACIJSKI EMAIL LINK
+
+const generateEmailVerificationLink = async (email) => {
+    try {
+      const link = await getAuth().generateEmailVerificationLink(email);
+      // Construct email verification template, embed the link and send
+      // using custom SMTP server.
+      
+      await sendCustomVerificationEmail(email, link);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken, generateEmailVerificationLink };
