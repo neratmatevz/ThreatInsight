@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUser,createUser, deleteUser, updateUser, createCustomToken } = require('../../authentication/auth'); 
+const { getUser,createUser, deleteUser, updateUser, createCustomToken, generateEmailVerificationLink } = require('../../authentication/auth'); 
 
 let router = express.Router();
 
@@ -91,6 +91,18 @@ router.get('/createCustomToken', async (req, res) => {
     } catch (error) {
         console.log('Error creating custom token:', error);
         res.status(500).send("Error creating custom token");
+    }
+});
+
+router.post('/send-verification-email', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const link = await generateEmailVerificationLink(email);
+        res.send({ link });
+    } catch (error) {
+        console.log('Error generating email verification link:', error);
+        res.status(500).send('Error generating email verification link');
     }
 });
 

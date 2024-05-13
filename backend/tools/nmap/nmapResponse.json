@@ -1,6 +1,11 @@
 {
-    "hostUp": true,
+    "scan_id" : "",
+    "host": {
+        "hostname" : "",
+        "ip" : "",
+        "isUp" : false
+    },
     "ports":[
-
+        { "port": 21, "protocol": "tcp", "state": "open", "service": "ftp" }
     ]
 }
