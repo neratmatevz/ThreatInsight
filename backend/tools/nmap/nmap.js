@@ -1,27 +1,32 @@
 const fs = require('fs');
 const path = require('path');
-/*
-    Function reads the parameters that are JS object encoded 
-    and recognizes the parameters important for the API call
-    to the nmap API web service. The object is parsed from 
-    the JSON that contains information about all the tools 
-    for the scan.
+const nmapAPIcall = require('./nmapAPI');
+const structureResponse = require('./nmapStructureResponse');
+const saveStructuredResponse = require('./nmapSaveResponse');
 
-    Function should be called only from the function that
-    processes the JSON data from the "Run" on frontend.
-
-    @param {Object} nmapJsonData - JS object containing parameters for the Nmap API call.
-*/
+/**
+ * Reads the parameters encoded within a JavaScript
+ * object and identifies the necessary parameters for
+ * making an API call to the Nmap API web service. 
+ * 
+ * This function is intended to be exclusively invoked
+ * by the function responsible for processing JSON data
+ * resulting from the frontend "Run" action.
+ * 
+ * @param {Object} nmapJsonData - JavaScript object containing parameters required for the Nmap API call.
+ * @returns {Object} - That the nmap scan is complete.
+ */
 const nmap = (nmapJsonData) => {
 
     //Supported request parameters
     let supportedRequestJSON;
-    try{
+    try {
         const supportedRequestJSONPath = path.join(__dirname, 'nmapSupportedRequest.json');
-        supportedRequestJSON = fs.readFileSync(supportedRequestJSONPath , { encoding: 'utf8'});
-    }catch(e){
+        supportedRequestJSON = fs.readFileSync(supportedRequestJSONPath, { encoding: 'utf8' });
+    } catch (e) {
         throw new Error(e);
     }
+
     const supportedRequestData = JSON.parse(supportedRequestJSON);
     const supportedRequestCommands = supportedRequestData.command;
     const supportedRequestScanType = supportedRequestData.scan_type;
@@ -31,7 +36,7 @@ const nmap = (nmapJsonData) => {
         throw new Error("Parameters for nmap not provided!");
     }
 
-    //setup parameters for nmapAPIcall()
+    //Setup parameters for nmapAPIcall()
     const { scan_type, command, options, schedule, target, target_end } = nmapJsonData;
 
     //Check the correctness of all the parameters
@@ -59,9 +64,27 @@ const nmap = (nmapJsonData) => {
         throw new Error("Target end parameter is not empty!");
     }
 
-    //TODO: call the nmapAPIcall()
-    //TODO: save the result to database 
-    //TODO: return that the result is saved to database and search for this tool is over
+    //Call API and wait for scan to be over
+    nmapAPIcall(scan_type, command, options, schedule, target, target_end)
+        .then(scanID => {
+            nmapAPIreport(scanID)
+                .then(result => {
+
+                    //TODO: make structure for json to save in database
+                    let jsonStructuredResponse = structureResponse(result);
+                    //TODO: save the result to database(need id of the whole "search in database") 
+                    saveStructuredResponse(jsonStructuredResponse);
+                    //TODO: return that the result is saved to database and search for this tool is over
+                })
+                .catch(error => {
+                    // Handle any errors that occur during the process
+                    throw new Error(error)
+                });
+        })
+        .catch(error => {
+            console.error("Error:", error.message);
+        });
+
 }
 
 module.exports = nmap;
