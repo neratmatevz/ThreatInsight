@@ -1,0 +1,43 @@
+.overview-section {
+    background-color: #f4f4f4; 
+    padding: 150px 0; 
+}
+
+.container {
+    max-width: 1200px; 
+}
+
+h2 {
+    font-size: 28px; 
+    color: #333; 
+    margin-bottom: 15px; 
+}
+
+p {
+    font-size: 16px; 
+    color: #666; 
+    line-height: 1.6; 
+}
+.img-fluid {
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+}
+
+.overview-section .explore-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #f8f9fa; 
+    color: #212529; 
+    text-decoration: none; 
+    font-weight: bold;
+    border: 1px solid #ced4da; 
+    border-radius: 2px; 
+    transition: all 0.3s ease; 
+    border-radius: 4px;
+}
+
+.overview-section .explore-button:hover {
+    background-color: #e2e6ea; 
+    border-color: #adb5bd; 
+}
