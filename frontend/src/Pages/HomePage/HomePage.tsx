@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../../components/Common/Header/Header';
-import Overview from './Introduction/Overview';
+import Overview from './Overview/Overview';
 import Features from './Features/Features';
 import { useAuth } from '../../context/AuthContext';
 
