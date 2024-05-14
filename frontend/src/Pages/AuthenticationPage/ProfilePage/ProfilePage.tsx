@@ -5,12 +5,12 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../../firebase';
 
 const ProfilePage = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await signOut(auth)
+    logout();
       navigate('/');
       console.log('You are logged out')
     } catch (e: any) {

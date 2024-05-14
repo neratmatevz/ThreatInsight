@@ -12,19 +12,21 @@ import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/Password
 import Login from './Pages/AuthenticationPage/LoginPages/Login';
 import { User } from 'firebase/auth';
 import { auth } from './firebase';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import ProfilePage from './Pages/AuthenticationPage/ProfilePage/ProfilePage';
 import ProtectedRoute from './Pages/AuthenticationPage/ProtectedRoute/ProtectedRoute';
 import EmailVerification from './Pages/AuthenticationPage/RegistrationPages/EmailVerification/EmailVerification';
 
 
-function App() {
 
+function App() {
+  const { user } = useAuth();
 
   return (
     <AuthProvider>
     <BrowserRouter>
       <div>
+        
         <Header /> {/* Include Header component */}
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -40,6 +42,9 @@ function App() {
             <ProfilePage />
             </ProtectedRoute>} />
         </Routes>
+
+
+        
       </div>
     </BrowserRouter>
     </AuthProvider>
