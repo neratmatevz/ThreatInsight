@@ -32,7 +32,6 @@ p {
     text-decoration: none; 
     font-weight: bold;
     border: 1px solid #ced4da; 
-    border-radius: 2px; 
     transition: all 0.3s ease; 
     border-radius: 4px;
 }
