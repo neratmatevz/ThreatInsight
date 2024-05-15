@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { auth } from '../firebase';
+import { auth } from '../Firebase/firebase';
 import { User, setPersistence, browserLocalPersistence } from 'firebase/auth';
 
 interface AuthContextType {

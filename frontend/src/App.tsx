@@ -11,7 +11,7 @@ import EmailInput from './Pages/AuthenticationPage/RegistrationPages/EmailInput/
 import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/PasswordInput/PasswordInput';
 import Login from './Pages/AuthenticationPage/LoginPages/Login';
 import { User } from 'firebase/auth';
-import { auth } from './firebase';
+import { auth } from './Firebase/firebase';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProfilePage from './Pages/AuthenticationPage/ProfilePage/ProfilePage';
 import ProtectedRoute from './Pages/AuthenticationPage/ProtectedRoute/ProtectedRoute';
