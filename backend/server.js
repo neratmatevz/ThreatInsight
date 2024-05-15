@@ -5,21 +5,16 @@ const PORT = process.env.PORT || 3001;
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
-// imports
-const { getFirestore } = require('firebase-admin/firestore');
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 
+const initializeFirestore = require('./firebase');
 
-// vzpostavitev Firebase
-var serviceAccount = require("./serviceAccountKey.json");
-initializeApp({
-    credential: cert(serviceAccount)
-  });
-const db = getFirestore();
+// Initialize Firestore
+const db = initializeFirestore();
 
+// Export db 
+module.exports = db;
 
-//
-
+//Routes
 var demo = require('./routes/demo/demo.js');
 app.use('/demo', demo);
 

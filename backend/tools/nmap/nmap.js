@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const nmapAPIcall = require('./nmapAPI');
+const {nmapAPIcall, nmapAPIreport} = require('./nmapAPI');
 const structureResponse = require('./nmapStructureResponse');
 const saveStructuredResponse = require('./nmapSaveResponse');
 
@@ -67,13 +67,16 @@ const nmap = (nmapJsonData) => {
     //Call API and wait for scan to be over
     nmapAPIcall(scan_type, command, options, schedule, target, target_end)
         .then(scanID => {
+            console.log(scanID);
             nmapAPIreport(scanID)
                 .then(result => {
 
-                    //TODO: make structure for json to save in database
-                    let jsonStructuredResponse = structureResponse(result);
+                    //Make structured response to save in database
+                    let structuredResponse = structureResponse(result);
+
                     //TODO: save the result to database(need id of the whole "search in database") 
-                    saveStructuredResponse(jsonStructuredResponse);
+                    saveStructuredResponse(structuredResponse);
+
                     //TODO: return that the result is saved to database and search for this tool is over
                 })
                 .catch(error => {

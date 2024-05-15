@@ -1,5 +1,19 @@
 const Agent = require('undici').Agent;
 
+/**
+ * Initiates an Nmap scan by making a call to the Nmap API.
+ * 
+ * If the scan is successfully started, the promise will resolve with the scan ID.
+ * 
+ * @param {string} scan_type - The type of scan to perform (e.g., 'fast', 'normal', 'ping', 'port').
+ * @param {string} command - The specific Nmap command to execute.
+ * @param {string} options - Additional options to customize the scan.
+ * @param {string} schedule - The schedule for the scan.
+ * @param {string} target - The target IP address or hostname to scan.
+ * @param {string} target_end - The ending IP address (optional).
+ * @returns {Promise<string>} A promise that resolves to the ID associated with the initiated scan.
+ 
+ */
 const nmapAPIcall = (scan_type, command, options, schedule, target, target_end) => {
     //set agent for ssl
     const agent = new Agent({
@@ -41,11 +55,20 @@ const nmapAPIcall = (scan_type, command, options, schedule, target, target_end) 
             }
         })
         .catch(error => {
-            throw new Error(`Error starting scan: ${error.message}`);
+            throw new Error(error.message);
         });
 };
 
+/**
+ * Fetches the Nmap scan report from the Nmap API asynchronously.
+ * If the status code is 200, the scan result is available immediately.
+ * If the status code is 202, the function will retry fetching the report after a delay.
+ * 
+ * @param {string} scan_id - The ID associated with the scan.
+ * @returns {Promise<object>} A promise that resolves to an object containing the scan report data.
+ * The resolved object typically includes the status code and the scan result data.
 
+ */
 const nmapAPIreport = (scan_id) => {
     // Set agent for SSL
     const agent = new Agent({
@@ -82,13 +105,13 @@ const nmapAPIreport = (scan_id) => {
                         // If status code is 202, call the function recursively after 5 seconds
                         setTimeout(() => {
                             resolve(fetchWithDelay());
-                        }, 5000); // 5 seconds delay
+                        }, 30000); // 30 seconds delay
                     } else {
                         reject(new Error(`Failed to fetch scan report: ${data.status}`));
                     }
                 })
                 .catch(error => {
-                    reject(new Error(`Error fetching report: ${error.message}`));
+                    reject(new Error(error.message));
                 });
         });
     };

@@ -1,4 +1,5 @@
 {
+    "userUID": "",
     "nmap": {
         "choosen": false,
         "scan_type": "single",
