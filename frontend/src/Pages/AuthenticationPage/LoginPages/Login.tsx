@@ -21,7 +21,7 @@ const Login = () => {
       }
       console.log('je')
       console.log(user.emailVerified)
-      navigate('/');
+      navigate('/profile');
       // Proceed with your login logic
     } catch (error: any) {
       setError(error.message);

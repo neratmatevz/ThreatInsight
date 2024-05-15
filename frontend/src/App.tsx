@@ -27,10 +27,14 @@ function App() {
     <BrowserRouter>
       <div>
         
-        <Header /> {/* Include Header component */}
+        <Header /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="scans" element={<ScansPage />} />
+          <Route path="scans" element ={<ProtectedRoute>
+            <ScansPage />
+            </ProtectedRoute>} />
+     
+
           <Route path="register">
             <Route path="/register" element={<EmailInput />} />
             <Route path="password" element={<PasswordInput />} />
