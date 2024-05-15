@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {nmapAPIcall, nmapAPIreport} = require('./nmapAPI');
+const { nmapAPIcall, nmapAPIreport } = require('./nmapAPI');
 const structureResponse = require('./nmapStructureResponse');
 const saveStructuredResponse = require('./nmapSaveResponse');
 
@@ -14,9 +14,11 @@ const saveStructuredResponse = require('./nmapSaveResponse');
  * resulting from the frontend "Run" action.
  * 
  * @param {Object} nmapJsonData - JavaScript object containing parameters required for the Nmap API call.
+ * @param {string} userUID - The UID of the user who initiated the scan.
+ * @param {string} searchUID - The UID of the database serach instance.
  * @returns {Object} - That the nmap scan is complete.
  */
-const nmap = (nmapJsonData) => {
+const nmap = (nmapJsonData, userUID, searchUID) => {
 
     //Supported request parameters
     let supportedRequestJSON;
@@ -67,24 +69,31 @@ const nmap = (nmapJsonData) => {
     //Call API and wait for scan to be over
     nmapAPIcall(scan_type, command, options, schedule, target, target_end)
         .then(scanID => {
-            console.log(scanID);
+
+            //Call API to check if scan is complete and get result
             nmapAPIreport(scanID)
                 .then(result => {
 
                     //Make structured response to save in database
                     let structuredResponse = structureResponse(result);
 
-                    //TODO: save the result to database(need id of the whole "search in database") 
-                    saveStructuredResponse(structuredResponse);
+                    //save the result to database
+                    saveStructuredResponse(structuredResponse, userUID, searchUID)
+                    .then(result => {
+                        console.log(result);
+                    })
+                    .catch(error => {
+                        throw new Error(error.message);
+                    });
 
                     //TODO: return that the result is saved to database and search for this tool is over
                 })
                 .catch(error => {
-                    // Handle any errors that occur during the process
                     throw new Error(error)
                 });
         })
         .catch(error => {
+            //TODO: throw error(to catch in function that calls this one)
             console.error("Error:", error.message);
         });
 

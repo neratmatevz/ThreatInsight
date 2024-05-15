@@ -90,7 +90,7 @@ const nmapAPIreport = (scan_id) => {
         dispatcher: agent,
         body: form
     };
-
+    //TODO: CALL FIRST TIME AFTER 30 SECONDS NOT INSTANTLY(zgubimo en klic takoj, ker kliče takoj ob ustvarjanju, ko ni nikoli nareto)
     // Function to fetch report recursively with a delay
     const fetchWithDelay = () => {
         return new Promise((resolve, reject) => {
