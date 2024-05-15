@@ -1,4 +1,4 @@
-const db = require('../../server');
+const { getFirestoreInstance } = require('../../firebase');
 
 /**
  * Saves the structured result of an Nmap scan to the database.
@@ -13,6 +13,7 @@ const db = require('../../server');
  * @returns {Object} - An object indicating the success or failure of saving to database.
  */
 const saveStructuredResponse = async (structuredResult, userUID, searchUID) => {
+    const db = getFirestoreInstance();
     try {
         const documentPath = `users/${userUID}/iskanje/${searchUID}`
 
