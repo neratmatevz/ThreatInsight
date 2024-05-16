@@ -9,10 +9,7 @@ app.use(express.json());
 const initializeFirestore = require('./firebase');
 
 // Initialize Firestore
-const db = initializeFirestore();
-
-// Export db 
-module.exports = db;
+initializeFirestore();
 
 //Routes
 var demo = require('./routes/demo/demo.js');

@@ -1,12 +1,21 @@
-const { getFirestore } = require('firebase-admin/firestore');
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { initializeApp, cert } = require('firebase-admin/app');
+const {getFirestore} = require('firebase-admin/firestore');
+
+let db;
 
 function initializeFirestore() {
-    var serviceAccount = require("./serviceAccountKey.json");
-    initializeApp({
-        credential: cert(serviceAccount)
-    });
-    return getFirestore();
+    if (!db) {
+        //TODO: save as secret and fetch as secret
+        var serviceAccount = require("./serviceAccountKey.json");
+        initializeApp({
+            credential: cert(serviceAccount)
+        });
+        db = getFirestore();
+    }
 }
 
-module.exports = initializeFirestore;
+function getFirestoreInstance() {
+    return db;
+}
+
+module.exports = { initializeFirestore, getFirestoreInstance };
