@@ -1,12 +1,24 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { auth } from '../Firebase/firebase';
-import { User, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { User, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
 
 interface AuthContextType {
   user: User | null;
-  logout: () => void;
+  signIn: (email: string, password: string) => Promise<boolean>;
+  logout: () => Promise<void>;
+  error: string | null;
+  loading: boolean | null;
+  createUser: (email: string, password: string) => Promise<void>;
 }
-const AuthContext = createContext<AuthContextType>({ user: null, logout: () => {} });
+
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  signIn: async () => false, // Default value should return a Promise<boolean>
+  logout: async () => {},
+  error: null,
+  loading: null,
+  createUser: async () => {}
+});
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -18,45 +30,64 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Probaj pridobiti uporabnika iz localStorage
-    const storedUser = localStorage.getItem('authUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      // Če uporabnika ni v localStorage, nastavi persistence na LOCAL
-      setPersistence(auth, browserLocalPersistence)
-        .then(() => {
-          // Naroči se na avtorizacijo, če se state spremeni
-          const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (user) {
-              // shrani uporabnika v localStorage
-              localStorage.setItem('authUser', JSON.stringify(user));
-            }
-            setUser(user);
-          });
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
 
-          return () => unsubscribe();
-        })
-        .catch((error) => {
-          console.error("Error setting persistence:", error);
-        });
-    }
+    return () => {
+      unsubscribe();
+    };
   }, []);
+  
+
+  const signIn = async (email: string, password: string): Promise<boolean> => {
+    try {   
+      
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      if (!user.emailVerified) {
+        setError("Please verify your email before logging in.");
+        return false;
+      }
+      await setPersistence(auth, browserLocalPersistence);
+      setError(null);
+      return true;
+    } catch (error: any) {
+      setError(error.message);
+      return false; 
+    }
+  };
+  
 
   const logout = async () => {
     try {
-      await auth.signOut(); // Wait for the signOut process to complete
-      localStorage.removeItem('authUser'); // Remove user data from localStorage
+      setLoading(true)
+      await auth.signOut();
+      localStorage.removeItem('authUser');
       console.log('You are logged out');
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
-  
+
+  const createUser = async  (email:string, password:string) => {
+    try{
+      setLoading(true);
+      await createUserWithEmailAndPassword(auth, email, password);
+    }catch (error:any){
+      setError(error.message)
+    }
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser }}>
       {children}
     </AuthContext.Provider>
   );

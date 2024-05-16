@@ -16,6 +16,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import ProfilePage from './Pages/AuthenticationPage/ProfilePage/ProfilePage';
 import ProtectedRoute from './Pages/AuthenticationPage/ProtectedRoute/ProtectedRoute';
 import EmailVerification from './Pages/AuthenticationPage/RegistrationPages/EmailVerification/EmailVerification';
+import YourWorkPage from './Pages/YourWorkPage/YourWorkPage/YourWorkPage';
 
 
 
@@ -44,6 +45,11 @@ function App() {
           <Route path="profile" 
           element ={<ProtectedRoute>
             <ProfilePage />
+            </ProtectedRoute>} />
+
+            <Route path="your-work" 
+          element ={<ProtectedRoute>
+            <YourWorkPage />
             </ProtectedRoute>} />
         </Routes>
 

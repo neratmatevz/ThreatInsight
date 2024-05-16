@@ -1,0 +1,15 @@
+{
+    "cityName": "",
+    "continentCode": "",
+    "countryName": "",
+    "latitude": 0,
+    "longitude": 0,
+    "timeZone": "",
+    "weatherCode": "",
+    "subdivisions": [],
+    "autonomousSystemNumber": 0,
+    "autonomousSystemOrganization": "",
+    "connectionType": "",
+    "isp": "",
+    "userType": ""
+}

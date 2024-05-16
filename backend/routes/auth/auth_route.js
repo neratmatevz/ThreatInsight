@@ -1,5 +1,6 @@
 const express = require('express');
 const { getUser,createUser, deleteUser, updateUser, createCustomToken, generateEmailVerificationLink } = require('../../authentication/auth'); 
+const { ipGeo } = require('../../tools/IpGeo/ipGeo');
 
 let router = express.Router();
 
@@ -105,6 +106,17 @@ router.post('/send-verification-email', async (req, res) => {
         res.status(500).send('Error generating email verification link');
     }
 });
+
+router.get('/ipgeo', async (req,res) => {
+    const ip = req.query.ip
+    console.log("x")
+    try{
+        await ipGeo(ip)
+        res.send("done")
+    }catch (error){
+        console.log('Error fetching user data:', error);
+    }
+})
 
 
 module.exports = router;

@@ -5,9 +5,15 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../../Firebase/firebase';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
+
 
   if (!user) {
+    console.log(user)
     return <Navigate to='/' />;
   }
   return <>{children}</>;
