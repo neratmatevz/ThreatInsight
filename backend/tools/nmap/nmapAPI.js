@@ -90,29 +90,39 @@ const nmapAPIreport = (scan_id) => {
         dispatcher: agent,
         body: form
     };
-    //TODO: CALL FIRST TIME AFTER 30 SECONDS NOT INSTANTLY(zgubimo en klic takoj, ker kliče takoj ob ustvarjanju, ko ni nikoli nareto)
-    // Function to fetch report recursively with a delay
+
+    // Function to fetch report recursively with a delay(first call after 10s, then recursively every 30s)
     const fetchWithDelay = () => {
         return new Promise((resolve, reject) => {
-            fetch(`${process.env.NMAP_API}/scan_result`, fetchConfig)
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status_code === 200) {
-                        resolve(data);
-                    } else if (data.status_code === 202) {
-                        // If status code is 202, call the function recursively after 5 seconds
-                        setTimeout(() => {
-                            resolve(fetchWithDelay());
-                        }, 30000); // 30 seconds delay
-                    } else {
-                        reject(new Error(`Failed to fetch scan report: ${data.status}`));
-                    }
-                })
-                .catch(error => {
-                    reject(new Error(error.message));
-                });
+
+            setTimeout(() => {
+
+                fetch(`${process.env.NMAP_API}/scan_result`, fetchConfig)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.status_code === 200) {
+
+                            //Resolve the result of API call
+                            resolve(data);
+
+                        } else if (data.status_code === 202) {
+
+                            // If status code is 202, call the function recursively after 30 seconds
+                            setTimeout(() => {
+                                fetchWithDelay().then(resolve).catch(reject);
+                            }, 30000); // 30 seconds delay
+
+                        } else {
+                            reject(new Error(`Failed to fetch scan report: ${data.status}`));
+                        }
+
+                    })
+                    .catch(error => {
+                        reject(new Error(error.message));
+                    });
+
+            }, 10000); // 10 seconds delay before the first fetch
         });
     };
 

@@ -66,35 +66,39 @@ const nmap = (nmapJsonData, userUID, searchUID) => {
         throw new Error("Target end parameter is not empty!");
     }
 
+
+    
     //Call API and wait for scan to be over
-    nmapAPIcall(scan_type, command, options, schedule, target, target_end)
+    return nmapAPIcall(scan_type, command, options, schedule, target, target_end)
         .then(scanID => {
 
             //Call API to check if scan is complete and get result
-            nmapAPIreport(scanID)
+            return nmapAPIreport(scanID)
                 .then(result => {
 
                     //Make structured response to save in database
                     let structuredResponse = structureResponse(result);
 
                     //save the result to database
-                    saveStructuredResponse(structuredResponse, userUID, searchUID)
-                    .then(result => {
-                        console.log(result);
-                    })
-                    .catch(error => {
-                        throw new Error(error.message);
-                    });
+                    return saveStructuredResponse(structuredResponse, userUID, searchUID)
+                        .then(result => {
 
-                    //TODO: return that the result is saved to database and search for this tool is over
+                            return result;
+                            
+                        })
+                        .catch(error => {
+                            throw new Error(error.message);
+                        });
+
+
                 })
                 .catch(error => {
-                    throw new Error(error)
+                    throw new Error(error.message);
                 });
         })
         .catch(error => {
-            //TODO: throw error(to catch in function that calls this one)
-            console.error("Error:", error.message);
+            //throw error(to catch in function that calls this one)
+            throw new Error(error.message);
         });
 
 }
