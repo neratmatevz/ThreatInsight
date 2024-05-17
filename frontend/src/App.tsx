@@ -5,9 +5,7 @@ import Header from './components/Common/Header/Header';
 import HomePage from './Pages/HomePage/HomePage';
 import ScansPage from './Pages/ScansPage/ScansPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RegisterForm from './Pages/AuthenticationPage/RegistrationPages/EmailInput/EmailInput';
-import Register from './Pages/AuthenticationPage/RegistrationPages/EmailInput/EmailInput';
-import EmailInput from './Pages/AuthenticationPage/RegistrationPages/EmailInput/EmailInput';
+
 import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/PasswordInput/PasswordInput';
 import Login from './Pages/AuthenticationPage/LoginPages/Login';
 import { User } from 'firebase/auth';
@@ -37,8 +35,8 @@ function App() {
      
 
           <Route path="register">
-            <Route path="/register" element={<EmailInput />} />
-            <Route path="password" element={<PasswordInput />} />
+            <Route path="/register" element={<PasswordInput/>} />
+
             <Route path="emailverification" element={<EmailVerification />} />
           </Route>
           <Route path ="login" element = {<Login />} />
