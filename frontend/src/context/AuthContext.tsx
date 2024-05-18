@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {   
-      
+      setPersistence(auth, browserLocalPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
   
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setError("Please verify your email before logging in.");
         return false;
       }
-      await setPersistence(auth, browserLocalPersistence);
+      
       setError(null);
       return true;
     } catch (error: any) {
@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setLoading(true)
       await auth.signOut();
-      localStorage.removeItem('authUser');
+
       console.log('You are logged out');
     } catch (error) {
       console.error("Error signing out:", error);

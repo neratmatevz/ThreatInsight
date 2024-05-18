@@ -6,7 +6,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-const { initializeFirestore } = require('./firebase');
+const {initializeFirestore} = require('./firebase');
 
 // Initialize Firestore
 initializeFirestore();
