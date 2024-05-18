@@ -17,7 +17,9 @@
         "target_end": ""
     },
     "WhoIs": {
-        "choosen": false
+        "choosen": false,
+        "ip": "",
+        "domain": ""
     },
     "HaveIBeenPwned": {
         "choosen": false
