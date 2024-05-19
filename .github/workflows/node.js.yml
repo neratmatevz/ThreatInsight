@@ -25,7 +25,12 @@ jobs:
         cache-dependency-path: ./backend/package-lock.json
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Retrieve and decode serviceAccountKey.json
+      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode > ./backend/serviceAccountKey.json
     - run: npm ci
       working-directory: ./backend
     - run: npm test
       working-directory: ./backend
+    - name: Remove serviceAccountKey.json
+      run: rm ./backend/serviceAccountKey.json
+      

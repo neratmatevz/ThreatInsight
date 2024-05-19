@@ -17,7 +17,9 @@
         "target_end": ""
     },
     "WhoIs": {
-        "choosen": false
+        "choosen": false,
+        "ip": "",
+        "domain": ""
     },
     "HaveIBeenPwned": {
         "choosen": false
@@ -26,7 +28,8 @@
         "choosen": false
     },
     "TLS-DNSSec": {
-        "choosen": false
+        "choosen": false,
+        "url": ""
     },
     "EmailVerifiers": {
         "choosen": false
