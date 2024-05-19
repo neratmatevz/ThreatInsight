@@ -1,4 +1,4 @@
-const whoisAPIcall = require('./whoisAPI'); // Import the WHOIS API call function
+const whoisAPIcall = require('./whoIsAPI'); // Import the WHOIS API call function
 const structureResponse = require('./whoisStructureResponse'); // Import the function to structure the response
 const saveStructuredResponse = require('./whoisSaveResponse'); // Import the function to save the structured response
 
