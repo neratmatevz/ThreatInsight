@@ -1,39 +1,69 @@
-.tool-item {
-    padding: 8px 12px;
-    margin: 5px 0;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+.toolpicker-container {  
+    background-color: #eff7ff; 
+    margin-bottom: 10px;
+    padding: 30px;     
+}
+
+.toolpicker-header {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.tool-entry {
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tool-entry.selected {
+    background-color: #d0e6ff; 
+}
+
+
+.form-check-input {
+    margin-left: auto;
+    pointer-events: none; 
+}
+
+.form-check-input:checked {
+    background-color: #0056b3; 
+    border-color: #024994; 
+}
+
+.form-check-label {
+    flex-grow: 1;
+    pointer-events: none; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: 10px; 
+}
+
+.btn-hacker {
+    background-color: #006bdd; /* Updated background color */
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #004494; /* Added border */
+    border-radius: 3px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
-    justify-content: space-between; 
     align-items: center;
-    width: 100%; 
-}
-.tool-item:hover {
-    background-color: #f0f0f0;
+    justify-content: center;
 }
 
-
-
-.tool-detail {
-    padding: 8px 12px;
-    background-color: #f9f9f9;
-    border-left: 2px solid #007bff;
-    margin: 0 0 5px 10px;
+.btn-hacker i {
+    margin-right: 8px;
+    color: rgb(255, 255, 255);
 }
 
-.arrow {
-    display: inline-block;
-    transition: transform 0.3s ease;
-    color: gray; 
-    font-size: 13px;
-    text-align: right;
+.btn-hacker:hover {
+    background-color: #b8b8b8;
+    border-color: #006bdd; /* Border color remains consistent on hover */
 }
-
-.down::after {
-    content: "▼"; 
-}
-
-.up::after {
-    content: "▲"; 
+.btn-hacker:hover i {
+    color: black;
 }

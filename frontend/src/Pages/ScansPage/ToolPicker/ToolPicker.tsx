@@ -1,32 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ToolPicker.css';
 
-const ToolPicker: React.FC = () => {
-    const [visibleTool, setVisibleTool] = useState<string | null>(null);
+interface ToolPickerProps {
+    selectedTools: string[];
+    setSelectedTools: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-    const toggleTool = (toolName: string) => {
-        setVisibleTool(visibleTool === toolName ? null : toolName);
+const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools }) => {
+
+    const handleCheckboxChange = (toolName: string) => {
+        setSelectedTools(prevSelectedTools =>
+            prevSelectedTools.includes(toolName)
+                ? prevSelectedTools.filter(tool => tool !== toolName)
+                : [...prevSelectedTools, toolName]
+        );
     };
 
     const tools = ["Nmap", "WhoIs", "HaveIBeenPwned", "IP Geolocation", "TLS/DNSSec Scan", "E-mail Verifier", "E-mail Permutator"];
 
     return (
-        <div className="bg-light col-3 toolpicker-container">
-            <h2 className="mb-2 fw-normal">ToolPicker</h2>
-            <hr></hr>
+        <div className="bg-light col-2 toolpicker-container">
+            <h3 className="toolpicker-header"><i className="fa fa-wrench tool-icon" aria-hidden="true"></i> Available tools:</h3>
             {tools.map((tool, index) => (
-                <div key={index} className="tool-entry">
-                    <div className="tool-item" onClick={() => toggleTool(tool)}>
-                        {tool}
-                        <span className={`arrow ${visibleTool === tool ? 'up' : 'down'}`}></span>
+                <div 
+                    key={index} 
+                    className={`tool-entry mb-3 p-2 border rounded ${selectedTools.includes(tool) ? 'selected' : ''}`} 
+                    onClick={() => handleCheckboxChange(tool)}
+                >
+                    <div className="d-flex justify-content-between align-items-center">
+                        <label className="form-check-label mb-0" htmlFor={`checkbox-${tool}`}>
+                            {tool}
+                        </label>
+                        <input 
+                            className="form-check-input"
+                            type="checkbox"
+                            value={tool}
+                            id={`checkbox-${tool}`}
+                            checked={selectedTools.includes(tool)}
+                            onChange={() => handleCheckboxChange(tool)}
+                            onClick={(e) => e.stopPropagation()}
+                        />
                     </div>
-                    {visibleTool === tool && (
-                        <div className="tool-detail">
-                            <p>This is a placeholder for {tool} options and settings.</p>
-                        </div>
-                    )}
                 </div>
             ))}
+            <div className="button-container">
+                <button className="btn btn-hacker">
+                    <i className="fa fa-user-secret" aria-hidden="true"></i> Start Scanning
+                </button>
+            </div>
         </div>
     );
 }

@@ -1,24 +1,44 @@
+/* Header.css */
 
 .navbar {
-    background-color: #f8f9fa; 
-    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: none;
+    padding: 0; 
 }
 
 .navbar-brand {
-    margin-left: 10px;
-    color: #003366; 
-    font-weight: bold; 
+    margin-left: 20px;
+    color: #3a3a3a;
+    font-weight: bold;
+    font-size: 14px; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
-    color: #001a33; 
+    color: #001a33;
 }
 
 .nav-link {
-    color: #003366; 
-    font-size: 16px;
+    color: #494949;
+    font-size: 11px; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0 8px; 
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    font-weight: bold;
 }
 
-.nav-link:hover, .nav-link:focus {
-    color: #001a33; 
+.links {
+    padding: 4px 3px; 
+    border-radius: 3px; 
+}
+
+.nav-link .links:hover {
+    background-color: #dddcdc; 
+    color: #494949; 
+}
+
+.nav-item.active .nav-link {
+    border-bottom: 2px solid #007bff; 
+    color: #494949; 
 }

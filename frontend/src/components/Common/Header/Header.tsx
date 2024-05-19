@@ -1,13 +1,14 @@
 import React from 'react';
 import './Header.css'; 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
 const Header = () => {
     const { user } = useAuth();
+    const location = useLocation();
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg">
             <Link className="navbar-brand" to="/">
                 <i className="fas fa-shield-alt mr-2"></i> ThreatInsight
             </Link>
@@ -17,9 +18,9 @@ const Header = () => {
 
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                {user && (
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/scans">Scans</Link>
+                    {user && (
+                        <li className={`nav-item ${location.pathname === '/scans' ? 'active' : ''}`}>
+                            <Link className="nav-link" to="/scans"><span className="links">Scans</span></Link>
                         </li>
                     )}
                 </ul>    
@@ -28,12 +29,12 @@ const Header = () => {
             <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul className="navbar-nav">
                     {user ? (
-                        <li className="nav-item">
-                            <Link className='nav-link ' to='/profile'>Profile </Link>
+                        <li className={`nav-item ${location.pathname === '/profile' ? 'active' : ''}`}>
+                            <Link className='nav-link' to='/profile'>Profile</Link>
                         </li>
                     ) : (
-                        <li className="nav-item">
-                            <Link className='nav-link ' to='/login'>Sign in </Link>
+                        <li className={`nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
+                            <Link className='nav-link' to='/login'>Sign in</Link>
                         </li>
                     )}
                 </ul>    
