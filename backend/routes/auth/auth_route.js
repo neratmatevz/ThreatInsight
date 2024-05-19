@@ -1,6 +1,7 @@
 const express = require('express');
-const { getUser,createUser, deleteUser, updateUser, createCustomToken, generateEmailVerificationLink } = require('../../authentication/auth'); 
+const { getUser,createUser, deleteUser, updateUser, createCustomToken } = require('../../authentication/auth'); 
 const { ipGeo } = require('../../tools/IpGeo/ipGeo');
+const { getFirestoreInstance } = require('../../firebase');
 
 let router = express.Router();
 
@@ -20,17 +21,17 @@ router.get('/getUser', async (req, res) => {
 });
 
 router.post('/createUser', async (req, res) => {
-    const { email, phoneNumber, password } = req.body
-    if (!email || !phoneNumber || !password) {
-        return res.status(400).send('Email, phone number, and password are required');
+    const { email, password } = req.body
+    if (!email || !password) {
+        return res.status(400).send('Email and password are required');
     }
 
     try {
-        await createUser(email, phoneNumber, password);
-        res.send("User created successfully");
+        const user = await createUser(email, password);
+        res.status(200).send(user); 
     } catch (error) {
         console.log('Error creating user:', error);
-        res.status(500).send("Error creating user");
+        res.status(500).send(error.message);
     }
 });
 
@@ -95,28 +96,37 @@ router.get('/createCustomToken', async (req, res) => {
     }
 });
 
-router.post('/send-verification-email', async (req, res) => {
-    const { email } = req.body;
 
-    try {
-        const link = await generateEmailVerificationLink(email);
-        res.send({ link });
-    } catch (error) {
-        console.log('Error generating email verification link:', error);
-        res.status(500).send('Error generating email verification link');
-    }
-});
 
-router.get('/ipgeo', async (req,res) => {
-    const ip = req.query.ip
+router.post('/ipgeo', async (req,res) => {
+
+    const {ip, userUID, searchUID} = req.body
     console.log("x")
     try{
-        await ipGeo(ip)
+        await ipGeo(ip, userUID, searchUID)
         res.send("done")
     }catch (error){
         console.log('Error fetching user data:', error);
     }
 })
 
+router.post('/addUserToFirestore', async (req, res) => {
+    try {
+        const { uid, email } = req.body; 
+
+        const db = getFirestoreInstance() 
+        
+
+        await db.collection('users').doc(uid).set({
+            email: email,
+
+        });
+
+        res.status(200).send('User added to Firestore successfully');
+    } catch (error) {
+        console.error('Error adding user to Firestore:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 module.exports = router;

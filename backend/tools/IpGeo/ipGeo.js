@@ -1,16 +1,30 @@
 const { ipGeoAPIcall } = require("./ipGeoAPI");
 const fs = require('fs');
 const path = require('path');
-const saveStructuredResponse = require("./ipgeoSaveResponse");
+const saveStructuredResponse = require("./ipGeoSaveResponse");
 
-const ipGeo = (ipGeoData) => {
+/**
+ * Reads the parameters encoded within a JavaScript
+ * object and identifies the necessary parameters for
+ * making an API call to the Nmap API web service. 
+ * 
+ * This function is intended to be exclusively invoked
+ * by the function responsible for processing JSON data
+ * resulting from the frontend "Run" action.
+ * 
+ * @param {string} ipGeoData - JavaScript containing ip parameter required for the ipGeo API call.
+ * @param {string} userUID - The UID of the user who initiated the scan.
+ * @param {string} searchUID - The UID of the database search instance.
+ * @returns {Object} - That the nmap scan is complete.
+ */
+const ipGeo = async (ipGeoData, userUID, searchUID) => {
     let supportedRequestJSON;
 
     try {
         const supportedRequestJSONPath = path.join(__dirname, 'ipGeoSupportedRequest.json');
         supportedRequestJSON = fs.readFileSync(supportedRequestJSONPath, { encoding: 'utf8' });
     } catch (e) {
-        throw new Error(e);
+        throw new Error(`Failed to read supported request JSON: ${e.message}`);
     }
 
     const supportedRequestData = JSON.parse(supportedRequestJSON);
@@ -29,15 +43,16 @@ const ipGeo = (ipGeoData) => {
         throw new Error("Invalid IP address!");
     }
 
-    ipGeoAPIcall(ipGeoData)
-    .then(result => {
-        console.log(result);
-        saveStructuredResponse(result)
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
-}
+    try {
+        const structuredResponse = await ipGeoAPIcall(ipGeoData);
+        console.log(structuredResponse);
+        
+        const result = await saveStructuredResponse(structuredResponse, userUID, searchUID);
+        return result;
+    } catch (error) {
+        console.error(`Error during API call or saving response: ${error.message}`);
+        throw new Error(`Error during processing: ${error.message}`);
+    }
+};
 
 module.exports = { ipGeo };

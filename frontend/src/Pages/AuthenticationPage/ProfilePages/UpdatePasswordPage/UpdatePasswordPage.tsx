@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth } from "../../../../Firebase/firebase";
-import {
-  Alert,
-  Button,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-  Spinner,
-} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
+
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.css";

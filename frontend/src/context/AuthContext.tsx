@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { auth } from '../Firebase/firebase';
-import { User, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
+import { appleProvider, auth, db, googleProvider, microsoftProvider } from '../Firebase/firebase';
+import { User, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth';
+import { NavigateFunction } from 'react-router-dom';
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import axios from 'axios';
 
 interface AuthContextType {
   user: User | null;
@@ -8,16 +11,22 @@ interface AuthContextType {
   logout: () => Promise<void>;
   error: string | null;
   loading: boolean | null;
-  createUser: (email: string, password: string) => Promise<void>;
+  createUser: (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => Promise<boolean>;
+  signInWithGoogle: () => Promise<void>;
+  signInWithApple: () => Promise<void>;
+  signInWithMicrosoft: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  signIn: async () => false, // Default value should return a Promise<boolean>
+  signIn: async () => false, 
   logout: async () => {},
   error: null,
   loading: null,
-  createUser: async () => {}
+  createUser: async () => false,
+  signInWithGoogle: async () => {},
+  signInWithApple: async () => {},
+  signInWithMicrosoft: async () => {},
 });
 
 export const useAuth = () => {
@@ -47,7 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {   
-      setPersistence(auth, browserLocalPersistence);
+      await setPersistence(auth, browserLocalPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
   
@@ -76,18 +85,57 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const createUser = async  (email:string, password:string) => {
-    try{
-      setLoading(true);
-      await createUserWithEmailAndPassword(auth, email, password);
-    }catch (error:any){
-      setError(error.message)
+
+  const createUser = async (email: string, password: string, showPassword: boolean, navigate: NavigateFunction): Promise<boolean> => {
+    try {
+   
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      logout();
+       navigate('/register/emailverification'); 
+      await addUserToFirestore(user)
+      await sendEmailVerification(user);
+      return true;
+
+    } catch (errorCatch: any) {
+      console.log(errorCatch.message);
+      setError(errorCatch.message);
+      return false;
     }
+  }
+
+  const addUserToFirestore = async (user: User) => {
+    try {
+        const response = await axios.post('http://localhost:3001/addUserToFirestore', {
+            uid: user.uid,
+            email: user.email
+        });
+
+        console.log(response.data); 
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Error adding user to Firestore:', error.response?.data || error.message);
+        } else {
+            console.error('Unexpected error:', error);
+        }
+    }
+};
+
+  const signInWithGoogle = async () => {
+    await signInWithRedirect(auth, googleProvider);
+  }
+
+  const signInWithApple = async () => {
+    await signInWithRedirect(auth, appleProvider);
+  };
+  
+  const signInWithMicrosoft = async () => {
+    await signInWithRedirect(auth, microsoftProvider);
   };
 
-
   return (
-    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser }}>
+    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser, signInWithGoogle, signInWithApple, signInWithMicrosoft }}>
       {children}
     </AuthContext.Provider>
   );

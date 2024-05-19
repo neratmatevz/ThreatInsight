@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase";
-import {
-  Alert,
-  Button,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-  Spinner,
-} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import "./Login.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import googleLogo from './google-logo.png'; 
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +27,7 @@ const Login = () => {
   const [editable, setEditable] = useState(true);
 
   const navigate = useNavigate();
-  const { signIn, user, loading, error } = useAuth();
+  const { signIn, user, loading, error, signInWithGoogle, signInWithApple, signInWithMicrosoft } = useAuth();
 
   if (user) {
     navigate("/");
@@ -67,6 +70,32 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = async (e: any) => {
+    e.preventDefault();
+    try {
+      await signInWithGoogle(); 
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+    }
+  };
+
+  const handleAppleLogin = async (e: any) => {
+    e.preventDefault();
+    try {
+      await signInWithApple(); 
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+    }
+  };
+  
+  const handleMicrosoftLogin = async (e: any) => {
+    e.preventDefault();
+    try {
+      await signInWithMicrosoft(); 
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+    }
+  };
   return (
     <Container fluid className="container-md login-container">
       <Row className="justify-content-center">
@@ -128,7 +157,16 @@ const Login = () => {
             )}
           </Form>
           <p>Or continue with: </p>
+      
+
+          <Button variant="outline-secondary" onClick={handleGoogleLogin} className="w-100 d-flex align-items-center justify-content-center" >
+      <img src={googleLogo} alt="Google Logo" className="mr-2" style={{ width: '24px', height: '24px' }} />
+      Google
+    </Button>
+
           <Link to="/register">Create an account</Link>
+        
+
         </Col>
       </Row>
     </Container>

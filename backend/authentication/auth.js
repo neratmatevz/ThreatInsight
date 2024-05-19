@@ -1,4 +1,5 @@
 const { getAuth } = require('firebase-admin/auth');
+const { getFirestoreInstance } = require('../firebase');
 
 
 
@@ -19,22 +20,23 @@ console.log(uid)
 }
 
 // USTVARI UPORABNIKA
-const createUser = async (email, phoneNumber, password) => {
-    console.log(email)
-    getAuth()
-    .createUser({
-        email: email,
-        emailVerified: false,
-        phoneNumber: phoneNumber,
-        password: password
-    })
-    .then((userRecord) => {
-        console.log('Successfully created new user:', userRecord.uid);
-    })
-    .catch((error) => {
-        console.log('Error creating new user:', error);
-    });
-}
+const createUser = async (email, password) => {
+  try {
+      const userRecord = await getAuth().createUser({
+          email: email,
+          emailVerified: false,
+          password: password
+      });
+      const user = await getAuth().getUser(userRecord.uid);
+getAuth().sendCustomVerificationEmail()
+      console.log('Successfully created new user:', user.uid);
+      return user; // Return the User object
+  } catch (error) {
+      console.log('Error creating new user:', error);
+      throw error; // Rethrow the error to be caught by the caller
+  }
+};
+
 
 // IZBRIŠI UPORABNIKA
 const deleteUser = async (uid) => {
@@ -87,19 +89,8 @@ const createCustomToken = async (uid) => {
 }
 
 
-// GENERIRAJ VERIFIKACIJSKI EMAIL LINK
-
-const generateEmailVerificationLink = async (email) => {
-    try {
-      const link = await getAuth().generateEmailVerificationLink(email);
-      // Construct email verification template, embed the link and send
-      // using custom SMTP server.
-      
-      await sendCustomVerificationEmail(email, link);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
 
-module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken, generateEmailVerificationLink };
+
+
+module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken };

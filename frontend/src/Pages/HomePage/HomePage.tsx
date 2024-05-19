@@ -8,14 +8,18 @@ import { useAuth } from '../../context/AuthContext';
 
 const HomePage = () => {
     const [demo, setDemo] = useState<string>("");
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
+          
     useEffect(()=> {
         console.log(user)
     })
+
+    
+
     return (
         <>
-          
+       
             <Overview />
             <Features /> 
         </>

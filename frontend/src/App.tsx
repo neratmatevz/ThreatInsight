@@ -6,20 +6,22 @@ import HomePage from './Pages/HomePage/HomePage';
 import ScansPage from './Pages/ScansPage/ScansPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/PasswordInput/PasswordInput';
+import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage';
 import Login from './Pages/AuthenticationPage/LoginPages/Login';
 import { User } from 'firebase/auth';
 import { auth } from './Firebase/firebase';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import ProfilePage from './Pages/AuthenticationPage/ProfilePage/ProfilePage';
+import ProfilePage from './Pages/AuthenticationPage/ProfilePages/ProfilePage/ProfilePage';
 import ProtectedRoute from './Pages/AuthenticationPage/ProtectedRoute/ProtectedRoute';
 import EmailVerification from './Pages/AuthenticationPage/RegistrationPages/EmailVerification/EmailVerification';
 import YourWorkPage from './Pages/YourWorkPage/YourWorkPage/YourWorkPage';
+import RegisterPage from './Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage';
 
 
 
 function App() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
 
   return (
     <AuthProvider>
@@ -35,8 +37,7 @@ function App() {
      
 
           <Route path="register">
-            <Route path="/register" element={<PasswordInput/>} />
-
+            <Route path="/register" element={<RegisterPage/>} />
             <Route path="emailverification" element={<EmailVerification />} />
           </Route>
           <Route path ="login" element = {<Login />} />
