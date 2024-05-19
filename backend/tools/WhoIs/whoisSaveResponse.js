@@ -24,11 +24,8 @@ const saveStructuredResponse = async (structuredResult, userUID, searchUID) => {
             msg: "Result saved successfully"
         };
     } catch (err) {
-        console.error('Error saving structured response to Firestore:', err);
-        return {
-            success: false,
-            msg: "Failed to save result"
-        };
+        throw new Error("Saving whois to database failed: " + err.message); 
+
     }
 };
 

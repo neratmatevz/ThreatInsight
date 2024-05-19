@@ -5,8 +5,9 @@ const saveStructuredResponse = require('./whoisSaveResponse'); // Import the fun
 /**
  * Main function to handle WHOIS data processing.
  * @param {Object} sampleJson - The input  object containing WHOIS parameters.
+
  */
-const whois = async (sampleJson,userUID, searchUID) => {
+const whois = async (sampleJson, userUID, searchUID) => {
 
   // Validate input parameters
   if (!sampleJson || !sampleJson.choosen) {
@@ -54,12 +55,18 @@ const whois = async (sampleJson,userUID, searchUID) => {
     // Log the structured response
     console.log('Structured Response:', structuredResponse);
 
-    // Save the structured response (simulated)
-    saveStructuredResponse(structuredResponse, userUID, searchUID);
+
+    // Save the structured response to Firestore
+    let saveResult = await saveStructuredResponse(structuredResponse, userUID, searchUID);
+
+    return saveResult; 
+
 
   } catch (error) {
-    console.error('Error processing WHOIS data:', error.message);
+    throw new Error(error.message);
   }
+
+
 }
 
 module.exports = whois; // Export the main function
