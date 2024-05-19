@@ -28,7 +28,8 @@
         "choosen": false
     },
     "TLS-DNSSec": {
-        "choosen": false
+        "choosen": false,
+        "url": ""
     },
     "EmailVerifiers": {
         "choosen": false
