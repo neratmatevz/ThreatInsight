@@ -18,18 +18,7 @@ const saveStructuredResponse = require("./ipGeoSaveResponse");
  * @returns {Object} - That the nmap scan is complete.
  */
 const ipGeo = async (ipGeoData, userUID, searchUID) => {
-    let supportedRequestJSON;
 
-    try {
-        const supportedRequestJSONPath = path.join(__dirname, 'ipGeoSupportedRequest.json');
-        supportedRequestJSON = fs.readFileSync(supportedRequestJSONPath, { encoding: 'utf8' });
-    } catch (e) {
-        throw new Error(`Failed to read supported request JSON: ${e.message}`);
-    }
-
-    const supportedRequestData = JSON.parse(supportedRequestJSON);
-    const supportedType = supportedRequestData.ip;
-    
     if (!ipGeoData) {
         throw new Error("IP for ipGeoData not provided!");
     }
