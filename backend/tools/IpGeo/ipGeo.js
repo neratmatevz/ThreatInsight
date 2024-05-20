@@ -1,7 +1,7 @@
 const { ipGeoAPIcall } = require("./ipGeoAPI");
 const fs = require('fs');
 const path = require('path');
-const saveStructuredResponse = require("./ipGeoSaveResponse");
+const saveStructuredResponse = require("./ipGeoSave")
 
 /**
  * Reads the parameters encoded within a JavaScript
