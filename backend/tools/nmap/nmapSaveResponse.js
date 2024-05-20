@@ -20,7 +20,7 @@ const saveStructuredResponse = async (structuredResult, userUID, searchUID) => {
         await db.doc(documentPath).set({ NMAP: structuredResult }, { merge: true });
 
         return {
-            succes: true,
+            success: true,
             msg: "Result saved succesfully"
         }
     } catch (err) {
