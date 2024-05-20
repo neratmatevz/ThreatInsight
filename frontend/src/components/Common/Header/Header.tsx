@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css'; 
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
-
 const Header = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const location = useLocation();
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            setIsProfileOpen(false);
+            // You can navigate to another page here if needed, e.g., navigate('/')
+        } catch (error) {
+            console.log(error); 
+        }
+    };
+
+    const toggleProfileDropdown = () => {
+        setIsProfileOpen(!isProfileOpen);
+    };
 
     return (
         <nav className="navbar navbar-expand-lg">
@@ -27,19 +41,37 @@ const Header = () => {
                 </ul>    
             </div>
 
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul className="navbar-nav">
-                    {user ? (
-                        <li className={`nav-item ${location.pathname === '/profile' ? 'active' : ''}`}>
-                            <Link className='nav-link' to='/profile'>Profile</Link>
-                        </li>
-                    ) : (
-                        <li className={`nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
-                            <Link className='nav-link' to='/login'>Sign in</Link>
-                        </li>
-                    )}
-                </ul>    
-            </div> 
+            <div className="navbar-nav ml-auto">
+                {user ? (
+                    <li className="nav-item dropdown">
+                        <button className="nav-link dropdown-toggle" onClick={toggleProfileDropdown}>
+                            <i className="fas fa-user"></i>
+                        </button>
+                        {isProfileOpen && (
+                            <div className="dropdown-menu show">
+                                <div className="dropdown-item-account">ACCOUNT</div>
+                                <div className="dropdown-item-email">{user.email}</div>
+                                <div className="dropdown-item">
+                                    My Searches
+                                    <i className="fas fa-search"></i>
+                                </div>
+                                <div className="dropdown-item">
+                                    Manage account
+                                    <i className="fas fa-external-link-alt"></i>
+                                </div>
+                                <hr></hr>
+                                <button onClick={handleLogout} className="dropdown-item logout-button">
+                                    Logout <i className="fas fa-sign-out-alt"></i>
+                                </button>
+                            </div>
+                        )}
+                    </li>
+                ) : (
+                    <li className={`nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
+                        <Link className='nav-link' to='/login'>Sign in</Link>
+                    </li>
+                )}
+            </div>
         </nav>
     );
 }
