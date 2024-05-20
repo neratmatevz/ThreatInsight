@@ -3,6 +3,7 @@ import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
+
 const Header = () => {
     const { user } = useAuth();
     const location = useLocation();
@@ -10,7 +11,7 @@ const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <Link className="navbar-brand" to="/">
-                <i className="fas fa-shield-alt mr-2"></i> ThreatInsight
+                <img src="/images/logo.png" alt="ThreatInsight Logo" className="logo mr-2" /> ThreatInsight
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

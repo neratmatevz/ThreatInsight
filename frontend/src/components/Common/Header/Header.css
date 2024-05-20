@@ -7,15 +7,21 @@
 }
 
 .navbar-brand {
+    padding-bottom: 1px;
     margin-left: 20px;
     color: #3a3a3a;
     font-weight: bold;
     font-size: 14px; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;    
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
     color: #001a33;
+}
+
+.logo {
+    height: 25px; /* Adjust the height as needed */
+    width: auto;
 }
 
 .nav-link {

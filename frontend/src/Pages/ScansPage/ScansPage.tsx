@@ -10,7 +10,7 @@ const ScansPage = () => {
     return (
         <>
             <div className="scans-page-container">
-                <div className="scans-container container-fluid mt-4">
+                <div className="scans-container container-fluid">
                     <div className="row flex-grow-1">
                         <ToolPicker selectedTools={selectedTools} setSelectedTools={setSelectedTools} />
                         <SearchForm selectedTools={selectedTools} />
