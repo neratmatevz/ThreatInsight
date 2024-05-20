@@ -39,7 +39,6 @@ const ipGeo = async (ipGeoData, userUID, searchUID) => {
         const result = await saveStructuredResponse(structuredResponse, userUID, searchUID);
         return result;
     } catch (error) {
-        console.error(`Error during API call or saving response: ${error.message}`);
         throw new Error(`Error during processing: ${error.message}`);
     }
 };

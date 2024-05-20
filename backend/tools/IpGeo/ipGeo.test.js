@@ -4,14 +4,8 @@ const path = require('path');
 
 
 describe('ipGeo function', () => {
-    const userUID = 'user123';
-    const searchUID = 'search123';
-    const validIP = '192.168.1.1';
-    const invalidIP = '999.999.999.999';
+    const invalidIP = 'abc.def.ghi.jkl';
 
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
 
     test('throws an error if ipGeoData is not provided', async () => {
         await expect(ipGeo(null, userUID, searchUID)).rejects.toThrow("IP for ipGeoData not provided!");
