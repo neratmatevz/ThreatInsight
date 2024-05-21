@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './Header.css'; 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
 const Header = () => {
     const { user, logout } = useAuth();
     const location = useLocation();
     const [isProfileOpen, setIsProfileOpen] = useState(false);
-
+    const navigate = useNavigate(); 
     const handleLogout = async () => {
         try {
             await logout();
@@ -20,6 +20,11 @@ const Header = () => {
 
     const toggleProfileDropdown = () => {
         setIsProfileOpen(!isProfileOpen);
+    };
+
+    const navigateToProfile = () => {
+        setIsProfileOpen(false);
+        navigate('/profile'); // Use navigate to redirect to profile page
     };
 
     return (
@@ -55,7 +60,7 @@ const Header = () => {
                                     My Searches
                                     <i className="fas fa-search"></i>
                                 </div>
-                                <div className="dropdown-item">
+                                <div className="dropdown-item" onClick={navigateToProfile}>
                                     Manage account
                                     <i className="fas fa-external-link-alt"></i>
                                 </div>
