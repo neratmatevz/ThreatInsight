@@ -17,7 +17,7 @@ const tls_dnssecAPIcall = async (url) => {
         url: url
     });
 
-    var tlsConfig = {
+    const tlsConfig = {
         method: "POST",
         url: `${process.env.TLSDNSSEC_API}/tlsscan`,
         headers: {
@@ -27,7 +27,7 @@ const tls_dnssecAPIcall = async (url) => {
         data: requestData,
     };
 
-    var dnssecConfig = {
+    const dnssecConfig = {
         method: "POST",
         url: `${process.env.TLSDNSSEC_API}/dnssec`,
         headers: {

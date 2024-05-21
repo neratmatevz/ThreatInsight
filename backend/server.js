@@ -12,11 +12,11 @@ const {initializeFirestore} = require('./firebase');
 initializeFirestore();
 
 //Routes
-var demo = require('./routes/demo/demo.js');
-app.use('/demo', demo);
-
 const authRouter = require('./routes/auth/auth_route.js');
 app.use('/', authRouter);
+
+const ser = require('./routes/search/search.js');
+app.use('/search', ser);
 
 
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUser,createUser, deleteUser, updateUser, createCustomToken, validateToken } = require('../../authentication/auth'); 
+const { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken } = require('../../authentication/auth');
 const { ipGeo } = require('../../tools/IpGeo/ipGeo');
 const { getFirestoreInstance } = require('../../firebase');
 const { getAuth } = require('firebase-admin/auth');
@@ -7,7 +7,7 @@ const { getAuth } = require('firebase-admin/auth');
 let router = express.Router();
 
 router.get('/getUser', async (req, res) => {
-    const uid = req.query.uid; 
+    const uid = req.query.uid;
     if (!uid) {
         return res.status(400).send('UID is required');
     }
@@ -29,7 +29,7 @@ router.post('/createUser', async (req, res) => {
 
     try {
         const user = await createUser(email, password);
-        res.status(200).send(user); 
+        res.status(200).send(user);
     } catch (error) {
         console.log('Error creating user:', error);
         res.status(500).send(error.message);
@@ -37,7 +37,7 @@ router.post('/createUser', async (req, res) => {
 });
 
 router.delete('/deleteUser', async (req, res) => {
-    const uid = req.query.uid; 
+    const uid = req.query.uid;
     if (!uid) {
         return res.status(400).send('UID is required');
     }
@@ -69,7 +69,7 @@ router.post('/updateUser', async (req, res) => {
 
 router.put('/updateUser', async (req, res) => {
     const { uid, email, phoneNumber, password } = req.body
-    if ( !uid || !email || !phoneNumber || !password) {
+    if (!uid || !email || !phoneNumber || !password) {
         return res.status(400).send('Uid, email, phone number, and password are required');
     }
 
@@ -83,7 +83,7 @@ router.put('/updateUser', async (req, res) => {
 });
 
 router.get('/createCustomToken', async (req, res) => {
-    const uid = req.query.uid; 
+    const uid = req.query.uid;
     if (!uid) {
         return res.status(400).send('UID is required');
     }
@@ -99,24 +99,24 @@ router.get('/createCustomToken', async (req, res) => {
 
 
 
-router.post('/ipgeo', async (req,res) => {
+router.post('/ipgeo', async (req, res) => {
 
-    const {ip, userUID, searchUID} = req.body
+    const { ip, userUID, searchUID } = req.body
     console.log("x")
-    try{
+    try {
         await ipGeo(ip, userUID, searchUID)
         res.send("done")
-    }catch (error){
+    } catch (error) {
         console.log('Error fetching user data:', error);
     }
 })
 
 router.post('/addUserToFirestore', async (req, res) => {
     try {
-        const { uid, email } = req.body; 
+        const { uid, email } = req.body;
 
-        const db = getFirestoreInstance() 
-        
+        const db = getFirestoreInstance()
+
 
         await db.collection('users').doc(uid).set({
             email: email,
@@ -130,18 +130,12 @@ router.post('/addUserToFirestore', async (req, res) => {
     }
 });
 
-router.post('/validateToken', async(req,res) =>{
-    const idToken = req.headers.authorization.split(" ")[1];
- 
-    try {
-        const uid = await validateToken(idToken);
-        console.log(uid);
-        res.status(200).send("Token is valid, user uid is " + uid);
-    } catch (error) {
-        res.status(401).send({ error: "Unauthorized" });
-    }
+router.post('/validateToken', validateToken, (req, res) => {
 
-  });
+    const uid = req.user.uid;
+    res.status(200).send("Token is valid, user uid is " + uid);
+
+});
 
 
 router.post('/checkEmailVerified', async(req,res) => {
