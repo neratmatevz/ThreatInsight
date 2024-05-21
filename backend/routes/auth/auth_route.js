@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUser,createUser, deleteUser, updateUser, createCustomToken } = require('../../authentication/auth'); 
+const { getUser,createUser, deleteUser, updateUser, createCustomToken, validateToken } = require('../../authentication/auth'); 
 const { ipGeo } = require('../../tools/IpGeo/ipGeo');
 const { getFirestoreInstance } = require('../../firebase');
 
@@ -128,5 +128,18 @@ router.post('/addUserToFirestore', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
+
+router.post('/validateToken', async(req,res) =>{
+    const idToken = req.headers.authorization.split(" ")[1];
+ 
+    try {
+        const uid = await validateToken(idToken);
+        console.log(uid);
+        res.status(200).send("Token is valid, user uid is " + uid);
+    } catch (error) {
+        res.status(401).send({ error: "Unauthorized" });
+    }
+
+  });
 
 module.exports = router;

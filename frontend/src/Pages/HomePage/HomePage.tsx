@@ -4,6 +4,7 @@ import Header from '../../components/Common/Header/Header';
 import Overview from './Overview/Overview';
 import Features from './Features/Features';
 import { useAuth } from '../../context/AuthContext';
+import { auth } from '../../Firebase/firebase';
 
 
 const HomePage = () => {
@@ -13,6 +14,11 @@ const HomePage = () => {
           
     useEffect(()=> {
         console.log(user)
+        auth.currentUser?.getIdToken(true)
+        .then(function(idToken){
+            console.log(idToken)
+        });
+        
     })
 
     

@@ -1,11 +1,5 @@
 
-.card {
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    background-color: #f0f0f0;
-}
-
+  .work-page-container {
+    padding-top: 60px;
+    text-align: left;
+  }

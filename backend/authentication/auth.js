@@ -88,9 +88,18 @@ const createCustomToken = async (uid) => {
     }
 }
 
+const validateToken = async (idToken) => {
+    try {
+        const decodedToken = await getAuth().verifyIdToken(idToken);
+        const uid = decodedToken.uid;
+        console.log(uid);
+        return uid;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
 
 
 
-
-
-module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken };
+module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken };

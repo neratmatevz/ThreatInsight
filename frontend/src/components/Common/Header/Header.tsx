@@ -32,6 +32,7 @@ const Header = () => {
                         <li className={`nav-item ${location.pathname === '/profile' ? 'active' : ''}`}>
                             <Link className='nav-link' to='/profile'>Profile</Link>
                         </li>
+                        
                     ) : (
                         <li className={`nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
                             <Link className='nav-link' to='/login'>Sign in</Link>
