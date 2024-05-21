@@ -4,7 +4,9 @@ const { validateToken } = require('../../authentication/auth');
 let router = express.Router();
 
 router.post('/', validateToken, (req, res) => {
-    res.status(200).send('hello world '+req.body.msg);
+
+    res.status(200).json({msg: 'hello world'});
+
 })
 
 module.exports = router;
