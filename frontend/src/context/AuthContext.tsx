@@ -15,6 +15,7 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   signInWithApple: () => Promise<void>;
   signInWithMicrosoft: () => Promise<void>;
+  setErrorNull: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -27,6 +28,7 @@ const AuthContext = createContext<AuthContextType>({
   signInWithGoogle: async () => {},
   signInWithApple: async () => {},
   signInWithMicrosoft: async () => {},
+  setErrorNull: async () => {}
 });
 
 export const useAuth = () => {
@@ -50,24 +52,59 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     return () => {
       unsubscribe();
+
     };
   }, []);
   
+  const setErrorNull = async () =>{
+    setError(null)
+  }
+
+  const checkEmailVerified = async (email: string) => {
+    try {
+      const response = await axios.post('http://localhost:3001/checkEmailVerified', {
+        email: email,
+      });
+  
+      return response.data.emailVerified;
+    } catch (error) {
+      console.error('Error checking email verification:', error);
+      return false;
+    }
+  };
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {   
-      await setPersistence(auth, browserLocalPersistence);
+
+    setLoading(true)
+
+      const isEmailVerified = await checkEmailVerified(email);
+    
+      if (!isEmailVerified) {
+        setError('Please verify your email before logging in.');
+        setLoading(false);
+        return false;
+      }
+
+     
+   
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+    
   
       if (!user.emailVerified) {
+        console.log('nisi')
+        logout()
+
         setError("Please verify your email before logging in.");
         return false;
       }
-      
+      setLoading(false)
       setError(null);
+      console.log("sej je true")
       return true;
     } catch (error: any) {
+      setLoading(false)
       setError(error.message);
       return false; 
     }
@@ -135,7 +172,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser, signInWithGoogle, signInWithApple, signInWithMicrosoft }}>
+    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser, signInWithGoogle, signInWithApple, signInWithMicrosoft, setErrorNull }}>
       {children}
     </AuthContext.Provider>
   );

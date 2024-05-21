@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase";
 import Button from "react-bootstrap/Button";
@@ -14,10 +14,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import "./Login.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import googleLogo from './google-logo.png'; 
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import googleLogo from "./google-logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,32 +25,57 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [editable, setEditable] = useState(true);
+  const [showPasswordText, setShowPasswordText] = useState(false);
 
   const navigate = useNavigate();
-  const { signIn, user, loading, error, signInWithGoogle, signInWithApple, signInWithMicrosoft } = useAuth();
+  const {
+    signIn,
+    user,
+    loading,
+    error,
+    signInWithGoogle,
+    signInWithApple,
+    signInWithMicrosoft,
+    setErrorNull
+  } = useAuth();
 
   if (user) {
     navigate("/");
   }
 
-  const handleTogglePassword = () => {
+  useEffect(() => {
+  
+    return () => {
+      if (error) {
+   
+        setErrorNull();
+      }
+    };
+  }, []);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPasswordText(!showPasswordText);
+  };
+
+  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoadingLogin(true);
 
     setTimeout(() => {
       setLoadingLogin(false);
       setEditable(false);
       setShowPassword(!showPassword);
-    }, 300);
+    }, 150);
   };
 
   const handleEditClick = () => {
     setLoadingLogin(true);
 
-    setTimeout(() => {
+  
       setLoadingLogin(false);
       setEditable(true);
       setShowPassword(false);
-    }, 300);
+   
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,35 +98,20 @@ const Login = () => {
   const handleGoogleLogin = async (e: any) => {
     e.preventDefault();
     try {
-      await signInWithGoogle(); 
+      await signInWithGoogle();
     } catch (error) {
       console.error("Error during Google sign-in:", error);
     }
   };
 
-  const handleAppleLogin = async (e: any) => {
-    e.preventDefault();
-    try {
-      await signInWithApple(); 
-    } catch (error) {
-      console.error("Error during Google sign-in:", error);
-    }
-  };
-  
-  const handleMicrosoftLogin = async (e: any) => {
-    e.preventDefault();
-    try {
-      await signInWithMicrosoft(); 
-    } catch (error) {
-      console.error("Error during Google sign-in:", error);
-    }
-  };
   return (
     <Container fluid className="container-md login-container">
       <Row className="justify-content-center">
         <Col md={3} className="text-center">
           <p>Sign in to continue.</p>
-          <Form onSubmit={handleLogin}>
+
+          {/* Email Form */}
+          <Form onSubmit={handleEmailSubmit}>
             <InputGroup className="mb-3">
               <Form.Control
                 type="email"
@@ -116,38 +126,8 @@ const Login = () => {
                 </Button>
               )}
             </InputGroup>
-
-            {showPassword && (
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-            )}
-
-            {error && <Alert variant="danger">{error}</Alert>}
-
-            {showPassword ? (
-              <Button
-                variant="primary"
-                className="w-100"
-                type="submit"
-              >
-                {loadingLogin ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  "Login"
-                )}
-              </Button>
-            ) : (
-              <Button
-                variant="primary"
-                className="w-100"
-                onClick={handleTogglePassword}
-              >
+            {!showPassword && (
+              <Button variant="primary" className="w-100" type="submit">
                 {loadingLogin ? (
                   <Spinner animation="border" size="sm" />
                 ) : (
@@ -156,17 +136,63 @@ const Login = () => {
               </Button>
             )}
           </Form>
-          <p>Or continue with: </p>
-      
 
-          <Button variant="outline-secondary" onClick={handleGoogleLogin} className="w-100 d-flex align-items-center justify-content-center" >
-      <img src={googleLogo} alt="Google Logo" className="mr-2" style={{ width: '24px', height: '24px' }} />
-      Google
-    </Button>
+          
+
+          {/* Password Form */}
+          {showPassword && (
+            <Form onSubmit={handleLogin}>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  type={showPasswordText ? "text" : "password"}
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <Button
+                  variant="outline-secondary"
+                  onClick={handleTogglePasswordVisibility}
+                >
+                  <i
+                    className={
+                      showPasswordText ? "fas fa-eye-slash" : "fas fa-eye"
+                    }
+                  ></i>
+                </Button>
+              </InputGroup>
+
+              {error && <Alert variant="danger">{error}</Alert>}
+
+              <Button variant="primary" className="w-100" type="submit">
+                {loading ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  "Login"
+                )}
+              </Button>
+            </Form>
+          )}
+
+   
+
+          <p>Or continue with: </p>
+
+          <Button
+            variant="outline-secondary"
+            onClick={handleGoogleLogin}
+            className="w-100 d-flex align-items-center justify-content-center"
+          >
+            <img
+              src={googleLogo}
+              alt="Google Logo"
+              className="mr-2"
+              style={{ width: "24px", height: "24px" }}
+            />
+            Google
+          </Button>
 
           <Link to="/register">Create an account</Link>
-        
-
         </Col>
       </Row>
     </Container>

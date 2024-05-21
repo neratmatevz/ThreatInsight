@@ -2,6 +2,7 @@ const express = require('express');
 const { getUser,createUser, deleteUser, updateUser, createCustomToken, validateToken } = require('../../authentication/auth'); 
 const { ipGeo } = require('../../tools/IpGeo/ipGeo');
 const { getFirestoreInstance } = require('../../firebase');
+const { getAuth } = require('firebase-admin/auth');
 
 let router = express.Router();
 
@@ -141,5 +142,21 @@ router.post('/validateToken', async(req,res) =>{
     }
 
   });
+
+
+router.post('/checkEmailVerified', async(req,res) => {
+    const {email} = req.body;
+
+    try {
+        const userRecord = await getAuth().getUserByEmail(email);
+        const isEmailVerified = userRecord.emailVerified;
+        console.log(isEmailVerified)
+    
+        res.status(200).send({ emailVerified: isEmailVerified });
+      } catch (error) {
+        res.status(500).send({ error: error.message });
+      }
+    });
+
 
 module.exports = router;
