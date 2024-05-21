@@ -6,7 +6,7 @@ let db;
 function initializeFirestore() {
     if (!db) {
         //TODO: save as secret and fetch as secret
-        var serviceAccount = require("./serviceAccountKey.json");
+        const serviceAccount = require("./serviceAccountKey.json");
         initializeApp({
             credential: cert(serviceAccount)
         });

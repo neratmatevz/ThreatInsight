@@ -88,15 +88,23 @@ const createCustomToken = async (uid) => {
     }
 }
 
-const validateToken = async (idToken) => {
+const validateToken = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(403).json({ error: 'No token provided!' });
+    }
+
+    const idToken = authHeader.split(' ')[1];
+    if (!idToken) {
+        return res.status(403).json({ error: 'No token provided!' });
+    }
+
     try {
         const decodedToken = await getAuth().verifyIdToken(idToken);
-        const uid = decodedToken.uid;
-        console.log(uid);
-        return uid;
+        req.user = { uid: decodedToken.uid };
+        next();
     } catch (error) {
-        console.log(error);
-        throw error;
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 }
 

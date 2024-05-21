@@ -29,9 +29,9 @@ const hibp = async (account, userUID, searchUID) => {
     console.log('Structured Response:', structuredResponse);
 
     // Save the structured response to Firestore
-    let result = await hibpSaveResponse(structuredResponse, userUID, searchUID);
+    let returnResult = await hibpSaveResponse(structuredResponse, userUID, searchUID);
     
-    return result;
+    return returnResult;
 
   } catch (error) {
     throw new Error(error.message);
