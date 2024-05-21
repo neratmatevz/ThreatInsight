@@ -1,5 +1,16 @@
 const axios = require('axios');
 
+/**
+ * Calls the TLS and DNSSEC API endpoints with the provided URL for scanning.
+ * 
+ * This function is responsible for making asynchronous calls to both the TLS and DNSSEC
+ * API endpoints. It concurrently sends requests to both APIs and returns their responses
+ * once both requests are complete.
+ * 
+ * @param {string} url - The URL to be scanned for TLS and DNSSEC security protocols.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the TLS and DNSSEC scan results.
+ * @throws {Error} - Throws an error if the API calls fail or return an error response.
+ */
 const tls_dnssecAPIcall = async (url) => {
 
     let requestData = JSON.stringify({

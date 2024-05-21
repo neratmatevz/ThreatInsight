@@ -31,8 +31,10 @@
         "choosen": false,
         "url": ""
     },
-    "EmailVerifiers": {
-        "choosen": false
+    "DomainSearch": {
+        "choosen": false,
+        "company": "",
+        "email": ""
     },
     "EmailPermutator": {
         "choosen": false
