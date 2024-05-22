@@ -13,7 +13,7 @@ const featuresData: Feature[] = [
     { name: "HaveIBeenPwned", description: "Check if target's data has been exposed in a data breach.", icon: "fas fa-user-secret" },
     { name: "IP Geolocation", description: "Enter a target IP address to obtain its approximate location.", icon: "fas fa-map-marked-alt" },
     { name: "TLS/DNSSec Scan", description: "TLS information and DNSSec status.", icon: "fas fa-lock" },
-    { name: "E-mail Verifier", description: "Verify the existence of emails or find emails based on domain or complete address.", icon: "fas fa-envelope-open-text" },
+    { name: "Domain Search", description: "Verify the existence of emails or find emails based on domain or complete address.", icon: "fas fa-envelope-open-text" },
     { name: "E-mail Permutator", description: "Generate possible phishing email accounts based on input guidelines.", icon: "fas fa-user-plus" }
 ];
 

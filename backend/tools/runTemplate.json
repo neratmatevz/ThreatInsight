@@ -1,6 +1,7 @@
 {
     "userUID": "",
     "name":"",
+    "notes":"",
     "nmap": {
         "choosen": false,
         "scan_type": "single",
@@ -17,31 +18,31 @@
         "target": "domena ali IP",
         "target_end": ""
     },
-    "WhoIs": {
+    "whois": {
         "choosen": false,
         "ip": "",
         "domain": ""
     },
-    "HaveIBeenPwned": {
+
+    "hibp": {
         "choosen": false,
         "email": ""
     },
-    "IpGeolocation": {
+    "ipGeo": {
         "choosen": false,
         "domain": "",
         "ip":""
     },
-    "TLS-DNSSec": {
+    "tls_dnssec": {
         "choosen": false,
         "url": ""
     },
-    "DomainSearch": {
+    "domainSearch": {
         "choosen": false,
-        "company": "",
-        "email": ""
+        "company": ""
     },
-    "EmailPermutator": {
+    "permutator": {
         "choosen": false,
-        "domain":""
+        "email":""
     }
 }

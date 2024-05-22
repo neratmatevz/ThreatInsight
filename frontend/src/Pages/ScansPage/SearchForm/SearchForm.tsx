@@ -9,9 +9,9 @@ interface SearchFormProps {
         ip: string;
         nmapScanType: string;
         notes: string;
-        title: string; // Add title here
+        title: string;
     }>>;
-    showNotes: boolean; // Add this prop
+    showNotes: boolean;
 }
 
 const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) => {
@@ -30,9 +30,9 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
         setNmapScanType(event.target.value);
     };
 
-    const showEmailInput = selectedTools.includes("HaveIBeenPwned") || selectedTools.includes("E-mail Verifier") || selectedTools.includes("E-mail Permutator");
-    const showDomainInput = selectedTools.includes("WhoIs") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan");
-    const showIPInput = selectedTools.includes("IP Geolocation") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan");
+    const showEmailInput = selectedTools.includes("HaveIBeenPwned") || selectedTools.includes("E-mail Permutator");
+    const showDomainInput = selectedTools.includes("WhoIs") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan") || selectedTools.includes("Domain Search");
+    const showIPInput = selectedTools.includes("IP Geolocation") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan") ;
 
     return (
         <div className="search-form-container">
@@ -49,25 +49,46 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
             {showEmailInput && (
                 <div className="custom-form-group">
                     <label htmlFor="email" className="custom-form-label">Email</label>
-                    <input type="text" id="email" className="custom-form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input 
+                        type="email" 
+                        id="email" 
+                        className="custom-form-control" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required 
+                    />
                     <small className="custom-form-text">
-                        {selectedTools.filter(tool => ["HaveIBeenPwned", "E-mail Verifier", "E-mail Permutator"].includes(tool)).join(', ')}
+                        {selectedTools.filter(tool => ["HaveIBeenPwned", "E-mail Permutator"].includes(tool)).join(', ')}
                     </small>
                 </div>
             )}
             {showDomainInput && (
                 <div className="custom-form-group">
                     <label htmlFor="domain" className="custom-form-label">Domain</label>
-                    <input type="text" id="domain" className="custom-form-control" value={domain} onChange={(e) => setDomain(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="domain" 
+                        className="custom-form-control" 
+                        value={domain} 
+                        onChange={(e) => setDomain(e.target.value)} 
+                        required 
+                    />
                     <small className="custom-form-text">
-                        {selectedTools.filter(tool => ["WhoIs", "Nmap", "TLS/DNSSec Scan"].includes(tool)).join(', ')}
+                        {selectedTools.filter(tool => ["Domain Search", "WhoIs", "Nmap", "TLS/DNSSec Scan"].includes(tool)).join(', ')}
                     </small>
                 </div>
             )}
             {showIPInput && (
                 <div className="custom-form-group">
                     <label htmlFor="ip" className="custom-form-label">IP</label>
-                    <input type="text" id="ip" className="custom-form-control" value={ip} onChange={(e) => setIP(e.target.value)} required />
+                    <input 
+                        type="text" 
+                        id="ip" 
+                        className="custom-form-control" 
+                        value={ip} 
+                        onChange={(e) => setIP(e.target.value)} 
+                        required 
+                    />
                     <small className="custom-form-text">
                         {selectedTools.filter(tool => ["IP Geolocation", "WhoIs", "Nmap", "TLS/DNSSec Scan"].includes(tool)).join(', ')}
                     </small>

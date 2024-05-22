@@ -24,7 +24,7 @@ const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools
         setShowNotes(prev => !prev);
     };
 
-    const tools = ["Nmap", "WhoIs", "HaveIBeenPwned", "IP Geolocation", "TLS/DNSSec Scan", "E-mail Verifier", "E-mail Permutator"];
+    const tools = ["Nmap", "WhoIs", "HaveIBeenPwned", "IP Geolocation", "TLS/DNSSec Scan", "Domain Search", "E-mail Permutator"];
 
     return (
         <div className="toolpicker-container">

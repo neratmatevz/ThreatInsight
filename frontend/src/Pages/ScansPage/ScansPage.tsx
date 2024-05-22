@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import ToolPicker from './ToolPicker/ToolPicker';
 import SearchForm from './SearchForm/SearchForm';
+import { useAuth } from '../../context/AuthContext';
 
 const ScansPage = () => {
+    const { user } = useAuth(); // Get the user from the AuthContext
     const [selectedTools, setSelectedTools] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         email: '',
@@ -14,10 +16,7 @@ const ScansPage = () => {
     });
     const [showNotes, setShowNotes] = useState<boolean>(false);
 
-    const mockUserUID = "mockUserUID"; // Mock user UID for demonstration
-
     const handleStartScanning = () => {
-
         // Perform validation checks
         if (!formData.title) {
             alert("Please enter a title.");
@@ -32,13 +31,8 @@ const ScansPage = () => {
             }
         }
 
-        if ((selectedTools.includes("WhoIs") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan")) && !formData.domain) {
-            alert("Please enter a domain.");
-            return;
-        }
-
-        if ((selectedTools.includes("IP Geolocation") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan")) && !formData.ip) {
-            alert("Please enter an IP address.");
+        if ((selectedTools.includes("WhoIs") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan")) && !formData.domain && !formData.ip) {
+            alert("Please enter a domain or an IP address.");
             return;
         }
 
@@ -53,8 +47,8 @@ const ScansPage = () => {
         }
 
         const runTemplate = {
-            userUID: mockUserUID,
-            title: formData.title,
+            userUID: user?.uid || 'No UID', // Get the UID from the user context
+            name: formData.title,
             notes: formData.notes,
             nmap: {
                 choosen: selectedTools.includes("Nmap"),
@@ -65,30 +59,31 @@ const ScansPage = () => {
                 target: formData.domain || formData.ip,
                 target_end: ""
             },
-            WhoIs: {
+            whois: {
                 choosen: selectedTools.includes("WhoIs"),
                 ip: formData.ip,
                 domain: formData.domain
             },
-            HaveIBeenPwned: {
-                choosen: selectedTools.includes("HaveIBeenPwned")
+            hibp: {
+                choosen: selectedTools.includes("HaveIBeenPwned"),
+                email: formData.email
             },
-            IpGeolocation: {
-                choosen: selectedTools.includes("IP Geolocation")
+            ipGeo: {
+                choosen: selectedTools.includes("IP Geolocation"),
+                ip: formData.ip
             },
-            "TLS-DNSSec": {
+            tls_dnssec: {
                 choosen: selectedTools.includes("TLS/DNSSec Scan"),
                 url: formData.domain
             },
-            DomainSearch: {
-                choosen: false,
-                company: "",
+            domainSearch: {
+                choosen: selectedTools.includes("Domain Search"),
+                company: formData.domain
+            },
+            permutator: {
+                choosen: selectedTools.includes("E-mail Permutator"),
                 email: formData.email
             },
-            EmailPermutator: {
-                choosen: selectedTools.includes("E-mail Permutator")
-            },
-
         };
         console.log(runTemplate);
     };
