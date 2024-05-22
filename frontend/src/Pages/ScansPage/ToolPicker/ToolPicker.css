@@ -1,8 +1,8 @@
-.toolpicker-container {  
-    background-color: #eff7ff; 
+.toolpicker-container {   
     margin-bottom: 10px;
     padding: 30px;
-    padding-top: 70px;     
+    padding-top: 70px;
+  
 }
 
 .toolpicker-header {
@@ -62,9 +62,29 @@
 }
 
 .btn-hacker:hover {
-    background-color: #b8b8b8;
+    background-color: #1e84f1;
     border-color: #006bdd; /* Border color remains consistent on hover */
+    color: rgb(255, 255, 255);
 }
-.btn-hacker:hover i {
-    color: black;
+
+.btn-notes {
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-notes:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+}
+
+
+.btn-notes.selected {
+    background-color: #e0e0e0; /* Slightly darker background when selected */
+    border-color: #000000;
 }
