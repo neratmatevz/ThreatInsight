@@ -1,5 +1,6 @@
 {
     "userUID": "",
+    "name":"",
     "nmap": {
         "choosen": false,
         "scan_type": "single",
@@ -22,10 +23,13 @@
         "domain": ""
     },
     "HaveIBeenPwned": {
-        "choosen": false
+        "choosen": false,
+        "email": ""
     },
     "IpGeolocation": {
-        "choosen": false
+        "choosen": false,
+        "domain": "",
+        "ip":""
     },
     "TLS-DNSSec": {
         "choosen": false,
@@ -37,6 +41,7 @@
         "email": ""
     },
     "EmailPermutator": {
-        "choosen": false
+        "choosen": false,
+        "domain":""
     }
 }

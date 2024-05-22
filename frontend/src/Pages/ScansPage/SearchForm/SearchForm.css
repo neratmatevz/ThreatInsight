@@ -2,8 +2,7 @@
 .scans-page-container {
     display: flex;
     flex-direction: column;
-    height: 95vh;
-  
+    height: 93.5vh;
 
 }
 
@@ -14,58 +13,155 @@
     overflow-y: auto;
 }
 
-
-.results-container {  
-    background-color: #e6e6e6; 
-    padding: 100px;
-    padding-left: 100px;
-    padding-right: 500px;
-    margin-bottom: 10px; 
-    box-shadow: 3px 3px 5px rgba(0,0,0,0.2); 
+.results-container {
+    background-color: #e6e6e6;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     height: 100%;
     overflow-y: auto;
+    position: relative;
 }
 
-/* Form group styling */
-.form-group {
-    margin-bottom: 15px;
+.results-container::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    bottom: 0;
+    background-image: url('../../../../public/images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1; 
+    pointer-events: none; 
+    z-index: 0; 
 }
 
-/* Label styling */
-.form-label {
+
+
+/*FORM*/
+.search-form-container{
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.custom-form-group {
+    margin-bottom: 30px;
+}
+
+.custom-form-label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    font-size : 14px;
 }
 
-/* Input and select styling */
-.form-control {
+.custom-form-control {
+    display: block;
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     font-size: 14px;
+    line-height: 1.25;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-/* Focus state for inputs and selects */
-.form-control:focus {
-    border-color: #0056b3;
+/*TITTLE*/
+.custom-title-input-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the title input */
+    margin-bottom: 20px;
+    position: relative;
+}
+.custom-title-input {
+    width: 30%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #000;
+    font-size: 1.5em;
+    text-align: center;
+    box-sizing: border-box;
+    background: none;
     outline: none;
 }
 
-/* Button styling */
-.form-group button {
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
+.custom-title-placeholder {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    color: #666;
 }
 
-/* Button hover state */
-.form-group button:hover {
-    background-color: #004494;
+.custom-form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/*NMAP SCAN TYPE*/
+.custom-radio-group {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+}
+
+.custom-radio input {
+    margin-right: 5px;
+    width: 12px;
+    height: 12px;
+    appearance: none;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+.custom-radio input:checked {
+    background-color: #007bff;
+}
+
+.custom-radio label {
+    cursor: pointer;
+    user-select: none;
+}
+/*INFO FOR SCAN TYPE*/
+
+.info-icon {
+    margin-left: 8px;
+    position: relative;
+}
+
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    white-space: nowrap;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    z-index: 1000;
+}
+
+.info-icon:hover::after {
+    display: block;
 }
