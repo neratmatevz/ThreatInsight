@@ -4,6 +4,7 @@ import { User, setPersistence, browserLocalPersistence, signInWithEmailAndPasswo
 import { NavigateFunction } from 'react-router-dom';
 import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import axios from 'axios';
+import { AnyARecord } from 'dns';
 
 interface AuthContextType {
   user: User | null;
@@ -65,10 +66,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await axios.post('http://localhost:3001/checkEmailVerified', {
         email: email,
       });
-  
+      console.log(response)
       return response.data.emailVerified;
-    } catch (error) {
-      console.error('Error checking email verification:', error);
+    } catch (error:any) {
+      console.error('Error checking email verification:', error.response.data.error);
+      setError(error.response.data.error)
       return false;
     }
   };
@@ -79,29 +81,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true)
 
       const isEmailVerified = await checkEmailVerified(email);
-    
+      console.log(isEmailVerified)
       if (!isEmailVerified) {
-        setError('Please verify your email before logging in.');
         setLoading(false);
+        setError('Your email is not verified');
         return false;
       }
 
      
    
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      await signInWithEmailAndPassword(auth, email, password);
+    //  const user = userCredential.user;
     
   
-      if (!user.emailVerified) {
-        console.log('nisi')
-        logout()
-
-        setError("Please verify your email before logging in.");
-        return false;
-      }
+   
       setLoading(false)
       setError(null);
-      console.log("sej je true")
       return true;
     } catch (error: any) {
       setLoading(false)
@@ -136,8 +131,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return true;
 
     } catch (errorCatch: any) {
-      console.log(errorCatch.message);
-      setError(errorCatch.message);
+      console.log(errorCatch);
+      setError(errorCatch.response);
       return false;
     }
   }

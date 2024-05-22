@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container';
 import './YourWorkPage.css';
 import { useAuth } from '../../../context/AuthContext';
 import FrequentScans from '../FrequentScans/FrequentScans';
+import FrequencyTable from '../Statistics/FrequencyTable/FrequencyTable';
+import NumberScans from '../Statistics/NumberScans/NumberScans';
 
 const YourWorkPage: React.FC = () => {
     const { user } = useAuth();
@@ -15,8 +17,12 @@ const YourWorkPage: React.FC = () => {
 
             </Container>
             <Container>
-            <h3 className="text-left">Frequent scans</h3>
+            <h3 className="text-left">Recent scans</h3>
             <FrequentScans />
+            <h3 className="text-left">Your statistics</h3>
+            <NumberScans />
+            <br></br>
+            <FrequencyTable />
             </Container>
         </>
     );

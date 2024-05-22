@@ -23,9 +23,11 @@
     "react-bootstrap-sidebar-menu": "^2.0.3",
     "react-dom": "^18.3.1",
     "react-firebase-hooks": "^5.1.1",
+    "react-globe.gl": "^2.27.2",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
+    "three": "^0.164.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
