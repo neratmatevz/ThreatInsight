@@ -4,28 +4,56 @@
  * @returns {Array<string>} - An array of phishing email variations.
  */
 const generateEmailPermutations = (email) => {
-    const [localPart, domain] = email.split('@');
-    const domainParts = domain.split('.');
+  const [localPart, domain] = email.split('@');
   
-    let permutations = [];
+  let permutations = new Set();
+
+  // Base permutations
+  permutations.add(`${localPart}@${domain}`);
+  permutations.add(`${localPart.replace('.', '')}@${domain}`);
+  permutations.add(`${localPart.replace(/[^a-zA-Z]/g, '')}@${domain}`);
   
-    // Add variations to the local part
-    permutations.push(localPart + '.' + domain); // Add a dot
-    permutations.push(localPart.replace('.', '') + '@' + domain); // Remove dots
-    permutations.push(localPart + '1@' + domain); // Add a number
-  
-    // Add variations to the domain part
-    if (domainParts.length > 1) {
-      const [domainName, topLevelDomain] = domainParts;
-      permutations.push(localPart + '@' + domainName + '.' + 'co'); // Change TLD to .co
-      permutations.push(localPart + '@' + domainName + topLevelDomain); // Combine domain parts without a dot
-    }
-  
-    // Additional permutations
-    permutations.push(localPart + '@' + 'phishing-' + domain); // Add phishing- prefix to domain
-  
-    return permutations;
-  };
-  
-  module.exports = generateEmailPermutations;
-  
+  // Variations of the local part
+  const localVariations = new Set();
+  localVariations.add(localPart);
+
+  const parts = localPart.split('.');
+  if (parts.length === 2) {
+      const [first, last] = parts;
+      localVariations.add(`${first}${last}`);
+      localVariations.add(`${first}.${last}`);
+      localVariations.add(`${first}-${last}`);
+      localVariations.add(`${first}_${last}`);
+      localVariations.add(`${last}${first}`);
+      localVariations.add(`${last}.${first}`);
+      localVariations.add(`${last}-${first}`);
+      localVariations.add(`${last}_${first}`);
+      localVariations.add(`${first[0]}${last}`);
+      localVariations.add(`${first[0]}.${last}`);
+      localVariations.add(`${first[0]}-${last}`);
+      localVariations.add(`${first[0]}_${last}`);
+      localVariations.add(`${first}${last[0]}`);
+      localVariations.add(`${first}.${last[0]}`);
+      localVariations.add(`${first}-${last[0]}`);
+      localVariations.add(`${first}_${last[0]}`);
+      localVariations.add(`${first[0]}${last[0]}`);
+      localVariations.add(`${first[0]}.${last[0]}`);
+      localVariations.add(`${first[0]}-${last[0]}`);
+      localVariations.add(`${first[0]}_${last[0]}`);
+      localVariations.add(`${last}${first[0]}`);
+      localVariations.add(`${last}.${first[0]}`);
+      localVariations.add(`${last}-${first[0]}`);
+      localVariations.add(`${last}_${first[0]}`);
+  } else if (parts.length === 1) {
+      localVariations.add(parts[0]);
+  }
+
+  // Add each local variation with domain
+  localVariations.forEach(variation => {
+      permutations.add(`${variation}@${domain}`);
+  });
+
+  return [...permutations];
+};
+
+module.exports = generateEmailPermutations;

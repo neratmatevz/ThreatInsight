@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Common/Header/Header';
 import HomePage from './Pages/HomePage/HomePage';
-import ScansPage from './Pages/ScansPage/ScansPage';
+import ScansPage from './Pages/SearchPage/SearchPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import PasswordInput from './Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage';

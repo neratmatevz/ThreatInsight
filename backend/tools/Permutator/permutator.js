@@ -23,12 +23,13 @@ const permutator = async (sampleJson, userUID, searchUID) => {
     // Generate email permutations
     const permutations =  generateEmailPermutations(email);
     // Simulate saving to database
-    
+
     console.log('Simulating saving to database...');
     console.log(permutations);
-    let saveResult = await permutatorSave(permutations, userUID, searchUID);
 
+    let saveResult = await permutatorSave(permutations, userUID, searchUID);
     return saveResult;
+
   } catch (error) {
     console.error('Error generating email permutations:', error.message);
     throw new Error(error.message);
