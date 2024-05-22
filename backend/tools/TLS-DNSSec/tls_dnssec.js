@@ -17,7 +17,7 @@ const saveStructuredResponse = require('./tls_dnssecSaveResponse');
  * @returns {Promise<Object>} - A promise that resolves to the structured response saved in the database.
  * @throws {Error} - Throws an error if parameters are not provided or URL is invalid.
  */
-const tls_dnssec = (tls_dnssecJsonData, userUID, searchUID) => {
+const tls_dnssec = async (tls_dnssecJsonData, userUID, searchUID) => {
 
 
     if (!tls_dnssecJsonData || !tls_dnssecJsonData.choosen) {

@@ -30,7 +30,6 @@
     },
     "ipGeo": {
         "choosen": false,
-        "domain": "",
         "ip":""
     },
     "tls_dnssec": {
