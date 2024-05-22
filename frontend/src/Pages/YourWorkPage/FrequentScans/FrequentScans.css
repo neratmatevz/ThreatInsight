@@ -4,7 +4,7 @@
   margin-bottom: 1.5rem !important;
 }
 
-.card {
+.card-custom {
   cursor: pointer;
   transition: transform 0.3s, background-color 0.3s;
   width: 20rem; /* Increase the width */
@@ -14,12 +14,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a boxed shadow */
 }
 
-.card:hover {
+.card-custom:hover {
   transform: scale(1.05);
   background-color: #f0f0f0; /* Light gray background on hover */
 }
 
-.card-body {
+.card-custom-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,12 +27,12 @@
   height: 100%;
 }
 
-.card-title,
-.card-text {
+.card-custom-title,
+.card-custom-text {
   text-align: center;
 }
 
-.card-text {
+.card-custom-text {
   margin-top: auto; /* Push the text to the bottom */
   text-align: left;
   margin-left: 10px; /* Add left margin */
