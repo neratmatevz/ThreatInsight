@@ -3,9 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Common/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
-import ScansPage from "./Pages/ScansPage/ScansPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import PasswordInput from "./Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage";
 import Login from "./Pages/AuthenticationPage/LoginPages/Login";
 import { User } from "firebase/auth";
@@ -20,6 +18,7 @@ import DeleteAccountPage from "./Pages/AuthenticationPage/ProfilePages/DeleteAcc
 import UpdateEmailPage from "./Pages/AuthenticationPage/ProfilePages/UpdateEmail/UpdateEmailPage";
 import AllScansPage from "./Pages/ScansPage/AllScansPage/AllScansPage";
 import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
+import ScansPage from "./Pages/SearchPage/SearchPage";
 
 function App() {
   const { user, loading } = useAuth();
