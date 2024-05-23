@@ -1,9 +1,11 @@
 const express = require('express');
-const { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken } = require('../../authentication/auth');
+const { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken, TOTPexists } = require('../../authentication/auth');
 const { ipGeo } = require('../../tools/IpGeo/ipGeo');
 const { getFirestoreInstance } = require('../../firebase');
 const { getAuth } = require('firebase-admin/auth');
-
+const { authenticator } = require('otplib');
+const qrcode = require('qrcode');
+const { v4: uuidv4 } = require('uuid');
 let router = express.Router();
 
 router.get('/getUser', async (req, res) => {
@@ -155,5 +157,108 @@ router.post('/checkEmailVerified', async(req,res) => {
       }
     });
 
+    router.post('/generateTOTPandQR', async(req,res) => {
+        const {email,uid} = req.body;
+     
+        const secret = authenticator.generateSecret()
+        const otpauthUrl = authenticator.keyuri(email, 'ThreatInsight', secret)
+        const recoveryKey = uuidv4();
+
+       
+        qrcode.toDataURL(otpauthUrl, async (err, imageUrl) => {
+            if (err) {
+                return res.status(500).send('Error generating QR code');
+            }
+    
+            try { 
+                const db = getFirestoreInstance()
+                // Shrani totpSecret in recovey key v bazo
+                await db.collection('users').doc(uid).set({
+                    totpSecret: secret,
+                    recoveryKey: recoveryKey,
+                    qrCode :imageUrl
+        
+                }, {merge: true});
+    
+                res.json({ secret, qrCode: imageUrl, recoveryKey });
+            } catch (error) {
+                res.status(500).send(error);
+            }
+        });
+    });
+
+// Verify TOTP
+router.post('/verifyTOTP', async (req, res) => {
+    const { token, email, uid } = req.body;
+    
+    try {
+
+      const db = getFirestoreInstance();
+  
+      let userUid = uid;
+      if (!uid) {
+        const userRecord = await getAuth().getUserByEmail(email);
+        userUid = userRecord.uid;
+      }
+  
+      const userRef = db.collection('users').doc(userUid);
+  
+   
+      const doc = await userRef.get();
+  
+      if (!doc.exists) {
+        return res.status(404).send('User not found');
+      }
+  
+      const { totpSecret } = doc.data();
+
+      const isValid = authenticator.verify({ token, secret: totpSecret });
+  
+      res.json({ verified: isValid });
+    } catch (error) {
+      console.error('Error verifying token:', error);
+      res.status(500).send('Error verifying token');
+    }
+  });
+  
+// Verify Recovery Key
+router.post('/verifyRecoveryKey', async (req, res) => {
+    const { email, recoveryKey } = req.body;
+
+    try {
+        const userRef = db.collection('users').doc(email);
+        const doc = await userRef.get();
+
+        if (!doc.exists) {
+            return res.status(404).send('User not found');
+        }
+
+        const user = doc.data();
+
+        if (user.recoveryKey === recoveryKey) {
+            res.json({ verified: true });
+        } else {
+            res.json({ verified: false });
+        }
+    } catch (error) {
+        res.status(500).send('Error verifying recovery key');
+    }
+});
+
+router.post('/TOTPexists', async (req, res) => {
+    try {
+      const { email } = req.body;
+  console.log("Klican")
+
+      const result = await TOTPexists(email);
+console.log(result)
+res.json({totp: result})
+
+    } catch (error) {
+      // Handle unexpected errors
+      console.error('Unexpected error:', error);
+      res.status(500).json({ status: 'error', message: 'An unexpected error occurred.' });
+    }
+  });
 
 module.exports = router;

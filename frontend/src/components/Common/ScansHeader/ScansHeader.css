@@ -10,7 +10,7 @@
     text-align: center;
   }
   
-  .nav-link-box2 {
+  .nav-link-box-scans {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,4 +51,23 @@
     background-color: #f0f0f0; /* Customize the background color of the scrollbar track */
     border-radius: 4px; /* Customize the roundness of the scrollbar track */
   }
+  .activeScans {
+    background-color: #007bff;
+    color: white;
+  }
+  .nav-link-box-scans {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    margin: 0px 0;
+  }
   
+  .nav-link-box-scans:hover {
+    background-color: #f0f0f0;
+  }

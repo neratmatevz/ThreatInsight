@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../Firebase/firebase";
+import { auth, db } from "../../../Firebase/firebase";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import Col from "react-bootstrap/Col";
@@ -18,6 +18,15 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import googleLogo from "./google-logo.png";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +35,7 @@ const Login = () => {
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [editable, setEditable] = useState(true);
   const [showPasswordText, setShowPasswordText] = useState(false);
-
+  const [totpExists, setTotpExists] = useState<boolean>(false);
   const navigate = useNavigate();
   const {
     signIn,
@@ -36,18 +45,17 @@ const Login = () => {
     signInWithGoogle,
     signInWithApple,
     signInWithMicrosoft,
-    setErrorNull
+    setErrorNull,
   } = useAuth();
-
+const [totp, setTotp] = useState<string>();
+const [recoveryKey, setRecoveryKey] = useState<string>();
   if (user) {
     navigate("/");
   }
 
   useEffect(() => {
-  
     return () => {
       if (error) {
-   
         setErrorNull();
       }
     };
@@ -71,29 +79,41 @@ const Login = () => {
   const handleEditClick = () => {
     setLoadingLogin(true);
 
-  
-      setLoadingLogin(false);
-      setEditable(true);
-      setShowPassword(false);
-   
+    setLoadingLogin(false);
+    setEditable(true);
+    setShowPassword(false);
   };
+
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     if (!password) {
       return null;
     }
-
+  
     try {
-      const success = await signIn(email, password);
-      if (success) {
-        navigate("/your-work");
+      const response = await axios.post('http://localhost:3001/TOTPexists', {
+        email: email
+      });
+  console.log(response)
+      const totpExists = response.data.totp;
+
+      if (totpExists) {
+   // setTotpExists(true);
+        navigate('/authorization', {state: {totp: totpExists, email: email, password: password}})
+      } else {
+        const success = await signIn(email, password);
+        if (success) {
+          navigate("/your-work");
+        }
       }
-    } catch (error: any) {
-      console.log(error);
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle errors here
     }
   };
+  
 
   const handleGoogleLogin = async (e: any) => {
     e.preventDefault();
@@ -137,8 +157,6 @@ const Login = () => {
             )}
           </Form>
 
-          
-
           {/* Password Form */}
           {showPassword && (
             <Form onSubmit={handleLogin}>
@@ -165,16 +183,28 @@ const Login = () => {
               {error && <Alert variant="danger">{error}</Alert>}
 
               <Button variant="primary" className="w-100" type="submit">
-                {loading ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  "Login"
-                )}
+                {loading ? <Spinner animation="border" size="sm" /> : "Login"}
               </Button>
             </Form>
+            
           )}
 
-   
+{totpExists && (
+            <div>
+              <Form.Control
+                type="text"
+                placeholder="Enter six-digit code"
+                value={totp}
+                onChange={(e) => setTotp(e.target.value)}
+              />
+              <Form.Control
+                type="text"
+                placeholder="Enter 24-digit code"
+                value={recoveryKey}
+                onChange={(e) => setRecoveryKey(e.target.value)}
+              />
+            </div>
+          )}
 
           <p>Or continue with: </p>
 

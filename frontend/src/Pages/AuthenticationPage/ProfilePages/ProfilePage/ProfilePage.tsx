@@ -17,6 +17,7 @@ import Nav from 'react-bootstrap/Nav';
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import './ProfilePage.css'
 import Header2 from '../../../../components/Common/VerticalHeader/VerticalHeader';
+import TwoFAPage from '../../TwoFAPage/TwoFAPage';
 const ProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -146,6 +147,7 @@ const ProfilePage = () => {
       </Form>
       <br></br>
       <h4 className='mb-4'>Two-step verification</h4>
+      <TwoFAPage />
        </Container>
 </Col>
 

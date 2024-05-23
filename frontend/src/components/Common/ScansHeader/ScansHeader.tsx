@@ -89,7 +89,7 @@ const handleAddNewScan = async () => {
                 key={iskanje.id}
                 as={Link}
                 to={`/scans/${iskanje.id}`}
-                className={`nav-link-box2 ${location.pathname === `/scans/${iskanje.id}` ? 'active2' : ''}`}
+                className={`nav-link-box-scans ${location.pathname === `/scans/${iskanje.id}` ? 'activeScans' : ''}`}
               >
                 <h5>{iskanje.name}</h5>
                 <Dropdown className="dropdown-scans">

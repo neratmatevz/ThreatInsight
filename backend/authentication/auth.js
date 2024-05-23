@@ -108,6 +108,28 @@ const validateToken = async (req, res, next) => {
     }
 }
 
+const TOTPexists = async (email) => {
+    try {
+       const db= getFirestoreInstance()
+
+      const querySnapshot = await db.collection('users').where('email', '==', email).get();
+  
+
+      let firstDocTotp = null;
+
+      querySnapshot.forEach((doc) => {
+
+        firstDocTotp = doc.data().totpSecret;
+      });
+  
+
+      return firstDocTotp;
+    } catch (error) {
+      console.error('Error checking TOTP secret:', error);
+
+      throw error;
+    }
+  };
 
 
-module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken };
+module.exports = { getUser, createUser, deleteUser, updateUser, createCustomToken, validateToken, TOTPexists };

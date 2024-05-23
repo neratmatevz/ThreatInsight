@@ -13,23 +13,23 @@ const VerticalHeader = () => {
       <Nav.Link
         as={Link}
         to="/profile"
-        className={`nav-link-box2 ${location.pathname === '/profile' ? 'active2' : ''}`}
+        className={`nav-link-box-vertical ${location.pathname === '/profile' ? 'activeVertical' : ''}`}
       >
-        <FontAwesomeIcon icon={faShieldAlt} /> Security
+       <h5> <FontAwesomeIcon icon={faShieldAlt} /> Security</h5>
       </Nav.Link>
       <Nav.Link
         as={Link}
         to="/profile/updateemail"
-        className={`nav-link-box2 ${location.pathname === '/profile/updateemail' ? 'active2' : ''}`}
+        className={`nav-link-box-vertical ${location.pathname === '/profile/updateemail' ? 'activeVertical' : ''}`}
       >
-        <FontAwesomeIcon icon={faEnvelope} /> Email
+       <h5> <FontAwesomeIcon icon={faEnvelope} /> Email</h5>
       </Nav.Link>
       <Nav.Link
         as={Link}
         to="/profile/deleteaccount"
-        className={`nav-link-box2 ${location.pathname === '/profile/deleteaccount' ? 'active2' : ''}`}
+        className={`nav-link-box-vertical ${location.pathname === '/profile/deleteaccount' ? 'activeVertical' : ''}`}
       >
-        <FontAwesomeIcon icon={faUserCog} /> Account preferences
+       <h5> <FontAwesomeIcon icon={faUserCog} /> Account preferences</h5>
       </Nav.Link>
     </Nav>
   );

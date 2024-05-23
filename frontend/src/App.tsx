@@ -19,6 +19,8 @@ import UpdateEmailPage from "./Pages/AuthenticationPage/ProfilePages/UpdateEmail
 import AllScansPage from "./Pages/ScansPage/AllScansPage/AllScansPage";
 import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
 import ScansPage from "./Pages/SearchPage/SearchPage";
+import GenerateTOTP from "./Pages/AuthenticationPage/TwoFAPage/GenerateTOTP";
+import VerifyTOTP from "./Pages/AuthenticationPage/TwoFAPage/VerifyTOTP";
 
 function App() {
   const { user, loading } = useAuth();
@@ -60,6 +62,9 @@ function App() {
               }>
                  <Route path=":id" element={<ScanPage />} />
               </Route>
+
+              <Route path='qrcode' element={<GenerateTOTP/>} />
+              <Route path='authorization' element={<VerifyTOTP/>} />
           </Routes>
         </div>
       </BrowserRouter>
