@@ -37,10 +37,17 @@ const Header = () => {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
+            <ul className="navbar-nav">
                     {user && (
                         <li className={`nav-item ${location.pathname === '/scans' ? 'active' : ''}`}>
                             <Link className="nav-link" to="/scans"><span className="links">Scans</span></Link>
+                        </li>
+                    )}
+                </ul>  
+                <ul className="navbar-nav">
+                    {user && (
+                        <li className={`nav-item ${location.pathname === '/newscan' ? 'active' : ''}`}>
+                            <Link className="nav-link" to="/newscan"><span className="links">New scan</span></Link>
                         </li>
                     )}
                 </ul>    

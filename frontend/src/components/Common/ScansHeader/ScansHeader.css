@@ -1,0 +1,54 @@
+
+  .scans-header {
+ /* Make the sidebar fixed -     position: fixed; */
+    height: 90vh;   
+    width: 250px;  
+  }
+  
+  .no-iskanja-message {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .nav-link-box2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .fa-ellipsis-icon {
+    font-size: 1.2em; 
+    color: black; 
+    width: 30px;
+  }
+  .ellipsis-dropdown-toggle {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .dropdown-menu-scans {
+    min-width: 200px;
+  }
+
+  .nav-container {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px; 
+  }
+  
+  .nav-container::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  .nav-container::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Customize the color of the scrollbar thumb */
+    border-radius: 4px; /* Customize the roundness of the scrollbar thumb */
+  }
+  
+  .nav-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Customize the background color of the scrollbar track */
+    border-radius: 4px; /* Customize the roundness of the scrollbar track */
+  }
+  

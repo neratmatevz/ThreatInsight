@@ -9,7 +9,7 @@ import './FrequentScans.css';
 import { useAuth } from '../../../context/AuthContext';
 import Badge from 'react-bootstrap/Badge';
 
-interface Iskanje {
+export interface Iskanje {
     id: string;
     name: string;
     creationDate: string;
