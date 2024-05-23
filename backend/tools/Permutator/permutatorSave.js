@@ -16,14 +16,13 @@ const permutatorSave = async (permutations, userUID, searchUID) => {
     const db = getFirestoreInstance();
     try {
         const documentPath = `users/${userUID}/iskanje/${searchUID}`;
-        await db.doc(documentPath).set({ PERMUTATIONS: permutations }, { merge: true });
+        await db.doc(documentPath).set({ PERMUTATOR: permutations }, { merge: true });
 
         return {
             success: true,
             msg: "Permutations saved successfully"
         };
     } catch (err) {
-        console.error('Error saving permutations to Firestore:', err.message);
         throw new Error("Saving permutations to database failed: " + err.message);
     }
 };

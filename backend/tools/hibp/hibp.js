@@ -4,11 +4,19 @@ const hibpSaveResponse = require('./hibpSaveResponse'); // Import the function t
 
 /**
  * Main function to handle HIBP data processing.
- * @param {string} account - The account (email or username) to search for breaches.
+ * @param {Object} hibpJsonData - The account (email or username) to search for breaches.
  * @param {string} userUID - The UID of the user who initiated the lookup.
  * @param {string} searchUID - The UID of the database search instance.
  */
-const hibp = async (account, userUID, searchUID) => {
+const hibp = async (hibpJsonData, userUID, searchUID) => {
+
+  if(!hibpJsonData || !hibpJsonData.choosen) throw new Error("Parameters for HIBP not provided!");
+
+  const account = hibpJsonData.email;
+
+  if(!userUID || typeof userUID !== 'string') throw new Error("UserUID not provided");
+    
+  if(!searchUID || typeof searchUID !== 'string') throw new Error("UserUID not provided");
 
   // Validate input parameters
   if (!account || typeof account !== 'string') {
@@ -24,9 +32,6 @@ const hibp = async (account, userUID, searchUID) => {
 
     // Structure the raw breach data
     const structuredResponse = hibpStructureResponse(result.data, account);
-
-    // Log the structured response
-    console.log('Structured Response:', structuredResponse);
 
     // Save the structured response to Firestore
     let returnResult = await hibpSaveResponse(structuredResponse, userUID, searchUID);

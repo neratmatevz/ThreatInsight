@@ -8,14 +8,14 @@ const axios = require('axios');
  * email address can be provided to further refine the search results.
  * 
  * @param {string} company - The name of the company to search for.
- * @param {string} [email] - Optional. The email address associated with the company.
  * @returns {Promise<Object>} - A promise that resolves to the response data from the domain search API.
  * @throws {Error} - Throws an error if the API call fails or returns an error response.
  */
-const domainSearchAPIcall = async (company, email) => {
+const domainSearchAPIcall = async (company) => {
 
     const data = {
-        company: company
+        company: company,
+        company_enrichment: true
     };
 
     const requiredHeaders = {
@@ -38,7 +38,6 @@ const domainSearchAPIcall = async (company, email) => {
         );
 
         if (!response.data.error) {
-            //TODO: look if paramtere email is in the found emails list, if it is verify it
             return response.data;
         } else {
             throw new Error(response.data.message);

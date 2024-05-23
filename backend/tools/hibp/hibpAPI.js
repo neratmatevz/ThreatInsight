@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 const hibpAPI = async (account) => {
-  const apiUrl = `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(account)}?truncateResponse=false`;
-  const apiKey = '553e6444599441168b264f8490373c2c';
+  const apiUrl = `${process.env.HIBP_API}/breachedaccount/${encodeURIComponent(account)}?truncateResponse=false`;
+  const apiKey = process.env.HIBP_API_KEY;
   
   try {
     const response = await axios.get(apiUrl, {

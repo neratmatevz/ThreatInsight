@@ -6,7 +6,7 @@ const axios = require('axios'); // Import axios for HTTP requests
  * @returns {Object} - An object containing the status code and WHOIS data.
  */
 const whoisAPIcall = async (address) => {
-  const apiUrl = `https://ki.tc/whois?address=${address}`;
+  const apiUrl = `${process.env.WHOIS_API}/whois?address=${address}`;
   
   try {
     const response = await axios.get(apiUrl);

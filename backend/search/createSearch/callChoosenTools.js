@@ -13,10 +13,12 @@ const whois = require('../../tools/WhoIs/whois');
  * the results of each tool in an object.
  * 
  * @param {Object} choosenTools - An object containing the selected tools and their parameters.
+ * @param {string} userUID - The user UID that started the search.
+ * @param {string} searchUID - The UID of the search fot this tools in database.
  * @returns {Promise<Object>} - A promise that resolves to an object containing the results of each tool.
  * @throws {Error} - Throws an error if any unexpected error occurs during tool execution.
  */
-const callChoosenTools = async (choosenTools) => {
+const callChoosenTools = async (choosenTools, userUID, searchUID) => {
 
     // Map function names to the functions
     const functionMap = {
@@ -36,7 +38,7 @@ const callChoosenTools = async (choosenTools) => {
         if (choosenTools.hasOwnProperty(key)) {
             const func = functionMap[key];
             if (typeof func === 'function') {
-                promises[key] = func(choosenTools[key]).catch(error => ({
+                promises[key] = func(choosenTools[key], userUID, searchUID).catch(error => ({
                     success: false,
                     msg: error.message
                 }));
