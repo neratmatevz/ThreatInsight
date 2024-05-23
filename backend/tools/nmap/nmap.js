@@ -19,7 +19,7 @@ const saveStructuredResponse = require('./nmapSaveResponse');
  * @returns {Promise<Object>} - A promise that resolves to the structured response saved in the database.
  * @throws {Error} - Throws an error if parameters are not provided or invalid.
  */
-const nmap = (nmapJsonData, userUID, searchUID) => {
+const nmap = async (nmapJsonData, userUID, searchUID) => {
 
     // Supported request parameters
     let supportedRequestJSON;

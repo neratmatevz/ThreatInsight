@@ -17,7 +17,7 @@ const saveStructuredResponse = require('./domainSearchSaveResponse');
  * @returns {Promise<Object>} - A promise that resolves to the structured response saved in the database.
  * @throws {Error} - Throws an error if parameters are not provided or domain is invalid.
  */
-const domainSearch = (domainSearchJsonData, userUID, searchUID) => {
+const domainSearch = async (domainSearchJsonData, userUID, searchUID) => {
 
     if (!domainSearchJsonData || !domainSearchJsonData.choosen) {
         throw new Error("Parameters for domainSearch not provided!");

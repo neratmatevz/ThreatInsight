@@ -3,13 +3,11 @@ const structureResponse = require('./nmapStructureResponse');
 
 describe('nmap function', () => {
     
-    test('throws an error if parameters for nmap are not provided', () => {
-        expect(() => {
-            nmap(null);
-        }).toThrow("Parameters for nmap not provided!");
+    test('throws an error if parameters for nmap are not provided', async () => {
+        await expect(nmap(null)).rejects.toThrow("Parameters for nmap not provided!");
     });
 
-    test('throws an error if scan type is not supported', () => {
+    test('throws an error if scan type is not supported', async () => {
         const testData = {
             choosen: true,
             scan_type: "invalid_scan_type",
@@ -20,12 +18,10 @@ describe('nmap function', () => {
             target_end: ""
         };
 
-        expect(() => {
-            nmap(testData);
-        }).toThrow("Scan type invalid_scan_type is not supported!");
+        await expect(nmap(testData)).rejects.toThrow("Scan type invalid_scan_type is not supported!");
     });
 
-    test('throws an error if command is not supported', () => {
+    test('throws an error if command is not supported', async () => {
         const testData = {
             choosen: true,
             scan_type: "single",
@@ -36,12 +32,10 @@ describe('nmap function', () => {
             target_end: ""
         };
 
-        expect(() => {
-            nmap(testData);
-        }).toThrow("Command parameter invalid_command is not supported!");
+        await expect(nmap(testData)).rejects.toThrow("Command parameter invalid_command is not supported!");
     });
 
-    test('throws an error if options parameter is not empty', () => {
+    test('throws an error if options parameter is not empty', async () => {
         const testData = {
             choosen: true,
             scan_type: "single",
@@ -52,9 +46,7 @@ describe('nmap function', () => {
             target_end: ""
         };
 
-        expect(() => {
-            nmap(testData);
-        }).toThrow("Options parameter is not empty!");
+        await expect(nmap(testData)).rejects.toThrow("Options parameter is not empty!");
     });
 
     test('structure response for fast, normal, port and ping scan', () => {

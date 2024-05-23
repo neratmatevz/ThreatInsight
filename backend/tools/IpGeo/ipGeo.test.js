@@ -1,4 +1,4 @@
-const { ipGeo } = require('./ipGeo');
+const ipGeo  = require('./ipGeo');
 const fs = require('fs');
 const path = require('path');
 

@@ -1,4 +1,4 @@
-const { getFirestoreInstance, initializeFirestore } = require("../../firebase");
+const { getFirestoreInstance } = require("../../firebase");
 const {FieldValue} = require('firebase-admin/firestore');
 
 /**
@@ -10,12 +10,11 @@ const {FieldValue} = require('firebase-admin/firestore');
  * 
  * @param {string} userUID - The UID of the user under which the search instance will be created.
  * @param {string} name - The name of the search instance.
+ * @param {string} notes - The notes of the search instance.
  * @returns {Promise<string>} - A promise that resolves to the ID of the newly created search document.
  * @throws {Error} - Throws an error if the operation fails to create the search instance in the database.
  */
-
-const createSearchInDB = async (userUID, name) => {
-    initializeFirestore();
+const createSearchInDB = async (userUID, name, notes) => {
     const db = getFirestoreInstance();
     try {
         // Create a new document with randomly generated ID in the 'iskanje' collection under the user's document
@@ -26,7 +25,8 @@ const createSearchInDB = async (userUID, name) => {
         }
 
         await docRef.set({ 
-            name: name, 
+            name: name,
+            notes: notes, 
             creationDate: FieldValue.serverTimestamp()
         });
 

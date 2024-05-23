@@ -43,4 +43,4 @@ const ipGeo = async (ipGeoData, userUID, searchUID) => {
     }
 };
 
-module.exports = { ipGeo };
+module.exports = ipGeo;

@@ -1,4 +1,4 @@
-const { getFirestoreInstance, initializeFirestore } = require('../../firebase');
+const { getFirestoreInstance } = require('../../firebase');
 
 /**
  * Saves the generated email permutations to the database.
@@ -13,11 +13,10 @@ const { getFirestoreInstance, initializeFirestore } = require('../../firebase');
  * @returns {Object} - An object indicating the success or failure of saving to the database.
  */
 const permutatorSave = async (permutations, userUID, searchUID) => {
-    initializeFirestore()
     const db = getFirestoreInstance();
     try {
-        const documentPath = `users/fjOezFDxvUgbW0McMAp5/iskanje/hY0KnjZczBeuIUP5k6mh`;
-        await db.doc(documentPath).set({ permutations: permutations }, { merge: true });
+        const documentPath = `users/${userUID}/iskanje/${searchUID}`;
+        await db.doc(documentPath).set({ PERMUTATIONS: permutations }, { merge: true });
 
         return {
             success: true,

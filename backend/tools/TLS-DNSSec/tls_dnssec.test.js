@@ -3,16 +3,12 @@ const structureResponse = require('./tls_dnssecStructureResponse');
 
 describe('tls_dnssec function', () => {
 
-    test('throws an error if parameters for tls_dnssec are not provided', () => {
-        expect(() => {
-            tls_dnssec(null);
-        }).toThrow("Parameters for tls_dnssec not provided!");
+    test('throws an error if parameters for tls_dnssec are not provided', async () => {
+        await expect(tls_dnssec(null)).rejects.toThrow("Parameters for tls_dnssec not provided!");
     });
 
-    test('throws an error if url parameter is empty', () => {
-        expect(() => {
-            tls_dnssec({ choosen: true, url: '' });
-        }).toThrow("Url cannot be empty!");
+    test('throws an error if url parameter is empty', async () => {
+        await expect(tls_dnssec({ choosen: true, url: '' })).rejects.toThrow("Url cannot be empty!");
     });
 
     test('structure response for tls_dnssec response', () => {

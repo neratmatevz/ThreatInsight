@@ -15,8 +15,8 @@ initializeFirestore();
 const authRouter = require('./routes/auth/auth_route.js');
 app.use('/', authRouter);
 
-const ser = require('./routes/search/search.js');
-app.use('/search', ser);
+const search = require('./routes/search/search.js');
+app.use('/search', search);
 
 
 
