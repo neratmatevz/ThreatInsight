@@ -23,8 +23,12 @@ const domainSearch = async (domainSearchJsonData, userUID, searchUID) => {
         throw new Error("Parameters for domainSearch not provided!");
     }
 
+    if(!userUID || typeof userUID !== 'string') throw new Error("UserUID not provided");
+    
+    if(!searchUID || typeof searchUID !== 'string') throw new Error("UserUID not provided");
+
     //Setup parameters for domainSearchAPIcall()
-    const { company, email } = domainSearchJsonData;
+    const { company } = domainSearchJsonData;
 
     //Check the correctness of all the parameters
     const domainPattern = /^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
@@ -32,14 +36,7 @@ const domainSearch = async (domainSearchJsonData, userUID, searchUID) => {
         throw new Error("Domain cannot be empty or must be in format: domain.tld!");
     }
 
-    /*
-    TODO: check for email verify, if domain of mail matches the company domain
-    if(!email || typeof email !== "string" || email.trim() === ''){
-        throw new Error("Email cannot be empty!");
-    }
-    */
-
-    return domainSearchAPIcall(company, email)
+    return domainSearchAPIcall(company)
         .then(result => {
 
             // Structure API's response

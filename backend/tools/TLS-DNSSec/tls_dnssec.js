@@ -24,6 +24,10 @@ const tls_dnssec = async (tls_dnssecJsonData, userUID, searchUID) => {
         throw new Error("Parameters for tls_dnssec not provided!");
     }
 
+    if(!userUID || typeof userUID !== 'string') throw new Error("UserUID not provided");
+    
+    if(!searchUID || typeof searchUID !== 'string') throw new Error("UserUID not provided");
+
     //Setup parameters for nmapAPIcall()
     const { url } = tls_dnssecJsonData;
 

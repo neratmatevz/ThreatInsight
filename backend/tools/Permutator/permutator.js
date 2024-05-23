@@ -9,7 +9,7 @@ const permutatorSave = require('./permutatorSave');
  * @returns {Object} - An object indicating the success of the operation and the generated permutations.
  */
 const permutator = async (sampleJson, userUID, searchUID) => {
-  if (!sampleJson || !sampleJson.email) {
+  if (!sampleJson || !sampleJson.choosen) {
     throw new Error("Parameters for permutator not provided!");
   }
 
@@ -24,14 +24,10 @@ const permutator = async (sampleJson, userUID, searchUID) => {
     const permutations =  generateEmailPermutations(email);
     // Simulate saving to database
 
-    console.log('Simulating saving to database...');
-    console.log(permutations);
-
     let saveResult = await permutatorSave(permutations, userUID, searchUID);
     return saveResult;
 
   } catch (error) {
-    console.error('Error generating email permutations:', error.message);
     throw new Error(error.message);
   }
 }

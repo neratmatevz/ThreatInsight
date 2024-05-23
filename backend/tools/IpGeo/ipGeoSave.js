@@ -24,7 +24,6 @@ const saveStructuredResponse = async (structuredResult, userUID, searchUID) => {
             msg: "Result saved successfully"
         };
     } catch (err) {
-        console.log(err.message);
         throw new Error(`Failed to save structured response: ${err.message}`);
     }
 };

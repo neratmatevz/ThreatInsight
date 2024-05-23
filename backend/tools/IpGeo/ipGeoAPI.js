@@ -11,7 +11,7 @@ require('dotenv').config();
  */
 const ipGeoAPIcall = async (ip) => {
     try {
-        const response = await fetch(`https://api.findip.net/${ip}/?token=${process.env.IPGEO_API_KEY}`);
+        const response = await fetch(`${process.env.IPGEO_API}/${ip}/?token=${process.env.IPGEO_API_KEY}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

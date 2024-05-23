@@ -14,6 +14,10 @@ const whois = async (sampleJson, userUID, searchUID) => {
     throw new Error("Parameters for whois not provided!");
   }
 
+  if(!userUID || typeof userUID !== 'string') throw new Error("UserUID not provided");
+    
+  if(!searchUID || typeof searchUID !== 'string') throw new Error("UserUID not provided");
+
   const { ip, domain } = sampleJson;
 
   if (!ip && !domain) {
@@ -39,7 +43,6 @@ const whois = async (sampleJson, userUID, searchUID) => {
       addressUsed = domain;
     } else {
       // If domain lookup fails, try with the IP address
-      console.warn(`Failed to get WHOIS data for domain ${domain} with status code ${result.status}. Trying with IP ${ip}...`);
       result = await whoisAPIcall(ip);
       if (result.status === 200) {
         rawData = result.data;
@@ -51,10 +54,6 @@ const whois = async (sampleJson, userUID, searchUID) => {
 
     // Structure the raw WHOIS data
     const structuredResponse = structureResponse(rawData, addressUsed);
-
-    // Log the structured response
-    console.log('Structured Response:', structuredResponse);
-
 
     // Save the structured response to Firestore
     let saveResult = await saveStructuredResponse(structuredResponse, userUID, searchUID);

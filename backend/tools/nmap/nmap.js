@@ -40,6 +40,10 @@ const nmap = async (nmapJsonData, userUID, searchUID) => {
         throw new Error("Parameters for nmap not provided!");
     }
 
+    if(!userUID || typeof userUID !== 'string') throw new Error("UserUID not provided");
+    
+    if(!searchUID || typeof searchUID !== 'string') throw new Error("UserUID not provided");
+
     // Setup parameters for nmapAPIcall()
     const { scan_type, command, options, schedule, target, target_end } = nmapJsonData;
 
