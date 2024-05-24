@@ -96,7 +96,6 @@ const nmapAPIreport = (scan_id) => {
         return new Promise((resolve, reject) => {
 
             setTimeout(() => {
-
                 fetch(`${process.env.NMAP_API}/scan_result`, fetchConfig)
                     .then(response => response.json())
                     .then(data => {
@@ -107,10 +106,9 @@ const nmapAPIreport = (scan_id) => {
                             resolve(data);
 
                         } else if (data.status_code === 202) {
-
                             // If status code is 202, call the function recursively after 30 seconds
                             setTimeout(() => {
-                                fetchWithDelay().then(resolve).catch(reject);
+                                fetchWithDelay().then(resolve).catch(error => reject(new Error("Fetching report failed: "+error.message)));
                             }, 30000); // 30 seconds delay
 
                         } else {
@@ -122,7 +120,7 @@ const nmapAPIreport = (scan_id) => {
                         reject(new Error(error.message));
                     });
 
-            }, 10000); // 10 seconds delay before the first fetch
+            }, 15000); // 15 seconds delay before the first fetch
         });
     };
 

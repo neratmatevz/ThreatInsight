@@ -15,7 +15,7 @@ const whois = require('../../tools/WhoIs/whois');
  * @param {Object} choosenTools - An object containing the selected tools and their parameters.
  * @param {string} userUID - The user UID that started the search.
  * @param {string} searchUID - The UID of the search fot this tools in database.
- * @returns {Promise<Object>} - A promise that resolves to an object containing the results of each tool.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the results state of each tool.
  * @throws {Error} - Throws an error if any unexpected error occurs during tool execution.
  */
 const callChoosenTools = async (choosenTools, userUID, searchUID) => {

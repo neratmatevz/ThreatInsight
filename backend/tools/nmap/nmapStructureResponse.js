@@ -59,8 +59,8 @@ const basicCommandStructure = (scanResult, scanID) => {
     const ports = portLines.map(line => {
         const [port, state, service] = line.split(/\s+/);
         return {
-            port: parseInt(port.split('/')[0]),
-            protocol: port.split('/')[1],
+            port: parseInt(port?.split('/')[0]),
+            protocol: port?.split('/')[1],
             state,
             service
         };
@@ -105,19 +105,18 @@ const osinfoStructure = (scanResult, scanID) => {
     // Extract port information
     const portLines = lines.slice(portInfoIndex + 1, lines.indexOf('OS details:'));
 
-    const ports = portLines.map(line => {
+    const ports = portLines?.map(line => {
         const [port, state, service, version] = line.split(/\s+/);
         const portDetails = {
-            port: parseInt(port.split('/')[0]),
-            protocol: port.split('/')[1],
+            port: parseInt(port?.split('/')[0]),
+            protocol: port?.split('/')[1],
             state: state, // Correcting state extraction
             service,
             version
         };
 
         if (portDetails.port === 3306) { // Additional info for port 3306 (MySQL)
-            const mysqlInfoLines = lines;
-            for (const line of mysqlInfoLines) {
+            for (const line of lines) {
                 if (line.startsWith('|   Protocol:')) {
                     const mysqlProtocol = line.match(/Protocol: (.+)/);
                     if (mysqlProtocol) {
@@ -153,15 +152,15 @@ const osinfoStructure = (scanResult, scanID) => {
 
     // Find OS details
     const osDetailsLine = lines.find(line => line.startsWith('OS details:'));
-    const osDetails = osDetailsLine.split(': ')[1].trim();
+    const osDetails = osDetails ? osDetailsLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
 
     // Find device type
     const deviceTypeLine = lines.find(line => line.startsWith('Device type:'));
-    const deviceType = deviceTypeLine ? deviceTypeLine.split(': ')[1].trim() : '';
+    const deviceType = deviceTypeLine ? deviceTypeLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
 
     // Find OS CPE
     const osCPELine = lines.find(line => line.startsWith('OS CPE:'));
-    const osCPE = osCPELine ? osCPELine.split(': ')[1].trim() : '';
+    const osCPE = osCPELine ? osCPELine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
 
     // Extract traceroute information
     const tracerouteIndex = lines.findIndex(line => line.startsWith('TRACEROUTE (using port'));
@@ -193,7 +192,7 @@ const osinfoStructure = (scanResult, scanID) => {
 const osdetectStructure = (scanResult, scanID) => {
 
     // Split the scan result into lines and filter out empty lines
-    const lines = scanResult.split('\n').filter(line => line.trim() !== '');
+    const lines = scanResult?.split('\n').filter(line => line.trim() !== '');
 
     // Find host information
     const hostInfoLine = lines.find(line => line.includes('Nmap scan report'));
@@ -212,8 +211,8 @@ const osdetectStructure = (scanResult, scanID) => {
     const ports = portLines.map(line => {
         const [port, state, service] = line.split(/\s+/);
         return {
-            port: parseInt(port.split('/')[0]),
-            protocol: port.split('/')[1],
+            port: parseInt(port?.split('/')[0]),
+            protocol: port?.split('/')[1],
             state,
             service
         };
@@ -221,15 +220,15 @@ const osdetectStructure = (scanResult, scanID) => {
 
     // Find OS details
     const osDetailsLine = lines.find(line => line.startsWith('OS details:'));
-    const osDetails = osDetailsLine.split(': ')[1].trim();
+    const osDetails = osDetailsLine ? osDetailsLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal)';
 
     // Find device type
     const deviceTypeLine = lines.find(line => line.startsWith('Device type:'));
-    const deviceType = deviceTypeLine ? deviceTypeLine.split(': ')[1].trim() : '';
+    const deviceType = deviceTypeLine ? deviceTypeLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal)';
 
     // Find OS CPE
     const osCPELine = lines.find(line => line.startsWith('OS CPE:'));
-    const osCPE = osCPELine ? osCPELine.split(': ')[1].trim() : '';
+    const osCPE = osCPELine ? osCPELine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal)';
 
     // Return structured response
     return {
