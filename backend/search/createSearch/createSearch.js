@@ -2,6 +2,7 @@ const callChoosenTools = require("./callChoosenTools");
 const createSearchInDB = require("./createSearchInDB");
 const findChoosenTools = require("./findChoosenTools");
 const { getAuth } = require('firebase-admin/auth');
+const getIntermediateData = require("./getIntermediateData");
 
 const createSearch = async (jsonData) => {
     // Check if parameter exists
@@ -43,9 +44,9 @@ const createSearch = async (jsonData) => {
     // Call choosen tool functions
     let toolsResults = await callChoosenTools(choosenTools, userUID, searchUID);
 
-    return toolsResults;
-
-    // TODO: Fetch intermediate data from database
+    // Fetch intermediate data from database
+    let intermediateData = await getIntermediateData(toolsResults, userUID, searchUID);
+    return intermediateData;
     // TODO: Structure final data + tag data that can be exploited
     // TODO: Calculate vulnerability of target from final data structure
     // TODO: Save final data
