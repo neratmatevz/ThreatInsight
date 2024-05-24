@@ -5,12 +5,11 @@ import Overview from './Overview/Overview';
 import Features from './Features/Features';
 import { useAuth } from '../../context/AuthContext';
 import { auth } from '../../Firebase/firebase';
-
+import './HomePage.css';
 
 const HomePage = () => {
     const [demo, setDemo] = useState<string>("");
     const { user, loading } = useAuth();
-
           
     useEffect(()=> {
         console.log(user)
@@ -19,16 +18,13 @@ const HomePage = () => {
             console.log(idToken)
         });
         
-    })
-
+    }, [user]);
     
-
     return (
-        <>
-       
+        <div className="homepage">
             <Overview />
             <Features /> 
-        </>
+        </div>
     );
 }
 
