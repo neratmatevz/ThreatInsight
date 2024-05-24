@@ -9,12 +9,12 @@ const AllScansPage = () => {
   
 
   return (
-    <Container fluid>
+    <Container fluid className="p-0">
     <Row>
-      <Col xs={12} sm={6} lg={2}>
+      <Col xs={12} sm={12} md={4} lg={2}>
         <ScansHeader />
       </Col>
-      <Col xs={12} sm={6} lg={10}>
+      <Col xs={12} sm={6} md={8}lg={10}>
         <Outlet />
       </Col>
     </Row>

@@ -1,9 +1,4 @@
 
-  .scans-header {
- /* Make the sidebar fixed -     position: fixed; */
-    height: 90vh;   
-    width: 250px;  
-  }
   
   .no-iskanja-message {
     padding: 20px;
@@ -32,25 +27,7 @@
     min-width: 200px;
   }
 
-  .nav-container {
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 10px; 
-  }
-  
-  .nav-container::-webkit-scrollbar {
-    width: 8px; 
-  }
-  
-  .nav-container::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Customize the color of the scrollbar thumb */
-    border-radius: 4px; /* Customize the roundness of the scrollbar thumb */
-  }
-  
-  .nav-container::-webkit-scrollbar-track {
-    background-color: #f0f0f0; /* Customize the background color of the scrollbar track */
-    border-radius: 4px; /* Customize the roundness of the scrollbar track */
-  }
+
   .activeScans {
     background-color: #007bff;
     color: white;
@@ -62,12 +39,60 @@
     text-align: center;
     color: #333;
     text-decoration: none;
-    display: flex;
     align-items: center;
     gap: 8px; 
     margin: 0px 0;
+    width: 100%;
+    height: 70px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }.nav-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+
   }
   
-  .nav-link-box-scans:hover {
-    background-color: #f0f0f0;
+
+  .scans-header {
+    flex-direction: column;
+height: 100%;
+
   }
+  
+  .nav-scrollable {
+    overflow-y: auto; 
+       height: 75vh; 
+    width:100%;
+
+
+  }
+  
+  .nav-scrollable::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .nav-scrollable::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  .nav-scrollable::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .fixed-bottom-left {
+    position: fixed;
+    bottom: 0px; /* Adjust as per your need */
+    left: 0px; /* Adjust as per your need */
+    background-color: red;
+    width:200px;
+    height: 70px;
+  }
+
+.left-div{
+  height: 300px;
+  align-items: center;
+}
