@@ -87,12 +87,12 @@ p {
         padding: 0 20px; /* Adjust horizontal padding for smaller screens */
     }
 
-    .features-heading h2 {
-        font-size: 48px;
+    .features-section h2 {
+        font-size: 40px;
     }
 
-    .features-heading p {
-        font-size: 18px;
+    .features-section p {
+        font-size: 16px;
     }
 
     .card-title {
