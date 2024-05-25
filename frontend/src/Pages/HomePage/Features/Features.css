@@ -1,13 +1,57 @@
-.row {
-    display: flex;
-    justify-content: center; 
+.features-section {
+    padding: 50px 0;
 }
 
+.purpose-content {
+    padding: 0 40px; /* Add horizontal padding to purpose paragraph */
+}
+
+h2 {
+    font-family: 'Space Grotesk', sans-serif; /* Same as Overview heading */
+    font-size: 48px; /* Same as Overview heading */
+    color: #e5e5e5;
+    margin-bottom: 30px;
+}
+
+p {
+    font-family: 'Space Mono', monospace; /* Same as Overview paragraph */
+    font-size: 20px; /* Same as Overview paragraph */
+    color: #a3a3a3;
+    line-height: 1.4; /* Adjusted line height for readability */
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Apply a shadow with blur */
+    position: relative; /* Required for the pseudo-element */
+}
+
+.features-heading {
+    margin-top: 50px; /* Add distance between features and purpose */
+}
+
+.features-heading h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 60px;
+    color: #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.features-heading p {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    color: #a3a3a3;
+    line-height: 1.4;
+}
 
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #2a2a2a;
+    color: #e5e5e5;
+    border: none;
+    border-radius: 8px;
     transition: all 0.3s ease-in-out;
-
+    text-align: left; /* Align text to the left */
 }
 
 .card:hover {
@@ -15,10 +59,40 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.container {
-    max-width: 1200px; 
+.card .fa {
+    color: #86e4e1 ; 
 }
 
-.fa {
-    color: #003366; 
+.card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.card-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .features-section {
+        padding: 30px 20px;
+    }
+
+    .features-heading h2 {
+        font-size: 48px;
+    }
+
+    .features-heading p {
+        font-size: 18px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
 }

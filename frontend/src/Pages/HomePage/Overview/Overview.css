@@ -1,42 +1,79 @@
 .overview-section {
-    background-color: #f4f4f4; 
-    padding: 150px 0; 
+    background: transparent; /* Background image is handled by HomePage */
+    padding: 250px 0px;
+    color: #060606;
 }
 
 .container {
-    max-width: 1200px; 
+    max-width: 1200px;
+    margin: auto;
 }
 
 h2 {
-    font-size: 28px; 
-    color: #333; 
-    margin-bottom: 15px; 
+    font-family: 'Space Grotesk', sans-serif; /* Added fallback fonts */
+    font-size: 60px;
+    color: #e5e5e5;
+    margin-bottom: 10px;
 }
 
 p {
-    font-size: 16px; 
-    color: #666; 
-    line-height: 1.6; 
+    font-family: 'Space Mono', monospace; /* Added fallback fonts */
+    font-size: 20px;
+    color: #a3a3a3;
+    line-height: 1; /* Adjusted line height for less space between lines */
 }
+
 .img-fluid {
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    width: 100%; 
+    height: auto;
+    transform: rotate(90deg); 
+
 }
 
 .overview-section .explore-button {
     display: inline-block;
-    padding: 10px 20px;
-    margin-top: 15px;
-    background-color: #f8f9fa; 
-    color: #212529; 
-    text-decoration: none; 
+    padding: 6px 32px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    background-color: #2ba8a4; /* Updated background color */
+    color: #060606;
+    text-decoration: none;
     font-weight: bold;
-    border: 1px solid #ced4da; 
-    transition: all 0.3s ease; 
-    border-radius: 4px;
+    font-family: 'Space Mono', monospace; /* Match the font family with <p> */
+    position: relative; /* Required for the arrow */
+}
+
+.overview-section .explore-button::after {
+    content: '→'; /* Arrow symbol */
+    margin-left: 10px;
+    font-size: 24px; /* Increase the font size for a bigger arrow */
 }
 
 .overview-section .explore-button:hover {
-    background-color: #e2e6ea; 
-    border-color: #adb5bd; 
+    background-color: #249591;
+    border-color: #249591;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .overview-section {
+        padding: 100px 20px;
+    }
+
+    h2 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .explore-button {
+        padding: 10px 24px;
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+ 
 }
