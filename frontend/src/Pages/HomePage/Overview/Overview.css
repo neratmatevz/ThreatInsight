@@ -1,6 +1,6 @@
 .overview-section {
     background: transparent; /* Background image is handled by HomePage */
-    padding: 250px 0px;
+    padding: 200px 0px;
     color: #060606;
 }
 
@@ -75,5 +75,11 @@ p {
         margin-bottom: 40px;
     }
 
- 
+    .img-fluid {
+        width: 100%; 
+        height: auto;
+        display: none;
+    
+    }
+
 }

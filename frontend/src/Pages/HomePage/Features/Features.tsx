@@ -1,22 +1,6 @@
 import React from 'react';
 import './Features.css';
 
-interface Feature {
-    name: string;
-    description: string;
-    icon: string;
-}
-
-const featuresData: Feature[] = [
-    { name: "Nmap", description: "Network scanning to identify hosts, host statuses, port statuses, operating systems, etc.", icon: "fas fa-network-wired" },
-    { name: "WhoIs", description: "Retrieve domain/IP information such as creation date, nameservers, registrar, etc.", icon: "fas fa-info-circle" },
-    { name: "HaveIBeenPwned", description: "Check if target's data has been exposed in a data breach.", icon: "fas fa-user-secret" },
-    { name: "IP Geolocation", description: "Enter a target IP address to obtain its approximate location.", icon: "fas fa-map-marked-alt" },
-    { name: "TLS/DNSSec Scan", description: "TLS information and DNSSec status.", icon: "fas fa-lock" },
-    { name: "Domain Search", description: "Verify the existence of emails or find emails based on domain or complete address.", icon: "fas fa-envelope-open-text" },
-    { name: "E-mail Permutator", description: "Generate possible phishing email accounts based on input guidelines.", icon: "fas fa-user-plus" }
-];
-
 const Features: React.FC = () => {
     return (
         <div className="features-section">
@@ -29,10 +13,10 @@ const Features: React.FC = () => {
                         <p>We aim to help you stay ahead of the threats and ensure the safety and security of your digital assets.</p>
                     </div>
                     <div className="col-lg-4">
-                        <img src="/images/security.jpg" alt="Cyber Security" className="img-fluid" />
+                        <img src="/images/purpose.png" alt="Cyber Security" className="img-fluid1" />
                     </div>
                 </div>
-                <div className="features-heading text-center mb-5">
+                <div className="features-heading mb-5 mt-5">
                     <h2>Features</h2>
                     <p>Explore the wide range of tools designed to help you in various aspects of cybersecurity.</p>
                 </div>
@@ -42,7 +26,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-network-wired fa-2x mb-3"></i>
                                 <h5 className="card-title">Nmap</h5>
-                                <p className="card-text">Network scanning to identify hosts, host statuses, port statuses, operating systems, etc.</p>
+                                <p className="card-text">
+                                    Nmap is a powerful network scanning tool used to identify hosts, port statuses, operating systems, and more within a network. It is essential for network inventory and monitoring service uptime, making it a crucial tool for security professionals.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +37,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-info-circle fa-2x mb-3"></i>
                                 <h5 className="card-title">WhoIs</h5>
-                                <p className="card-text">Retrieve domain/IP information such as creation date, nameservers, registrar, etc.</p>
+                                <p className="card-text">
+                                    WhoIs retrieves information about domain names and IP addresses, including creation dates and registrar details. It's vital for managing internet resources and verifying ownership.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +48,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-user-secret fa-2x mb-3"></i>
                                 <h5 className="card-title">HaveIBeenPwned</h5>
-                                <p className="card-text">Check if target's data has been exposed in a data breach.</p>
+                                <p className="card-text">
+                                    HaveIBeenPwned allows users to check if their personal data has been exposed in a data breach. Enter an email address to discover if it has been compromised and take steps to secure your accounts.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -69,7 +59,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-map-marked-alt fa-2x mb-3"></i>
                                 <h5 className="card-title">IP Geolocation</h5>
-                                <p className="card-text">Enter a target IP address to obtain its approximate location.</p>
+                                <p className="card-text">
+                                    IP Geolocation allows users to enter a target IP address and obtain its approximate location. This is useful for cybersecurity investigations and regional content delivery.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -78,7 +70,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-lock fa-2x mb-3"></i>
                                 <h5 className="card-title">TLS/DNSSec Scan</h5>
-                                <p className="card-text">TLS information and DNSSec status.</p>
+                                <p className="card-text">
+                                    TLS/DNSSec Scan tools provide detailed information about security protocols used to protect data in transit and add a layer of security to the DNS lookup process.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +81,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-envelope-open-text fa-2x mb-3"></i>
                                 <h5 className="card-title">Domain Search</h5>
-                                <p className="card-text">Verify the existence of emails or find emails based on domain or complete address.</p>
+                                <p className="card-text">
+                                    Domain Search tools allow users to verify the existence of emails or find emails based on a domain or complete address, aiding in reducing spam and phishing attacks.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -96,7 +92,9 @@ const Features: React.FC = () => {
                             <div className="card-body">
                                 <i className="fas fa-user-plus fa-2x mb-3"></i>
                                 <h5 className="card-title">E-mail Permutator</h5>
-                                <p className="card-text">Generate possible phishing email accounts based on input guidelines.</p>
+                                <p className="card-text">
+                                    The E-mail Permutator generates possible email addresses based on input guidelines, helping in social engineering and penetration testing by simulating phishing attacks.
+                                </p>
                             </div>
                         </div>
                     </div>
