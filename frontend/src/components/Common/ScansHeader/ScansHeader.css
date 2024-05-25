@@ -13,7 +13,7 @@
   
   .fa-ellipsis-icon {
     font-size: 1.2em; 
-    color: black; 
+    color: #E5E5E5; 
     width: 30px;
   }
   .ellipsis-dropdown-toggle {
@@ -27,17 +27,17 @@
     min-width: 200px;
   }
 
-
-  .activeScans {
-    background-color: #007bff;
-    color: white;
+  .activeScans{
+    color:#2BA8A4 !important;
+    background-color: #a3a3a30b !important; 
   }
+
   .nav-link-box-scans {
-    border: 1px solid #ccc;
+
     padding: 10px;
     border-radius: 4px;
+    color:white;
     text-align: center;
-    color: #333;
     text-decoration: none;
     align-items: center;
     gap: 8px; 
@@ -47,8 +47,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #252525;
 
-  }.nav-inner {
+  }
+  
+  .nav-link-box-scans:hover {
+    background-color: #a3a3a362; 
+    color:#2BA8A4;
+  }
+  
+  .nav-inner {
     width: 100%;
     display: flex;
     flex-direction: column; 
@@ -59,23 +67,27 @@
   .scans-header {
     flex-direction: column;
 height: 100%;
-
+border-right: 1px solid #e5e7eb;
   }
   
   .nav-scrollable {
     overflow-y: auto; 
-       height: 75vh; 
+       height: 65vh; 
     width:100%;
-
+background-color: #252525;
 
   }
-  
+  @media (min-width: 2000px) {
+    .nav-scrollable {
+      height: 75vh;
+    }
+  }
   .nav-scrollable::-webkit-scrollbar {
     width: 8px;
   }
   
   .nav-scrollable::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #2BA8A4;
     border-radius: 4px;
   }
   
@@ -92,7 +104,47 @@ height: 100%;
     height: 70px;
   }
 
-.left-div{
-  height: 300px;
-  align-items: center;
+  .left-div {
+    height: 150px;
+    display: flex; /* Enable Flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    background-color: #252525;
+  }
+.h3{
+  color: #E5E5E5;
+}
+.button-plus {
+  background-color: #2BA8A4;
+
+  padding: 10px 20px; 
+  color: white; 
+  border: 2px solid white;
+  position: relative; 
+  transition: all 0.3s ease; 
+  cursor: pointer;
+}
+
+.button-plus::before {
+  content: ''; 
+  position: absolute;
+  top: -1px; 
+  left: -1px; 
+  right: -1px; 
+  bottom: -1px; 
+  border: 1px solid white; 
+  transition: all 0.3s ease; 
+}
+
+.button-plus:hover {
+  background-color: #239B96; 
+  color: #FFF; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+}
+
+.button-plus:hover::before {
+  top: -8px; 
+  left: -8px; 
+  right: -8px; 
+  bottom: -8px; 
 }

@@ -101,7 +101,7 @@ const ScansHeader = () => {
 
   return (
     <div className="d-flex flex-column bg-light scans-header">
-      <div className="d-flex justify-content-between align-items-center p-3">
+      <div className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#252525' }}>
         <Button
           variant="secondary"
           className="d-md-none"
@@ -120,7 +120,7 @@ const ScansHeader = () => {
           </Button>
         </div>
         <div className="d-none d-md-flex justify-content-center p-3">
-          <h3>Your scans</h3>
+          <h3 className="h3">Your scans</h3>
         </div>
       </div>
 
@@ -152,6 +152,7 @@ const ScansHeader = () => {
                       <FontAwesomeIcon
                         icon={faEllipsisV}
                         className="fa-ellipsis-icon"
+               
                       />
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="dropdown-menu-scans">
@@ -215,8 +216,8 @@ const ScansHeader = () => {
           </div>
         </Nav>
         <div className="left-div">
-        <Button variant="primary" onClick={handleAddNewScan}>
-          + Add New Scan
+        <Button variant="primary" onClick={handleAddNewScan} className="button-plus">
+          + 
         </Button>
         </div>
       </div>
