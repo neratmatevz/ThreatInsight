@@ -9,7 +9,7 @@ const ScanPage = () => {
     // preberi podatke iz Scan Headerja, da nerabiš funkcije klicat 2x! 
   })
   return (
-    <div>
+    <div className="left-border">
       <h1>{}</h1>
       <p>Scan ID: {id}</p>
 

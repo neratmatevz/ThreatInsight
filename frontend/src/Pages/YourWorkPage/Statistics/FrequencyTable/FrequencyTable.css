@@ -1,0 +1,17 @@
+.table-custom {
+    background-color: black;
+    color: white;
+  }
+  
+  .table-custom thead tr {
+    background-color: cyan;
+  }
+  
+  .table-custom tbody tr:nth-child(even) {
+    background-color: #222; /* Darker shade for even rows */
+  }
+  
+  .table-custom tbody tr:nth-child(odd) {
+    background-color: black; /* Ensure odd rows are black */
+  }
+  

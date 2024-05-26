@@ -47,18 +47,14 @@ const Login = () => {
     signInWithMicrosoft,
     setErrorNull,
   } = useAuth();
-const [totp, setTotp] = useState<string>();
-const [recoveryKey, setRecoveryKey] = useState<string>();
+
+
   if (user) {
     navigate("/");
   }
 
   useEffect(() => {
-    return () => {
-      if (error) {
-        setErrorNull();
-      }
-    };
+  
   }, []);
 
   const handleTogglePasswordVisibility = () => {
@@ -67,7 +63,13 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
 
   const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if(!email){
+      return null;
+    }
     setLoadingLogin(true);
+
+
 
     setTimeout(() => {
       setLoadingLogin(false);
@@ -84,24 +86,25 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
     setShowPassword(false);
   };
 
-
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     if (!password) {
       return null;
     }
-  
+
     try {
-      const response = await axios.post('http://localhost:3001/TOTPexists', {
-        email: email
+      const response = await axios.post("http://localhost:3001/TOTPexists", {
+        email: email,
       });
-  console.log(response)
+      console.log(response);
       const totpExists = response.data.totp;
 
       if (totpExists) {
-   // setTotpExists(true);
-        navigate('/authorization', {state: {totp: totpExists, email: email, password: password}})
+        // setTotpExists(true);
+        navigate("/authorization", {
+          state: { totp: totpExists, email: email, password: password },
+        });
       } else {
         const success = await signIn(email, password);
         if (success) {
@@ -109,11 +112,10 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
         }
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Handle errors here
     }
   };
-  
 
   const handleGoogleLogin = async (e: any) => {
     e.preventDefault();
@@ -128,10 +130,12 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
     <Container fluid className="container-md login-container">
       <Row className="justify-content-center">
         <Col md={3} className="text-center">
-          <p>Sign in to continue.</p>
-
+          <h2>ThreatInsight </h2>
+          <p>Sign in to continue. </p>
+          {error && <Alert  className="error">Error: {error}</Alert>}
           {/* Email Form */}
           <Form onSubmit={handleEmailSubmit}>
+            
             <InputGroup className="mb-3">
               <Form.Control
                 type="email"
@@ -139,19 +143,26 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 readOnly={!editable}
+                required={true}
+                className="input-black"
               />
               {!editable && (
-                <Button variant="outline-secondary" onClick={handleEditClick}>
+                <Button variant="outline-secondary button-black" onClick={handleEditClick}>
                   <i className="bi bi-pencil"></i>
                 </Button>
               )}
             </InputGroup>
             {!showPassword && (
-              <Button variant="primary" className="w-100" type="submit">
+              <Button
+                variant="outline-dark"
+                size="lg"
+                className="w-100 button-black"
+                type="submit"
+              >
                 {loadingLogin ? (
                   <Spinner animation="border" size="sm" />
                 ) : (
-                  "Continue"
+                  <span className="button-content "> CONTINUE →</span>
                 )}
               </Button>
             )}
@@ -166,10 +177,12 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="input-black"
+                  required={true}
                 />
 
                 <Button
-                  variant="outline-secondary"
+                  className="button-black"
                   onClick={handleTogglePasswordVisibility}
                 >
                   <i
@@ -180,49 +193,40 @@ const [recoveryKey, setRecoveryKey] = useState<string>();
                 </Button>
               </InputGroup>
 
-              {error && <Alert variant="danger">{error}</Alert>}
+      
 
-              <Button variant="primary" className="w-100" type="submit">
-                {loading ? <Spinner animation="border" size="sm" /> : "Login"}
+              <Button      variant="outline-dark"   size="lg" className="w-100 button-black" type="submit">
+                {loading ? <Spinner animation="border" size="sm" /> :   <span className="button-content"> LOGIN →</span>}
               </Button>
+
             </Form>
             
           )}
 
-{totpExists && (
-            <div>
-              <Form.Control
-                type="text"
-                placeholder="Enter six-digit code"
-                value={totp}
-                onChange={(e) => setTotp(e.target.value)}
+       
+          <Container className="continue-with">
+            <p>OR continue with: </p>
+
+            <Button
+             size='lg'
+             variant='secondary'
+              onClick={handleGoogleLogin}
+              className="w-100 d-flex align-items-center justify-content-center button-black"
+            >
+           
+              <img
+                src={googleLogo}
+                alt="Google Logo"
+            
+                className="mr-2"
+                style={{ width: "24px", height: "24px", marginRight:'10px'}}
               />
-              <Form.Control
-                type="text"
-                placeholder="Enter 24-digit code"
-                value={recoveryKey}
-                onChange={(e) => setRecoveryKey(e.target.value)}
-              />
-            </div>
-          )}
+              Google
+            </Button>
 
-          <p>Or continue with: </p>
-
-          <Button
-            variant="outline-secondary"
-            onClick={handleGoogleLogin}
-            className="w-100 d-flex align-items-center justify-content-center"
-          >
-            <img
-              src={googleLogo}
-              alt="Google Logo"
-              className="mr-2"
-              style={{ width: "24px", height: "24px" }}
-            />
-            Google
-          </Button>
-
-          <Link to="/register">Create an account</Link>
+          
+          </Container>
+            <Link className='link-black'to="/register">Create an account</Link>
         </Col>
       </Row>
     </Container>

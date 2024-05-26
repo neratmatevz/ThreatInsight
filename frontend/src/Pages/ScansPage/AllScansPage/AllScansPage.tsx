@@ -9,9 +9,9 @@ const AllScansPage = () => {
   
 
   return (
-    <Container fluid className="p-0">
+    <Container fluid style={{ height: '100%' }}>
     <Row>
-      <Col xs={12} sm={12} md={4} lg={2}>
+      <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
         <ScansHeader />
       </Col>
       <Col xs={12} sm={6} md={8}lg={10}>

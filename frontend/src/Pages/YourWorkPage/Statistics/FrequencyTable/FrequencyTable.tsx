@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import { getDocs, collection } from "firebase/firestore";
 import { useAuth } from "../../../../context/AuthContext";
 import { db } from "../../../../Firebase/firebase";
-
+import './FrequencyTable.css'
 type ScanCount = {
   [key: string]: number;
 };
@@ -42,22 +42,46 @@ const FrequencyTable = () => {
   };
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Scan Type</th>
-          <th>Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.entries(scanCounts).map(([type, count]) => (
-          <tr key={type}>
-            <td>{type}</td>
-            <td>{count}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <Table variant="dark"  hover >
+    <thead>
+      <tr style={{ backgroundColor: 'cyan' }}>
+        <th>Scan Type</th>
+        <th>Scans made</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nmap</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>WhoIs</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>IP Geolocation</td>
+        <td >0</td>
+      </tr>
+      <tr>
+        <td>HaveIBeenPwned</td>
+        <td >0</td>
+      </tr>
+      <tr>
+        <td>TLS/DNSSec Scan</td>
+        <td >0</td>
+      </tr>
+      <tr>
+        <td>Domain Search</td>
+        <td >0</td>
+      </tr>
+      <tr>
+        <td>E-mail Permutator</td>
+        <td >0</td>
+      </tr>
+    </tbody>
+  </Table>
+  
+
   );
 };
 
