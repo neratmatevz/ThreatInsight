@@ -40,7 +40,7 @@ const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools
                             {tool}
                         </label>
                         <input
-                            className="form-check-input"
+                            className="form-checkbox"
                             type="checkbox"
                             value={tool}
                             id={`checkbox-${tool}`}
@@ -57,11 +57,10 @@ const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools
                 </button>
             </div>
             <div className="button-container">
-                <button className="btn btn-hacker" onClick={onStartScanning}>
+                <button className="btn-hacker" onClick={onStartScanning}>
                     <i className="fa fa-user-secret" aria-hidden="true"></i> Start Scanning
                 </button>
             </div>
-
         </div>
     );
 }

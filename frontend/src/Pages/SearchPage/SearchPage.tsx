@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import ToolPicker from './ToolPicker/ToolPicker';
 import SearchForm from './SearchForm/SearchForm';
 import { useAuth } from '../../context/AuthContext';
+import './SearchPage.css';
 
-const ScansPage = () => {
+const SearchPage = () => {
     const { user } = useAuth(); // Get the user from the AuthContext
     const [selectedTools, setSelectedTools] = useState<string[]>([]);
     const [formData, setFormData] = useState({
@@ -92,7 +93,7 @@ const ScansPage = () => {
         <div className="scans-page-container">
             <div className="scans-container container-fluid">
                 <div className="row flex-grow-1">
-                    <div className="col-2">
+                    <div className="col-lg-2 col-md-12 toolpicker-container">
                         <ToolPicker
                             selectedTools={selectedTools}
                             setSelectedTools={setSelectedTools}
@@ -100,7 +101,7 @@ const ScansPage = () => {
                             setShowNotes={setShowNotes}
                         />
                     </div>
-                    <div className="col-10 results-container">
+                    <div className="col-lg-10 col-md-12 results-container">
                         <SearchForm
                             selectedTools={selectedTools}
                             setFormData={setFormData}
@@ -113,4 +114,4 @@ const ScansPage = () => {
     );
 }
 
-export default ScansPage;
+export default SearchPage;

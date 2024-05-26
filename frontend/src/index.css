@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2ba8a400; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2ba8a4;/* Scrollbar thumb color */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #f1f3f5; /* Color when hovering over the scrollbar */
+}

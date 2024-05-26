@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 80px;
+    padding: 15px 80px;
     width: 100%;
 }
 
@@ -57,7 +57,7 @@
 
 .nav-link {
     color: #e5e5e5;
-    font-size: 18px; 
+    font-size: 16px; 
     font-family: 'Space Grotesk', sans-serif;
     text-align: right;
     font-weight: bold;
@@ -79,7 +79,7 @@
 
 .nav-item.dropdown .nav-link {
     font-family: 'Space Mono', monospace;
-    font-size: 18px;
+    font-size: 16px;
     text-align: right;
     color: #e5e5e5;
     cursor: pointer;

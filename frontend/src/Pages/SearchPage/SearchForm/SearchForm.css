@@ -1,167 +1,115 @@
-/* Add this to your existing Results.css file */
-.scans-page-container {
-    display: flex;
-    flex-direction: column;
-    height: 93.5vh;
-
-}
-
-.scans-container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-.results-container {
-    background-color: #e6e6e6;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
-    height: 100%;
-    overflow-y: auto;
+.search-form-container {
     position: relative;
-}
-
-.results-container::before {
-    content: "";
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    right: 10%;
-    bottom: 0;
-    background-image: url('../../../../public/images/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.1; 
-    pointer-events: none; 
-    z-index: 0; 
+    padding: 20px;
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #ebebeb;
+    font-family: 'Space Mono', monospace;
 }
 
 
+.custom-title-input-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2; 
+}
 
-/*FORM*/
-.search-form-container{
-  padding-left: 15%;
-  padding-right: 15%;
+.custom-title-input {
+    width: 30%;
+    padding: 8px;
+    border-radius: 0;
+    border: 1px solid #e3e3e3;
+    background-color: #1e1e1e;
+    color: #e3e3e3;
+    font-size: 16px;
 }
 
 .custom-form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2; 
 }
 
 .custom-form-label {
     display: block;
-    font-weight: bold;
     margin-bottom: 5px;
+    font-size: 16px;
+    color: #e3e3e3;
+    font-weight: bold;
 }
 
 .custom-form-control {
-    display: block;
     width: 100%;
     padding: 8px;
-    font-size: 14px;
-    line-height: 1.25;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-}
-
-/*TITTLE*/
-.custom-title-input-container {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Center the title input */
-    margin-bottom: 20px;
-    position: relative;
-}
-.custom-title-input {
-    width: 30%;
-    padding: 8px;
-    border: none;
-    border-bottom: 1px solid #000;
-    font-size: 1.5em;
-    text-align: center;
-    box-sizing: border-box;
-    background: none;
-    outline: none;
-}
-
-.custom-title-placeholder {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1em;
-    color: #666;
+    border-radius: 0;
+    border: 1px solid #e3e3e3;
+    background-color: #1e1e1e;
+    color: #e3e3e3;
+    font-size: 16px;
+    
 }
 
 .custom-form-text {
-    display: block;
     margin-top: 5px;
+    color: #e4e4e4;
     font-size: 12px;
-    color: #6c757d;
 }
 
-/*NMAP SCAN TYPE*/
 .custom-radio-group {
-    margin-top: 10px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 30px;
+    position: relative;
 }
 
 .custom-radio {
     display: flex;
     align-items: center;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .custom-radio input {
     margin-right: 5px;
-    width: 12px;
-    height: 12px;
-    appearance: none;
-    border: 2px solid #007bff;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
+    accent-color: #2ba8a4;
 }
-
-.custom-radio input:checked {
-    background-color: #007bff;
-}
-
-.custom-radio label {
-    cursor: pointer;
-    user-select: none;
-}
-/*INFO FOR SCAN TYPE*/
 
 .info-icon {
-    margin-left: 8px;
+    margin-left: 5px;
+    color: #a8e9e7;
     position: relative;
+    cursor: default;
 }
 
 .info-icon::after {
     content: attr(data-tooltip);
     position: absolute;
-    white-space: nowrap;
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: 12px;
-    bottom: 100%;
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
-    z-index: 1000;
+    background-color: #ffffff;
+    color: #1d1d1d;
+    padding: 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+    z-index: 1;
+    font-size: 12px;
 }
 
 .info-icon:hover::after {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+textarea.custom-form-control {
+    resize: none;
+    height: 80px;
 }
