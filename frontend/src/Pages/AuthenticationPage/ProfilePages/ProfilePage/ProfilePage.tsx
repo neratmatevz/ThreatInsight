@@ -18,6 +18,7 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import './ProfilePage.css'
 import Header2 from '../../../../components/Common/VerticalHeader/VerticalHeader';
 import TwoFAPage from '../../TwoFAPage/TwoFAPage';
+import VerticalHeader from '../../../../components/Common/VerticalHeader/VerticalHeader';
 const ProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -99,63 +100,54 @@ const ProfilePage = () => {
 
 
   return (
-    <>
-     <Row>
-          {/* Header2 Column */}
-          <Col sm={1} lg={2}>
-    <Header2 />
-    </Col>
-
-    <Col>
-    <Container fluid className='mt-4'>
-      
-      <h3 className='mb-4'>Security</h3>
-
-
-      <Form className='mt-4'>
-        <h4>Change your password</h4>
-        <Form.Group as={Row} className='mb-3'>
-          <Form.Label column sm={2}>
-            Old Password:
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control
-              type="password"
-              placeholder="Enter old password"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
-        <Form.Group as={Row} className='mb-3'>
-          <Form.Label column sm={2}>
-            New Password:
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control
-              type="password"
-              placeholder="Enter new password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
-        <Button onClick={handlePasswordReset} variant='primary'>
-          Reset Password
-        </Button>
-        {error && <Alert variant='danger'>{error}</Alert>}
-      </Form>
-      <br></br>
-      <h4 className='mb-4'>Two-step verification</h4>
-      <TwoFAPage />
-       </Container>
-</Col>
-
-
-  
-    </Row>
-    <Outlet />
-    </>
+    <Container fluid>
+      <Row>
+        <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
+          <VerticalHeader />
+        </Col>
+        <Col xs={12} sm={12} md={8} lg={10} style={{ height: '100%' }}>
+          <Container fluid className='mt-4'>
+            <p className='mb-4' style={{ fontSize: '30px' }}>Change your password</p>
+            {error && <Alert className="error" >{error}</Alert>}
+            <Form className='mt-4'>
+              <Form.Group as={Row} className='mb-3'>
+                <Form.Label column lg={2}>
+                <p>Old Password:</p>  
+                </Form.Label>
+                <Col lg={6}>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter old password"
+                    className='custom-title-input'
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                  />
+                </Col> 
+              </Form.Group>
+              <Form.Group as={Row} className='mb-3'>
+                <Form.Label column lg={2}>
+                 <p>New Password:</p> 
+                </Form.Label>
+                <Col lg={6}>
+                  <Form.Control
+                    type="password"
+                    className='custom-title-input'
+                    placeholder="Enter new password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+              <Button onClick={handlePasswordReset} variant='dark' size='lg' className='button-black'>
+                Reset Password
+              </Button>
+            </Form>
+            <p className='mb-4' style={{ fontSize: '30px', marginTop: '30px' }}>Two-step verification</p>
+            <TwoFAPage />
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

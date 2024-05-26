@@ -36,6 +36,7 @@ const Login = () => {
   const [editable, setEditable] = useState(true);
   const [showPasswordText, setShowPasswordText] = useState(false);
   const [totpExists, setTotpExists] = useState<boolean>(false);
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const {
     signIn,
@@ -94,7 +95,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/TOTPexists", {
+      const response = await axios.post(`${API_BASE_URL}/TOTPexists`, {
         email: email,
       });
       console.log(response);

@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   const firebaseErrorMessages: { [key: string]: string } = {
     'Firebase: Password should be at least 6 characters (auth/weak-password).': 'Please choose a password with at least 6 characters.',

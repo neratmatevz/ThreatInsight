@@ -9,12 +9,10 @@ import NumberScans from "../Statistics/NumberScans/NumberScans";
 import RecentScans from "../FrequentScans/RecentScans";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import LoadingOverlay from "../../../components/Common/LoadingOverlay/LoadingOverlay";
+
 const YourWorkPage: React.FC = () => {
   const { user } = useAuth();
-  if (!user) {
-    return <LoadingOverlay />; 
-}
+  
   return (
     <div className="work-page">
       <Container className="work-page-container">

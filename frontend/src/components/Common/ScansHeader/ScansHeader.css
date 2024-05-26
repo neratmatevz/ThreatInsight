@@ -36,7 +36,6 @@
   .nav-link-box-scans {
 
     padding: 10px;
-    border-radius: 4px;
     color:#e5e7eb;
     text-align: center;
     text-decoration: none;
@@ -128,7 +127,7 @@ background-color: #252525;
   background-color: #2BA8A4 !important;
   color: white !important;
   border-color: #2BA8A4 !important;
-  font-family: 'Space Grotesk' !important;
+  font-family:  'Space Grotesk', sans-serif !important;
   border-radius: 0 !important;
 }
 

@@ -25,6 +25,7 @@ import PromptForCredentials from "../PromptForCredentials/PromptForCredentials";
 import Nav from "react-bootstrap/Nav";
 import SidebarMenu from "react-bootstrap-sidebar-menu";
 import Header2 from "../../../../components/Common/VerticalHeader/VerticalHeader";
+import VerticalHeader from "../../../../components/Common/VerticalHeader/VerticalHeader";
 const UpdateEmailPage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -94,54 +95,53 @@ const UpdateEmailPage = () => {
   };
 
   return (
-    <>
-      <Row>
-        {/* Header2 Column */}
-        <Col sm={1} lg={2}>
-          <Header2 />
-        </Col>
+    <Container fluid>
+    <Row>
+      <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
+        <VerticalHeader />
+      </Col>
+      <Col xs={12} sm={12} md={8} lg={10} style={{ height: '100%' }}>
+        <Container fluid className='mt-4'>
+     
+          <p className='mb-4' style={{ fontSize: '30px', marginTop: '30px' }}>Update your email</p>
+          {error && <Alert className="error">{error}</Alert>}
+          <Form className='mt-4'>
+            <p>Your current e-mail: {user && user.email}</p>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm={2} htmlFor="new-email">
+                New e-mail:
+              </Form.Label>
+              <Col sm={10}>
+                <Form.Control
+                  type="email"
+                  id="new-email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  className="dark-input"
+                  required
+                />
+              </Col>
+            </Form.Group>
+            <Button
+              type="submit"
+              variant='dark' size='lg' className='button-black'
+              onClick={handleShowModalEmail}
+            >
+              Update Email
+            </Button>
 
-        <Col>
-          <Container fluid className="mt-4">
-            <h3 className="mb-4">Email</h3>
+            <PromptForCredentials
+              title={"To update your email, please confirm your password."}
+              show={showModalEmail}
+              handleClose={handleCloseModalEmail}
+              handleConfirm={handleEmailUpdate}
+            />
+          </Form>
 
-            <Form className="my-4">
-              <h4 className="mb-4">Update your email</h4>
-              <p>User Email: {user && user.email}</p>
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column htmlFor="new-email" className="col-sm-2">
-                  New Email:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    type="email"
-                    id="new-email"
-                    value={newEmail}
-                    onChange={(e) => setNewEmail(e.target.value)}
-                    required
-                  />
-                </Col>
-              </Form.Group>
-              <Button
-                type="submit"
-                variant="primary"
-                onClick={handleShowModalEmail}
-              >
-                Update Email
-              </Button>
-
-              <PromptForCredentials
-                title={"To update your email, please confirm your password."}
-                show={showModalEmail}
-                handleClose={handleCloseModalEmail}
-                handleConfirm={handleEmailUpdate}
-              />
-            </Form>
-            {error && <Alert variant='danger'>{error}</Alert>}
-          </Container>
-        </Col>
-      </Row>
-    </>
+        </Container>
+      </Col>
+    </Row>
+  </Container>
   );
 };
 
