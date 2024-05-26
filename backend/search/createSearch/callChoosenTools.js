@@ -61,7 +61,7 @@ const callChoosenTools = async (choosenTools, userUID, searchUID) => {
         // Return the results
         return resultsObj;
     } catch (error) {
-        throw new Error("Unexpecter error! " + error.message);
+        throw new Error(error.message);
     }
 };
 

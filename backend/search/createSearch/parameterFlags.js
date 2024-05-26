@@ -22,7 +22,7 @@ const domainExpiryFlag = (dateString) => {
     const totalMonthDiff = yearDiff * 12 + monthDiff;
 
     // Return 1 if the difference is less or equal to 3 months, otherwise return 0
-    return totalMonthDiff <= 3 ? 1 : 0;
+    return totalMonthDiff <= 3 ? 0 : null;
 }
 
 /**
@@ -97,5 +97,47 @@ const emailBreachesFlag = (emailBreaches) => {
     if (emailBreaches.length > 0) return 1;
 }
 
+/**
+ * Determines if there is atleast one vulnerable port, atleast one useful port.
+ * 
+ * This function checks if there is any vulnerable ports, then it returns 1. If 
+ * there are no vulnerable ports, it checks if there are any useful ports and 
+ * returns 0. If there are no ports, it returns null.
+ * 
+ * @param {number} portVulnFlags - Number of ports flagged vulnerable.
+ * @param {number} portUsefulFlags - Number of ports flagged useful.
+ * @returns {number|null} - Returns 1 if atleast one vulnerable. Returns 1 if atleast one useful. Returns null if no ports are provided.
+ */
+const allPortsFlag = (portVulnFlags, portUsefulFlags) => {
+    if (portVulnFlags > 0) {
+        return 1;
+    } else if (portUsefulFlags > 0) {
+        return 0
+    } else {
+        return null;
+    }
+}
 
-module.exports = { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag }
+/**
+ * Determines the flag value for TLS protocols based on the input.
+ * 
+ * This function evaluates the TLS protocols input to determine the appropriate flag.
+ * It returns null if the input is null, undefined, or true, indicating no specific 
+ * vulnerability. If the input is false, indicating a useful information, it returns 0.
+ * 
+ * @param {boolean|null|undefined} tls - The input indicating the status of TLS protocols.
+ * @returns {number|null} - Returns 0 if the input is false (indicating useful information),
+ *                          and null if the input is true, null, or undefined.
+ */
+const tlsProtocolsFlag = (tls) => {
+
+    if(tls === null || tls === undefined) {
+        return null;
+    }else if(tls === true){
+        return null;
+    }else if (tls === false){
+        return 0;
+    }
+}
+
+module.exports = { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag, allPortsFlag, tlsProtocolsFlag }

@@ -9,7 +9,6 @@
   transition: transform 0.3s, background-color 0.3s;
   width: 20rem; 
   height: 14rem; 
-  background-color: white; 
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   background-color: #252525;

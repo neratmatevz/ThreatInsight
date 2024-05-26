@@ -4,7 +4,26 @@ const findChoosenTools = require("./findChoosenTools");
 const { getAuth } = require('firebase-admin/auth');
 const getIntermediateData = require("./getIntermediateData");
 const structureFinalData = require("./structureFinalData");
+const saveFinalDataStructure = require("./saveFinalDataStructure");
 
+/**
+ * Creates a new search instance, processes the choosen tools, and saves the final data structure.
+ * 
+ * This function performs the following steps:
+ * 1. Validates the provided JSON data, ensuring necessary fields are present.
+ * 2. Verifies the existence of the user with the given user UID.
+ * 3. Creates a new search entry in the database.
+ * 4. Identifies the tools chosen for the search from the provided JSON data.
+ * 5. Calls the choosen tools to gather data.
+ * 6. Fetches intermediate data from the database based on the tools' results.
+ * 7. Structures and vulnerability tags the final data.
+ * 8. Saves the final data structure to the database.
+ * 9. Returns an object containing the path to the new search result.
+ * 
+ * @param {Object} jsonData - The data required to create and process the search.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the path to the search.
+ * @throws {Error} - Throws an error if any step in the process fails.
+ */
 const createSearch = async (jsonData) => {
     // Check if parameter exists
     if (!jsonData) throw new Error("Data for search creation not provided!");
@@ -47,12 +66,16 @@ const createSearch = async (jsonData) => {
         let intermediateData = await getIntermediateData(toolsResults, userUID, searchUID);
 
         // Structure final data + tag data that can be
-        // TODO: Calculate vulnerability of target from final data structure
-        // TODO: Include status of called tools in the final data structure
-        // TODO: Save final data 
-        let finalStructuredData = await structureFinalData(intermediateData);
-        return finalStructuredData;
-        // TODO: Return object with url that has the searches id in it, so the frontend redirects to that site
+        // Calculate vulnerability of target from final data structure
+        // Include status of called tools in the final data structure
+        let finalStructuredData = await structureFinalData(intermediateData, toolsResults);
+
+        // Save final data
+        let pathToSearch = await saveFinalDataStructure(finalStructuredData, userUID, searchUID);
+
+        // Return object with url that has the searches id in it, so the frontend redirects to that site
+        return pathToSearch;
+
     } catch (error) {
         throw new Error(error.message);
     }
