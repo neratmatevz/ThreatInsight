@@ -1,82 +1,107 @@
 /* General navbar styles */
 .navbar {
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: none;
-    padding: 0; 
-}
-
-.navbar-brand {
-    padding-bottom: 1px;
-    margin-left: 20px;
-    color: #3a3a3a;
-    font-weight: bold;
-    font-size: 14px; 
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;    
-}
-
-.navbar-brand:hover, .navbar-brand:focus {
-    color: #001a33;
-}
-
-.logo {
-    height: 25px; /* Adjust the height as needed */
-    width: auto;
-}
-
-.nav-link {
-    color: #494949;
-    font-size: 11px; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    margin: 0 8px; 
-    padding-top: 17px; 
-    padding-bottom: 17px; 
-    font-weight: bold;
-}
-
-.links {
-    padding: 4px 3px; 
-    border-radius: 3px; 
-}
-
-.nav-link .links:hover {
-    background-color: #dddcdc; 
-    color: #494949; 
-}
-
-.nav-item.active .nav-link {
-    border-bottom: 2px solid #007bff; 
-    color: #494949; 
-}
-
-/* Styles for the user icon button */
-.navbar-nav .dropdown-toggle {
-    border: none; /* Remove border */
-    background: none; /* Remove background */
     padding: 0;
-    margin-right: 1rem;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 80px;
+    width: 100%;
+}
+
+.logo-container, .menu-container, .account-container {
     display: flex;
     align-items: center;
 }
 
-.navbar-nav .dropdown-toggle i {
-    font-size: 1.2rem;
-    color: #343a40;
+.logo {
+    height: 25px; 
+    width: auto;
 }
 
-.navbar-nav .dropdown-toggle i:hover {
-    color: #aaaaaa;
+.navbar-title {
+    font-size: 20px; 
+    font-family: 'Space Grotesk', sans-serif;
+    color: #e5e5e5;
+    margin-left: 10px;
 }
 
-/* Dropdown menu styles */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.menu-container {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 0 16px;
+}
+
+.nav-link {
+    color: #e5e5e5;
+    font-size: 18px; 
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: right;
+    font-weight: bold;
+    padding: 0; 
+}
+
+.nav-item.active .nav-link {
+    border-bottom: 2px solid #2ba8a4;
+    color: #e5e5e5; 
+}
+
+.nav-item .nav-link:hover {
+    color: #ffffff; 
+}
+
+.account-container {
+    justify-content: flex-end;
+}
+
+.nav-item.dropdown .nav-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    text-align: right;
+    color: #e5e5e5;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.nav-item.dropdown .nav-link:hover {
+    color: #ffffff;
+}
+
 .dropdown-menu {
     padding: 20px;
     position: absolute;
-    top: 180%;
-    left: auto;
+    top: 100%;
     right: 0;
-    background-color: white;
+    background-color: #252525;
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
     display: none;
+    z-index: 1000;
+    font-family: 'Space Mono', monospace;
+    border: 1px solid #2ba8a4;
+    border-radius: 0;
 }
 
 .dropdown-menu.show {
@@ -84,27 +109,24 @@
 }
 
 .dropdown-item {
-    padding: 8px;
-    margin-right: 3px;
-    font-weight: 400;
-    color: #212529;
-    font-size: 12px;
+    padding: 12px;  /* Increase padding for better touch targets on mobile */
+    font-weight: bold;
+    color: #e5e5e5;
+    font-size: 14px;  /* Increase font size */
     cursor: pointer;
 }
-.dropdown-item i{
-    margin-left: 6px;
 
+.dropdown-item i {
+    margin-left: 6px;
 }
 
 .dropdown-item:hover {
-    color: #16181b;
-    background-color: #dbdbdb;
+    color: #ffffff;
+    background-color: #2ba8a4;
 }
 
-/* Special styles for the account and email items */
 .dropdown-item-account {
-
-    font-size: 10px;
+    font-size: 12px;
     color: rgb(163, 163, 163);
     font-weight: bold;
 }
@@ -112,27 +134,108 @@
 .dropdown-item-email {
     margin-top: 10px;
     margin-bottom: 15px;
-    text-align: center;
-    font-size: 12px;
-    color: #646464;
+    font-size: 14px;
+    color: #e5e5e5;
     font-weight: bold;
 }
 
-
-/* Special styles for the logout button */
 .logout-button {
     background-color: transparent;
-    border: none;
+    border-top: 1px solid #ffffff;
     width: 100%;
     text-align: left;
     cursor: pointer;
+    color: #e5e5e5;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .logout-button i {
     margin-left: 3px;
-    color: #343a40;
+    color: #e5e5e5;
 }
 
 .logout-button:hover {
-    background-color: #dbdbdb;
+    background-color: #2ba8a4;
+}
+
+.navbar-toggler {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e5e5e5;
+    font-size: 1.5rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(229, 229, 229, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+.menu-container.open {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        backdrop-filter: none; /* Remove blur on mobile */
+        background-color: #252525; /* Ensure navbar is not transparent on mobile */
+    }
+
+    .header-content {
+        padding: 20px;  
+    }
+
+    .menu-container {
+        border-top: 2px solid #2ba8a4;
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2525258b;
+        backdrop-filter: blur(10px);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .nav-item {
+        margin: 4px;
+        text-align: center;
+        position: relative;
+        padding: 0px 16px; 
+    }
+
+
+    .account-container {
+        display: none;
+    }
+
+    .mobile-account-dropdown {
+        margin-top: 30px;
+        padding: 20px;
+        z-index: 1000;
+        font-family: 'Space Mono', monospace; /* Added fallback fonts */
+    }
+
+    .mobile-account-dropdown .dropdown-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);  /* Add border between items */
+    }
+
+    .mobile-account-dropdown .dropdown-item:last-child {
+        border-bottom: none;  /* Remove border from the last item */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 10px; /* Reduce heading font size */
+    }
+
+    p {
+        font-size: 50%; /* Reduce paragraph font size */
+    }
+
 }

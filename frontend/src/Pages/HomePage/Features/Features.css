@@ -3,7 +3,7 @@
 }
 
 .purpose-content {
-    padding: 0 40px; /* Add horizontal padding to purpose paragraph */
+    padding-right: 70px; /* Add horizontal padding to purpose paragraph */
 }
 
 h2 {
@@ -14,28 +14,26 @@ h2 {
 }
 
 p {
-    font-family: 'Space Mono', monospace; /* Same as Overview paragraph */
-    font-size: 20px; /* Same as Overview paragraph */
+    font-family: 'Space Mono', monospace; 
+    font-size: 20px;
     color: #a3a3a3;
-    line-height: 1.4; /* Adjusted line height for readability */
+    line-height: 1; 
 }
 
-.img-fluid {
+.img-fluid1 {
     width: 100%;
-    height: auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Apply a shadow with blur */
-    position: relative; /* Required for the pseudo-element */
+    height: 100%;
+   
 }
 
-.features-heading {
-    margin-top: 50px; /* Add distance between features and purpose */
-}
 
 .features-heading h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 60px;
     color: #e5e5e5;
     margin-bottom: 20px;
+    margin-top: 100px; 
+
 }
 
 .features-heading p {
@@ -46,21 +44,22 @@ p {
 }
 
 .card {
-    background-color: #2a2a2a;
+    background-color: #171717; /* Background color in hex */
     color: #e5e5e5;
-    border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    text-align: left; /* Align text to the left */
+    border: 1px solid #404040; /* Border color in hex */
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Add transition for transform and border color */
+    text-align: left; 
+    border-radius: 0;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05); /* Slight zoom effect */
+    border-color: #86e4e1; /* Very light turquoise green */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card .fa {
-    color: #86e4e1 ; 
+    color: #86e4e1; 
 }
 
 .card-title {
@@ -74,18 +73,26 @@ p {
     font-size: 16px;
 }
 
+.card-body i {
+    color: #86e4e1;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     .features-section {
         padding: 30px 20px;
     }
 
-    .features-heading h2 {
-        font-size: 48px;
+    .purpose-content {
+        padding: 0 20px; /* Adjust horizontal padding for smaller screens */
     }
 
-    .features-heading p {
-        font-size: 18px;
+    .features-section h2 {
+        font-size: 40px;
+    }
+
+    .features-section p {
+        font-size: 16px;
     }
 
     .card-title {

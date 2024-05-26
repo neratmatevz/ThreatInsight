@@ -1,6 +1,6 @@
 .overview-section {
     background: transparent; /* Background image is handled by HomePage */
-    padding: 250px 0px;
+    padding: 200px 0px;
     color: #060606;
 }
 
@@ -35,12 +35,12 @@ p {
     padding: 6px 32px;
     padding-bottom: 10px;
     margin-top: 10px;
-    background-color: #2ba8a4; /* Updated background color */
+    background-color: #2ba8a4; 
     color: #060606;
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Space Mono', monospace; /* Match the font family with <p> */
-    position: relative; /* Required for the arrow */
+    font-family: 'Space Mono', monospace; 
+    position: relative; 
 }
 
 .overview-section .explore-button::after {
@@ -61,11 +61,11 @@ p {
         padding: 100px 20px;
     }
 
-    h2 {
-        font-size: 48px;
+    .overview-section h2 {
+        font-size: 40px;
     }
 
-    p {
+    .overview-section p {
         font-size: 18px;
     }
 
@@ -75,5 +75,11 @@ p {
         margin-bottom: 40px;
     }
 
- 
+    .img-fluid {
+        width: 100%; 
+        height: auto;
+        display: none;
+    
+    }
+
 }
