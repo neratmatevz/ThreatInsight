@@ -45,6 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const firebaseErrorMessages: { [key: string]: string } = {
     'Firebase: Password should be at least 6 characters (auth/weak-password).': 'Please choose a password with at least 6 characters.',
@@ -75,7 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkEmailVerified = async (email: string) => {
     try {
-        const response = await axios.post('http://localhost:3001/checkEmailVerified', {
+        const response = await axios.post(`${API_BASE_URL}/checkEmailVerified`, {
             email: email,
         });
 
@@ -174,7 +175,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const addUserToFirestore = async (user: User) => {
     try {
-        const response = await axios.post('http://localhost:3001/addUserToFirestore', {
+        const response = await axios.post(`${API_BASE_URL}/addUserToFirestore`, {
             uid: user.uid,
             email: user.email
         });
