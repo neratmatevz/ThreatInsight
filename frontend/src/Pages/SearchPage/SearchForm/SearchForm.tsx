@@ -32,7 +32,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
 
     const showEmailInput = selectedTools.includes("HaveIBeenPwned") || selectedTools.includes("E-mail Permutator");
     const showDomainInput = selectedTools.includes("WhoIs") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan") || selectedTools.includes("Domain Search");
-    const showIPInput = selectedTools.includes("IP Geolocation") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan") ;
+    const showIPInput = selectedTools.includes("IP Geolocation") || selectedTools.includes("Nmap") || selectedTools.includes("TLS/DNSSec Scan");
 
     return (
         <div className="search-form-container">
