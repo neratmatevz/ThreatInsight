@@ -43,28 +43,83 @@ function App() {
             <Route path="register" element={<RegisterPage />} />
             <Route
               path="register/emailverification"
-              element={<EmailVerification />}
+              element={
+                <ProtectedRoute>
+                  <EmailVerification />{" "}
+                </ProtectedRoute>
+              }
             />
             <Route path="login" element={<Login />} />
-            <Route path="profile" element={<ProfilePage />} />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="profile/deleteaccount"
-              element={<DeleteAccountPage />}
+              element={
+                <ProtectedRoute>
+                  <DeleteAccountPage />{" "}
+                </ProtectedRoute>
+              }
             />
-            <Route path="profile/updateemail" element={<UpdateEmailPage />} />
-            <Route path="your-work" element={<YourWorkPage />} />
+            <Route
+              path="profile/updateemail"
+              element={
+                <ProtectedRoute>
+                  <UpdateEmailPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="your-work"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <YourWorkPage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="scans"
               element={
                 <ProtectedRoute>
                   <AllScansPage />
                 </ProtectedRoute>
-              }>
-                 <Route path=":id" element={<ScanPage />} />
-              </Route>
+              }
+            >
+              <Route
+                path=":id"
+                element={
+                  <ProtectedRoute>
+                    <ScanPage />{" "}
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
-              <Route path='qrcode' element={<GenerateTOTP/>} />
-              <Route path='authorization' element={<VerifyTOTP/>} />
+            <Route
+              path="qrcode"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <GenerateTOTP />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="authorization"
+              element={
+                <ProtectedRoute>
+                  {" "}
+                  <VerifyTOTP />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </BrowserRouter>

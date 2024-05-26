@@ -49,3 +49,12 @@
   top: 10px;
   right: 10px;
 }
+
+.frequent-scans-container{
+  min-height: 25vh;
+}
+
+.card-custom2{
+  height: 20vh;
+  width: 15rem;
+}

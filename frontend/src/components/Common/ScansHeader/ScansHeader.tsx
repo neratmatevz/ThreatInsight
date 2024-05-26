@@ -10,7 +10,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ScansHeader.css";
-import { Iskanje } from "../../../Pages/YourWorkPage/FrequentScans/FrequentScans";
+import { Iskanje } from "../../../Pages/YourWorkPage/FrequentScans/RecentScans";
 import {
   addDoc,
   collection,
@@ -28,18 +28,23 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import Spinner from "react-bootstrap/esm/Spinner";
 const ScansHeader = () => {
   const location = useLocation();
   const { user } = useAuth();
   const [iskanja, setIskanja] = useState<Iskanje[]>([]);
   const [showOffCanvas, setShowOffCanvas] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleCloseOffCanvas = () => setShowOffCanvas(false);
   const handleShowOffCanvas = () => setShowOffCanvas(true);
+
+  
   useEffect(() => {
     const fetchIskanja = async () => {
       if (!user) return;
-
+setLoading(true);
       try {
         const iskanjaQuerySnapshot = await getDocs(
           collection(db, "users", user.uid, "iskanje")
@@ -53,11 +58,16 @@ const ScansHeader = () => {
         setIskanja(iskanjaList);
       } catch (error) {
         console.error("Error fetching iskanja: ", error);
+      }finally {
+        setLoading(false); 
       }
     };
 
     fetchIskanja();
   }, [user]);
+
+
+
 
   const handleAddNewScan = async () => {
     if (!user) return;
@@ -102,32 +112,35 @@ const ScansHeader = () => {
   };
 
   return (
-    <div >
-      <div className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#252525' }}>
+    <div>
+      
+      <div
+        className="d-flex justify-content-between align-items-center p-3"
+        style={{ backgroundColor: "#252525" }}
+      >
         <Button
-          variant="secondary"
-          className="d-md-none"
+ 
+          className="d-md-none btn-lg button-black"
           onClick={handleShowOffCanvas}
         >
           <FontAwesomeIcon icon={faBars} />
         </Button>
         <div className="d-flex d-md-none ms-2">
           <Button
-            variant="primary"
-            className="plus-button"
+
+            className="d-md-none btn-lg button-black"
             onClick={handleAddNewScan}
           >
             {" "}
             <FontAwesomeIcon icon={faPlus} />
           </Button>
         </div>
-      
       </div>
 
       <Offcanvas
         show={showOffCanvas}
         onHide={handleCloseOffCanvas}
-        className="d-md-none"
+        className="d-md-none offcanvas"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Scans</Offcanvas.Title>
@@ -146,13 +159,12 @@ const ScansHeader = () => {
                       : ""
                   }`}
                 >
-                  <h5>{iskanje.name}</h5>
+                  <p>{iskanje.name}</p>
                   <Dropdown className="dropdown-scans">
                     <Dropdown.Toggle variant="link" bsPrefix="p-0">
                       <FontAwesomeIcon
                         icon={faEllipsisV}
                         className="fa-ellipsis-icon"
-               
                       />
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="dropdown-menu-scans">
@@ -167,33 +179,43 @@ const ScansHeader = () => {
               ))
             ) : (
               <div className="no-iskanja-message">
-                <h5>No scans have been created.</h5>
+                <p>No scans have been created.</p>
               </div>
             )}
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
 
+     
+    <div className="d-none d-md-block pc-scans">
 
-      <div className="d-none d-md-block pc-scans">
-      <div className="d-none d-md-flex justify-content-center p-3 ">
+        <div className="d-flex justify-content-center p-3">
           <p className="h3">Your scans</p>
         </div>
+     
+      {loading && (
+        <div className="text-center">
+          <Spinner animation="border" role="status" variant="light">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      )}
+      {!loading && (
         <Nav className="flex-row nav-scrollable">
           <div className="nav-inner">
             {iskanja.length > 0 ? (
               iskanja.map((iskanje) => (
-                <div key={iskanje.id} className="nav-item">
+                <div key={iskanje.id} >
                   <Nav.Link
                     as={Link}
                     to={`/scans/${iskanje.id}`}
                     className={`nav-link-box-scans ${
                       location.pathname === `/scans/${iskanje.id}`
-                        ? "activeScans"
-                        : ""
+                        ? 'activeScans'
+                        : ''
                     }`}
                   >
-                    <p>{iskanje.name}</p>
+                    <p style={{ overflow: 'hidden' }}>{iskanje.name}</p>
                     <Dropdown className="dropdown-scans">
                       <Dropdown.Toggle variant="link" bsPrefix="p-0">
                         <FontAwesomeIcon
@@ -219,13 +241,20 @@ const ScansHeader = () => {
             )}
           </div>
         </Nav>
+      )}
+      {!loading && (
         <div className="left-div">
-        <Button variant="primary" onClick={handleAddNewScan} className="button-plus">
-          + 
-        </Button>
+          <Button
+         
+            onClick={handleAddNewScan}
+            size="lg"
+            className="button-black"
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </Button>
         </div>
-      </div>
-     
+      )}
+    </div>
     </div>
   );
 };

@@ -7,7 +7,12 @@
   .work-page {
     background: url('/public/images/bg.png') no-repeat center center fixed; 
     background-size: cover;
-    min-height: 100vh;
+    min-height: 130vh;
     width: 100%;
     background-color: rgb(255, 255, 255);
+
+}
+
+.margin-container{
+  margin-top: 50px;
 }

@@ -32,7 +32,7 @@ const NumberScans = () => {
 
           <Card.Title>Total Number of Scans</Card.Title>
          
-          <FontAwesomeIcon icon={faSearch} style={{ marginLeft: '15px'  ,fontSize: '1.5rem'} }/>
+         
         </div>
 
         <Card.Text style={{ fontSize: '2rem', marginTop: '20px' }}>

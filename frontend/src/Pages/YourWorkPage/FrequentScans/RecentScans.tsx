@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { db } from '../../../Firebase/firebase';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container'
-import './FrequentScans.css';
+import './RecentScans.css';
 import { useAuth } from '../../../context/AuthContext';
 import Badge from 'react-bootstrap/Badge';
+import { Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export interface Iskanje {
     id: string;
@@ -15,30 +17,41 @@ export interface Iskanje {
     creationDate: string;
 }
 
-const FrequentScans: React.FC = () => {
+const RecentScans: React.FC = () => {
     const { user } = useAuth();
     const [iskanja, setIskanja] = useState<Iskanje[]>([]);
-
+    const [loading, setLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const fetchIskanja = async () => {
-            if (!user) return;
-
+            if (!user) {
+                setLoading(false);
+                return;
+            }
+    
             try {
                 const currentTimestamp = getCurrentTimestampInSeconds();
-
-                const iskanjaQuerySnapshot = await getDocs(collection(db, 'users', user.uid, 'iskanje'));
+                const iskanjaQuery = query(
+                    collection(db, 'users', user.uid, 'iskanje'),
+                    orderBy('creationDate', 'desc'),
+                    limit(4)
+                );
+                const iskanjaQuerySnapshot = await getDocs(iskanjaQuery);
                 const iskanjaList: Iskanje[] = iskanjaQuerySnapshot.docs.map(doc => ({
                     id: doc.id,
                     name: doc.data().name,
                     creationDate: getDuration(currentTimestamp, doc.data().creationDate.seconds)
                 }));
-
+    
                 setIskanja(iskanjaList);
             } catch (error) {
                 console.error("Error fetching iskanja: ", error);
+            } finally {
+                setLoading(false);
             }
         };
-
+    
         fetchIskanja();
     }, [user]);
 
@@ -64,24 +77,36 @@ const FrequentScans: React.FC = () => {
             return `${seconds} seconds ago`;
         }
     }
+
+    const handleCardClick = (id: string) => {
+        navigate(`/scans/${id}`)
+    }
     
 
     return (
         <Container className="frequent-scans-container">
-            {iskanja.length === 0 ? (
-                <div>Loading...</div>
+            {loading ? (
+                <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                    <Spinner animation="border" variant="primary" />
+                </div>
+            ) : iskanja.length === 0 ? (
+                <Card className="mb-4 card-custom">
+                    <Card.Body>
+                        <Card.Title>You don't have any scans yet.</Card.Title>
+                    </Card.Body>
+                </Card>
             ) : (
                 <Row xs={1} sm={2} md={3} lg={4} className="g-4 justify-content-start">
                     {iskanja.map(iskanje => (
                         <Col key={iskanje.id}>
-                            <Card className="mb-4 card-custom" onClick={() => alert(`You clicked on ${iskanje.name}`)}>
+                              <Card className="mb-4 card-custom" onClick={() => handleCardClick(iskanje.id)}>
                                 <Card.Body>
                                     <Card.Title>{iskanje.name}</Card.Title>
                                 </Card.Body>
                                 <Card.Footer>
                                     <Card.Body>{iskanje.creationDate}</Card.Body>
                                 </Card.Footer>
-                                <Badge bg="danger" className="badge-top-right">Danger</Badge>
+                                <Badge bg="danger" className="badge-top-right">Vulnerable</Badge>
                             </Card>
                         </Col>
                     ))}
@@ -90,4 +115,4 @@ const FrequentScans: React.FC = () => {
         </Container>
     );
 }    
-export default FrequentScans;
+export default RecentScans;

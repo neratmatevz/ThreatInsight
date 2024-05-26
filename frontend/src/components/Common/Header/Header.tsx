@@ -15,6 +15,7 @@ const Header: React.FC = () => {
             await logout();
             setIsProfileOpen(false);
             setIsMobileMenuOpen(false);
+            navigate('/login');
         } catch (error) {
             console.log(error); 
         }

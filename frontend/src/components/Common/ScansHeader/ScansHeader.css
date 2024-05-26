@@ -3,6 +3,7 @@
   .no-iskanja-message {
     padding: 20px;
     text-align: center;
+    color:#E5E5E5;
   }
   
   .nav-link-box-scans {
@@ -28,15 +29,15 @@
   }
 
   .activeScans{
-    color:#2BA8A4 !important;
-    background-color: #a3a3a30b !important; 
+
+    background-color: #a3a3a362 !important; 
   }
 
   .nav-link-box-scans {
 
     padding: 10px;
     border-radius: 4px;
-    color:white;
+    color:#e5e7eb;
     text-align: center;
     text-decoration: none;
     align-items: center;
@@ -48,13 +49,15 @@
     align-items: center;
     justify-content: space-between;
     background-color: #252525;
-
+    border-radius: 0;
   }
   
   .nav-link-box-scans:hover {
     background-color: #a3a3a362; 
-    color:#2BA8A4;
+color:#e5e7eb;
   }
+
+ 
   
   .nav-inner {
     width: 100%;
@@ -93,8 +96,8 @@ background-color: #252525;
 
   .fixed-bottom-left {
     position: fixed;
-    bottom: 0px; /* Adjust as per your need */
-    left: 0px; /* Adjust as per your need */
+    bottom: 0px; 
+    left: 0px; 
     background-color: red;
     width:200px;
     height: 70px;
@@ -102,9 +105,9 @@ background-color: #252525;
 
   .left-div {
     height: 150px;
-    display: flex; /* Enable Flexbox */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     background-color: #252525;
   }
 .h3{
@@ -121,3 +124,20 @@ background-color: #252525;
   cursor: pointer;
 }
 
+.button-black {
+  background-color: #2BA8A4 !important;
+  color: white !important;
+  border-color: #2BA8A4 !important;
+  font-family: 'Space Grotesk' !important;
+  border-radius: 0 !important;
+}
+
+.button-black:hover {
+  background-color: #2BA8A4 !important;
+  color: white !important;
+  border-color: #2BA8A4 !important;
+}
+
+.offcanvas{
+  background-color: #252525;
+}

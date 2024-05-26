@@ -4,6 +4,8 @@ import { getDocs, collection } from "firebase/firestore";
 import { useAuth } from "../../../../context/AuthContext";
 import { db } from "../../../../Firebase/firebase";
 import './FrequencyTable.css'
+import BarChart from "./PieChart";
+import PieChart from "./PieChart";
 type ScanCount = {
   [key: string]: number;
 };
@@ -38,49 +40,13 @@ const FrequencyTable = () => {
       });
 
       setScanCounts(counts);
+      console.log()
     }
   };
 
   return (
-    <Table variant="dark"  hover >
-    <thead>
-      <tr style={{ backgroundColor: 'cyan' }}>
-        <th>Scan Type</th>
-        <th>Scans made</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Nmap</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>WhoIs</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>IP Geolocation</td>
-        <td >0</td>
-      </tr>
-      <tr>
-        <td>HaveIBeenPwned</td>
-        <td >0</td>
-      </tr>
-      <tr>
-        <td>TLS/DNSSec Scan</td>
-        <td >0</td>
-      </tr>
-      <tr>
-        <td>Domain Search</td>
-        <td >0</td>
-      </tr>
-      <tr>
-        <td>E-mail Permutator</td>
-        <td >0</td>
-      </tr>
-    </tbody>
-  </Table>
   
+    <PieChart counts={scanCounts}/>
 
   );
 };

@@ -5,6 +5,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import axios from 'axios';
 import { AnyARecord } from 'dns';
+import LoadingOverlay from '../components/Common/LoadingOverlay/LoadingOverlay';
 
 interface AuthContextType {
   user: User | null;
@@ -68,6 +69,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const setErrorNull = async () =>{
     setError(null)
   }
+  if (loading) {
+    return <LoadingOverlay />; 
+}
 
   const checkEmailVerified = async (email: string) => {
     try {
