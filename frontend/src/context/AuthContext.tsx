@@ -12,7 +12,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   error: string | null;
   loading: boolean | null;
-  createUser: (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => Promise<boolean>;
+  createUser: (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signInWithApple: () => Promise<void>;
   signInWithMicrosoft: () => Promise<void>;
@@ -25,7 +25,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
   error: null,
   loading: null,
-  createUser: async () => false,
+  createUser: async () => {},
   signInWithGoogle: async () => {},
   signInWithApple: async () => {},
   signInWithMicrosoft: async () => {},
@@ -45,6 +45,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const firebaseErrorMessages: { [key: string]: string } = {
+    'Firebase: Password should be at least 6 characters (auth/weak-password).': 'Please choose a password with at least 6 characters.',
+    'auth/user-disabled': 'The user account has been disabled.',
+    'auth/user-not-found': 'There is no user corresponding to this email.',
+    'auth/wrong-password': 'The password is incorrect.',
+
+};
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -54,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return () => {
       unsubscribe();
 
-    };
+    }; 
   }, []);
   
   const setErrorNull = async () =>{
@@ -63,33 +71,46 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkEmailVerified = async (email: string) => {
     try {
-      const response = await axios.post('http://localhost:3001/checkEmailVerified', {
-        email: email,
-      });
-      console.log(response)
-      return response.data.emailVerified;
-    } catch (error:any) {
-      console.error('Error checking email verification:', error.response.data.error);
-      setError(error.response.data.error)
-      return false;
+        const response = await axios.post('http://localhost:3001/checkEmailVerified', {
+            email: email,
+        });
+
+        if(response.status === 200){
+            return response.data.emailVerified;
+        } else if (response.status === 404) {
+            return 'not_found';
+        } else {
+            return response.data;
+        }
+    } catch (error: any) {
+        if (error.response && error.response.status === 404) {
+            return 'not_found';
+        } else {
+            console.error('Error checking email verification:', error.response ? error.response.data.error : error.message);
+            setError(error.response ? error.response.data.error : 'Unknown error');
+            return 'error';
+        }
     }
-  };
+};
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {   
 
     setLoading(true)
 
-      const isEmailVerified = await checkEmailVerified(email);
-      console.log(isEmailVerified)
-      if (!isEmailVerified) {
+    const isEmailVerified = await checkEmailVerified(email);
+
+    if (isEmailVerified === 'not_found') {
+        setLoading(false);
+        setError('Account does not exist');
+        return false;
+    } else if (!isEmailVerified) {
         setLoading(false);
         setError('Your email is not verified');
         return false;
-      }
+    }
 
-     
-   
+     if(isEmailVerified === true){
       await signInWithEmailAndPassword(auth, email, password);
     //  const user = userCredential.user;
     
@@ -98,6 +119,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(false)
       setError(null);
       return true;
+     }else{
+      setLoading(false)
+      return false;
+     }
     } catch (error: any) {
       setLoading(false)
       setError(error.message);
@@ -118,7 +143,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
 
-  const createUser = async (email: string, password: string, showPassword: boolean, navigate: NavigateFunction): Promise<boolean> => {
+  const createUser = async (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => {
     try {
    
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -128,12 +153,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
        navigate('/register/emailverification'); 
       await addUserToFirestore(user)
       await sendEmailVerification(user);
-      return true;
+ 
 
-    } catch (errorCatch: any) {
-      console.log(errorCatch);
-      setError(errorCatch.response);
-      return false;
+    } catch (error: any) {
+      const errorMessage = error.message;
+      console.log(errorMessage)
+
+      if (firebaseErrorMessages[errorMessage]) {
+          setError(firebaseErrorMessages[errorMessage]);
+      } else {
+          setError('An unexpected error occurred. Please try again.');
+      }
+ 
     }
   }
 

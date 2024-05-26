@@ -145,8 +145,10 @@ router.post('/checkEmailVerified', async(req,res) => {
 
     try {
         const userRecord = await getAuth().getUserByEmail(email);
-        if(userRecord == null){
-            res.status(500).send('user does not exist')
+        console.log(userRecord)
+        if(!userRecord){
+            console.log("ni ga")
+            res.status(500).send({error: 'Account does not exist'})
         }
         const isEmailVerified = userRecord.emailVerified;
         console.log(isEmailVerified)

@@ -8,7 +8,7 @@ const EmailVerification = () => {
           <div className="text-center">
             <h2>Email Verification Sent!</h2>
             <p>We've sent a verification email to your address. Please check your inbox and follow the instructions to complete the process.</p>
-            <Button variant="primary" href="/login">Back to Login</Button>
+            <Button size='lg' className="button-black" href="/login">Back to Login</Button>
           </div>
         </div>
       </div>

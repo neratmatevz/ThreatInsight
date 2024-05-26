@@ -11,20 +11,20 @@ const YourWorkPage: React.FC = () => {
     const { user } = useAuth();
 
     return (
-        <>
+       <div className="work-page">
             <Container className="work-page-container">
-                <h2 className="text-left">G'day, {user?.email}</h2>
+                <p className="text-left">G'day, {user?.email}</p>
 
             </Container>
             <Container>
-            <h3 className="text-left">Recent scans</h3>
+            <p className="text-left">Recent scans</p>
             <FrequentScans />
-            <h3 className="text-left">Your statistics</h3>
+            <p className="text-left">Your statistic</p>
             <NumberScans />
             <br></br>
             <FrequencyTable />
             </Container>
-        </>
+        </div>
     );
 };
 

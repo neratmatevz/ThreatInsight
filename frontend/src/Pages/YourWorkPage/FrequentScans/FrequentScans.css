@@ -12,11 +12,13 @@
   background-color: white; /* Set background color to white */
   border: 1px solid #ccc; /* Gray border */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a boxed shadow */
+  background-color: #252525;
 }
 
 .card-custom:hover {
   transform: scale(1.05);
   background-color: #f0f0f0; /* Light gray background on hover */
+  background-color: #252525;
 }
 
 .card-custom-body {

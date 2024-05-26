@@ -11,6 +11,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
+import googleLogo from '../../LoginPages/google-logo.png';
 
 import { useAuth } from "../../../../context/AuthContext";
 import axios from 'axios';
@@ -35,15 +36,6 @@ const RegisterPage = () => {
   };
 
 
-  useEffect(() => {
-  
-    return () => {
-      if (error) {
-   
-        setErrorNull();
-      }
-    };
-  }, []);
 
   const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,93 +71,109 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
-     <Container fluid className="container-md login-container">
-      <Row className="justify-content-center">
-        <Col md={3} className="text-center">
-          <p>Sign in to continue.</p>
-
-          {/* Email Form */}
-          <Form onSubmit={handleEmailSubmit}>
-            <InputGroup className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                readOnly={!editable}
-              />
-              {!editable && (
-                <Button variant="outline-secondary" onClick={handleEditClick}>
-                  <i className="bi bi-pencil"></i>
-                </Button>
-              )}
-            </InputGroup>
-            {!showPassword && (
-              <Button variant="primary" className="w-100" type="submit">
-                {loadingLogin ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  "Continue"
-                )}
+    <Container fluid className="container-md login-container">
+    <Row className="justify-content-center">
+      <Col md={3} className="text-center">
+        <h2>ThreatInsight </h2>
+        <p>Sign in to continue. </p>
+        {error && <Alert  className="error">Error: {error}</Alert>}
+        {/* Email Form */}
+        <Form onSubmit={handleEmailSubmit}>
+          
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              readOnly={!editable}
+              className="input-black"
+              required={true}
+            />
+            {!editable && (
+              <Button variant="outline-secondary button-black" onClick={handleEditClick}>
+                <i className="bi bi-pencil"></i>
               </Button>
             )}
-          </Form>
-
-          
-
-          {/* Password Form */}
-          {showPassword && (
-            <Form onSubmit={handleSubmit}>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  type={showPasswordText ? "text" : "password"}
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <Button
-                  variant="outline-secondary"
-                  onClick={handleTogglePasswordVisibility}
-                >
-                  <i
-                    className={
-                      showPasswordText ? "fas fa-eye-slash" : "fas fa-eye"
-                    }
-                  ></i>
-                </Button>
-              </InputGroup>
-
-              {error && <Alert variant="danger">{error}</Alert>}
-
-              <Button variant="primary" className="w-100" type="submit">
-                {loading ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  "Register"
-                )}
-              </Button>
-            </Form>
+          </InputGroup>
+          {!showPassword && (
+            <Button
+              
+              size="lg"
+              className="w-100 button-black"
+              type="submit"
+            >
+              {loadingLogin ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                <span className="button-content"> CONTINUE →</span>
+              )}
+            </Button>
           )}
+        </Form>
 
-   
+        {/* Password Form */}
+        {showPassword && (
+          <Form onSubmit={handleSubmit}>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type={showPasswordText ? "text" : "password"}
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-black"
+                  required={true}
+              />
 
-          <p>Or continue with: </p>
+              <Button
+                className="button-black"
+                onClick={handleTogglePasswordVisibility}
+              >
+                <i
+                  className={
+                    showPasswordText ? "fas fa-eye-slash" : "fas fa-eye"
+                  }
+                ></i>
+              </Button>
+            </InputGroup>
+
+    
+
+            <Button     size="lg" className="w-100 button-black" type="submit">
+              {loading ? <Spinner animation="border" size="sm" /> :   <span className="button-content"> REGISTER →</span>}
+            </Button>
+
+          </Form>
+          
+        )}
+
+     
+        <Container className="continue-with">
+          <p>OR continue with: </p>
 
           <Button
-            variant="outline-secondary"
+           size='lg'
+           variant='secondary'
             onClick={handleGoogleLogin}
-            className="w-100 d-flex align-items-center justify-content-center"
+            className="w-100 d-flex align-items-center justify-content-center button-black"
           >
+         
+            <img
+              src={googleLogo}
+              alt="Google Logo"
           
+              className="mr-2"
+              style={{ width: "24px", height: "24px", marginRight:'10px'}}
+            />
             Google
           </Button>
-        <Link to="/login">Already have an account? Log in</Link>
+
+        
+        </Container>
+        <Link className='link-black'to="/login">Already have an account? Log in</Link>
       </Col>
     </Row>
   </Container>
-  </>
   );
 };
 

@@ -26,6 +26,8 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 const ScansHeader = () => {
   const location = useLocation();
   const { user } = useAuth();
@@ -100,7 +102,7 @@ const ScansHeader = () => {
   };
 
   return (
-    <div className="d-flex flex-column bg-light scans-header">
+    <div >
       <div className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#252525' }}>
         <Button
           variant="secondary"
@@ -119,9 +121,7 @@ const ScansHeader = () => {
             <FontAwesomeIcon icon={faPlus} />
           </Button>
         </div>
-        <div className="d-none d-md-flex justify-content-center p-3">
-          <h3 className="h3">Your scans</h3>
-        </div>
+      
       </div>
 
       <Offcanvas
@@ -174,7 +174,11 @@ const ScansHeader = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      <div className="d-none d-md-block">
+
+      <div className="d-none d-md-block pc-scans">
+      <div className="d-none d-md-flex justify-content-center p-3 ">
+          <p className="h3">Your scans</p>
+        </div>
         <Nav className="flex-row nav-scrollable">
           <div className="nav-inner">
             {iskanja.length > 0 ? (
@@ -189,7 +193,7 @@ const ScansHeader = () => {
                         : ""
                     }`}
                   >
-                    <h5>{iskanje.name}</h5>
+                    <p>{iskanje.name}</p>
                     <Dropdown className="dropdown-scans">
                       <Dropdown.Toggle variant="link" bsPrefix="p-0">
                         <FontAwesomeIcon
@@ -221,6 +225,7 @@ const ScansHeader = () => {
         </Button>
         </div>
       </div>
+     
     </div>
   );
 };

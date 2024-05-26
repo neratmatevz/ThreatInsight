@@ -2,3 +2,58 @@
     margin-top: 100px;
     
   }
+
+  .input-black{
+    background-color: #252525;
+    border-color: #2BA8A4;
+    color: #e5e7eb;
+    font-family: 'Space Grotesk';
+    
+  }
+
+  .input-black:focus {
+    background-color: #252525;
+    border-color: #2BA8A4;
+    color:white;
+}
+
+
+.input-black:not(:focus) {
+  background-color: #252525;
+  color:#e5e7eb;
+}
+.button-black {
+  background-color: #2BA8A4 !important;
+  color: white !important;
+  border-color: #2BA8A4 !important;
+  font-family: 'Space Grotesk' !important;
+  border-radius: 0 !important;
+}
+
+.button-black:hover {
+  background-color: #2BA8A4 !important;
+  color: white !important;
+  border-color: #2BA8A4 !important;
+}
+
+.continue-with{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.error{
+  background-color: #2BA8A4;
+  color: white;
+  border-color: #252525;
+  margin-top: 20px;
+}
+
+.link-black{
+  color: #2BA8A4;
+  font-family: 'Space Grotesk';
+}
+
+.link-black:hover{
+  color: #2BA8A4;
+  font-family: 'Space Grotesk';
+}
