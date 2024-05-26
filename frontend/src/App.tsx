@@ -18,7 +18,7 @@ import DeleteAccountPage from "./Pages/AuthenticationPage/ProfilePages/DeleteAcc
 import UpdateEmailPage from "./Pages/AuthenticationPage/ProfilePages/UpdateEmail/UpdateEmailPage";
 import AllScansPage from "./Pages/ScansPage/AllScansPage/AllScansPage";
 import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
-import ScansPage from "./Pages/SearchPage/SearchPage";
+import SearchPage from "./Pages/SearchPage/SearchPage";
 import GenerateTOTP from "./Pages/AuthenticationPage/TwoFAPage/GenerateTOTP";
 import VerifyTOTP from "./Pages/AuthenticationPage/TwoFAPage/VerifyTOTP";
 
@@ -36,7 +36,7 @@ function App() {
               path="newscan"
               element={
                 <ProtectedRoute>
-                  <ScansPage />
+                  <SearchPage />
                 </ProtectedRoute>
               }
             />
