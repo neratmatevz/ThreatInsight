@@ -67,7 +67,6 @@ const nmapAPIcall = (scan_type, command, options, schedule, target, target_end) 
  * @param {string} scan_id - The ID associated with the scan.
  * @returns {Promise<object>} A promise that resolves to an object containing the scan report data.
  * The resolved object typically includes the status code and the scan result data.
-
  */
 const nmapAPIreport = (scan_id) => {
     // Set agent for SSL
@@ -79,53 +78,47 @@ const nmapAPIreport = (scan_id) => {
 
     // Set request body as form data
     const form = new FormData();
-    form.append(`scan_id`, scan_id);
+    form.append('scan_id', scan_id);
 
     // Configure request parameters
     const fetchConfig = {
         method: 'POST',
         headers: {
-            'NMAP-API-KEY': process.env.NMAP_API_KEY
+            'NMAP-API-KEY': process.env.NMAP_API_KEY,
         },
         dispatcher: agent,
-        body: form
+        body: form,
     };
 
-    // Function to fetch report recursively with a delay(first call after 10s, then recursively every 30s)
-    const fetchWithDelay = () => {
+    const fetchWithDelay = (delay) => {
         return new Promise((resolve, reject) => {
-
             setTimeout(() => {
                 fetch(`${process.env.NMAP_API}/scan_result`, fetchConfig)
-                    .then(response => response.json())
+                    .then(response => {
+                        return response.json();
+                    })
                     .then(data => {
 
                         if (data.status_code === 200) {
-
-                            //Resolve the result of API call
                             resolve(data);
-
                         } else if (data.status_code === 202) {
-                            // If status code is 202, call the function recursively after 30 seconds
-                            setTimeout(() => {
-                                fetchWithDelay().then(resolve).catch(error => reject(new Error("Fetching report failed: "+error.message)));
-                            }, 30000); // 30 seconds delay
-
+                            fetchWithDelay(30000).then(resolve).catch(error => {
+                                reject(new Error(`Fetching report failed during retry: ${error.message}`));
+                            });
                         } else {
                             reject(new Error(`Failed to fetch scan report: ${data.status}`));
                         }
-
+                        
                     })
                     .catch(error => {
                         reject(new Error(error.message));
                     });
-
-            }, 15000); // 15 seconds delay before the first fetch
+            }, delay);
         });
     };
 
-    // Start fetching report with delay
-    return fetchWithDelay();
+    // Start fetching report with an initial delay of 15 seconds
+    return fetchWithDelay(15000);
 };
 
 module.exports = { nmapAPIcall, nmapAPIreport };
