@@ -152,7 +152,7 @@ const osinfoStructure = (scanResult, scanID) => {
 
     // Find OS details
     const osDetailsLine = lines.find(line => line.startsWith('OS details:'));
-    const osDetails = osDetails ? osDetailsLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
+    const osDetails = osDetailsLine ? osDetailsLine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
 
     // Find device type
     const deviceTypeLine = lines.find(line => line.startsWith('Device type:'));
