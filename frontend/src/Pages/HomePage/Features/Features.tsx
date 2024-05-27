@@ -5,15 +5,30 @@ const Features: React.FC = () => {
     return (
         <div className="features-section">
             <div className="container mt-5">
-                <div className="row justify-content-center align-items-center mb-5">
-                    <div className="col-lg-8 purpose-content">
-                        <h2>Purpose of Threat Insight</h2>
-                        <p>Threat Insight is designed for ethical hackers, penetration testers, and cybersecurity professionals to provide them with a comprehensive suite of tools to enhance their security posture. Our goal is to make cybersecurity tools easily accessible and free to use.</p>
-                        <p>Whether you're performing network scans, retrieving domain information, checking data breaches, or verifying email addresses, Threat Insight offers a wide range of functionalities to assist you in your tasks.</p>
-                        <p>We aim to help you stay ahead of the threats and ensure the safety and security of your digital assets.</p>
+                <div className="purpose-heading mb-5">
+                    <h2>Purpose of Threat Insight</h2>
+                </div>
+                <div className="row justify-content-center align-items-center mb-5 purpose-cards">
+                    <div className="col-lg-4 purpose-card">
+                        <div className="purpose-content">
+                            <i className="fas fa-shield-alt fa-2x mb-3"></i>
+                            <h3>Secure</h3>
+                            <p>Threat Insight is designed to provide comprehensive tools for cybersecurity professionals, ensuring the safety and security of digital assets. By offering advanced security features and continuous monitoring capabilities, we help organizations protect against a wide range of cyber threats, from malware to sophisticated cyber attacks. Our commitment to security means that users can trust Threat Insight to safeguard their most sensitive information.</p>
+                        </div>
                     </div>
-                    <div className="col-lg-4">
-                        <img src="/images/purpose.png" alt="Cyber Security" className="img-fluid1" />
+                    <div className="col-lg-4 purpose-card">
+                        <div className="purpose-content">
+                            <i className="fas fa-tools fa-2x mb-3"></i>
+                            <h3>Comprehensive</h3>
+                            <p>Our platform offers a wide range of functionalities, from network scans to data breach checks, making cybersecurity tasks more accessible and efficient. Threat Insight's comprehensive suite of tools allows users to perform in-depth analyses and diagnostics, ensuring they have all the necessary information to identify vulnerabilities and secure their systems. With tools tailored for different aspects of cybersecurity, users can address various security concerns from a single platform.</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-4 purpose-card">
+                        <div className="purpose-content">
+                            <i className="fas fa-users fa-2x mb-3"></i>
+                            <h3>Community</h3>
+                            <p>We aim to support ethical hackers and cybersecurity enthusiasts by providing free and easy access to essential security tools. Our community-focused approach ensures that even those with limited resources can benefit from high-quality cybersecurity tools. By fostering a collaborative environment, Threat Insight encourages knowledge sharing and continuous learning among cybersecurity professionals. Together, we can build a safer digital world for everyone.</p>
+                        </div>
                     </div>
                 </div>
                 <div className="features-heading mb-5 mt-5">

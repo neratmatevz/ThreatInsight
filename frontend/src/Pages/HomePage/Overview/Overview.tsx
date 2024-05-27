@@ -15,7 +15,7 @@ const Overview = () => {
                     </div>
                     <div className="col-lg-1"></div> 
                     <div className="col-lg-4">
-                        <img src="/images/gif2.gif" alt="Cyber Security" className="img-fluid" />
+                        <img src="/images/purpose.png" alt="Cyber Security" className="img-fluid" />
                     </div>
                 </div>
             </div>

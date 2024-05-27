@@ -1,10 +1,13 @@
 .scans-page-container {
     padding: 40px;
     background: url('../../../public/images/bg.png') no-repeat center center/cover;
-    padding-bottom: 7%;
+    background-size: cover;
+    background-position: center top;
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
 }
+
 
 .scans-container {
     display: flex;

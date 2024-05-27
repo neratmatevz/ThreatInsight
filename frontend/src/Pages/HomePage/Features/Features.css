@@ -2,38 +2,48 @@
     padding: 50px 0;
 }
 
-.purpose-content {
-    padding-right: 70px; /* Add horizontal padding to purpose paragraph */
-}
-
-h2 {
-    font-family: 'Space Grotesk', sans-serif; /* Same as Overview heading */
-    font-size: 48px; /* Same as Overview heading */
-    color: #e5e5e5;
+.purpose-heading {
     margin-bottom: 30px;
 }
 
-p {
-    font-family: 'Space Mono', monospace; 
-    font-size: 20px;
+.purpose-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.purpose-card {
+    background-color: rgb(23, 23, 23);
+    padding: 32px;
+    border-left: 4px solid rgb(54, 210, 205);
+    flex: 1 1 30%;
+    min-width: 300px;
+}
+
+.purpose-card i {
+    color: rgb(54, 210, 205); /* Icon color */
+}
+
+.purpose-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    color: #e3e3e3;
+    margin-top: 15px; /* Add some space between the icon and heading */
+}
+
+.purpose-card p {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
     color: #a3a3a3;
-    line-height: 1; 
+    margin-top: 10px; /* Add some space between the heading and paragraph */
 }
-
-.img-fluid1 {
-    width: 100%;
-    height: 100%;
-   
-}
-
 
 .features-heading h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 60px;
     color: #e5e5e5;
     margin-bottom: 20px;
-    margin-top: 100px; 
-
+    margin-top: 100px;
 }
 
 .features-heading p {
@@ -44,22 +54,22 @@ p {
 }
 
 .card {
-    background-color: #171717; /* Background color in hex */
+    background-color: #171717;
     color: #e5e5e5;
-    border: 1px solid #404040; /* Border color in hex */
-    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Add transition for transform and border color */
-    text-align: left; 
+    border: 1px solid #404040;
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    text-align: left;
     border-radius: 0;
 }
 
 .card:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    border-color: #86e4e1; /* Very light turquoise green */
+    transform: scale(1.05);
+    border-color: #86e4e1;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card .fa {
-    color: #86e4e1; 
+    color: #86e4e1;
 }
 
 .card-title {
@@ -77,14 +87,13 @@ p {
     color: #86e4e1;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
     .features-section {
         padding: 30px 20px;
     }
 
     .purpose-content {
-        padding: 0 20px; /* Adjust horizontal padding for smaller screens */
+        padding: 0 20px;
     }
 
     .features-section h2 {
@@ -101,5 +110,10 @@ p {
 
     .card-text {
         font-size: 14px;
+    }
+
+    .purpose-card {
+        flex: 1 1 100%;
+        min-width: 100%;
     }
 }
