@@ -16,9 +16,9 @@ import PromptForCredentials from '../PromptForCredentials/PromptForCredentials';
 import Nav from 'react-bootstrap/Nav';
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import './ProfilePage.css'
-import Header2 from '../../../../components/Common/VerticalHeader/VerticalHeader';
 import TwoFAPage from '../../TwoFAPage/TwoFAPage';
 import VerticalHeader from '../../../../components/Common/VerticalHeader/VerticalHeader';
+
 const ProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -100,9 +100,9 @@ const ProfilePage = () => {
 
 
   return (
-    <Container fluid>
+    <div>
       <Row>
-        <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
+        <Col xs={12} sm={12} md={4} lg={2}>
           <VerticalHeader />
         </Col>
         <Col xs={12} sm={12} md={8} lg={10} style={{ height: '100%' }}>
@@ -147,7 +147,7 @@ const ProfilePage = () => {
           </Container>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 

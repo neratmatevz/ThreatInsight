@@ -159,37 +159,47 @@ router.post('/checkEmailVerified', async(req,res) => {
       }
     });
 
-    router.post('/generateTOTPandQR', async(req,res) => {
-        const {email,uid} = req.body;
-     
-        const secret = authenticator.generateSecret()
-        const otpauthUrl = authenticator.keyuri(email, 'ThreatInsight', secret)
+    router.post('/generateTOTPandQR', async (req, res) => {
+        const { email } = req.body;
+    
+        const secret = authenticator.generateSecret();
+        const otpauthUrl = authenticator.keyuri(email, 'ThreatInsight', secret);
         const recoveryKey = uuidv4();
-
-       
-        qrcode.toDataURL(otpauthUrl, async (err, imageUrl) => {
+  
+        qrcode.toDataURL(otpauthUrl, (err, imageUrl) => {
             if (err) {
                 return res.status(500).send('Error generating QR code');
             }
     
-            try { 
-                const db = getFirestoreInstance()
-                // Shrani totpSecret in recovey key v bazo
-                await db.collection('users').doc(uid).set({
-                    totpSecret: secret,
-                    recoveryKey: recoveryKey,
-                    qrCode :imageUrl
         
-                }, {merge: true});
-    
-                res.json({ secret, qrCode: imageUrl, recoveryKey });
-            } catch (error) {
-                res.status(500).send(error);
-            }
+            res.json({ secret, qrCode: imageUrl, recoveryKey });
         });
     });
 
-// Verify TOTP
+
+    router.post('/verifyTOTPandSave', async (req, res) => {
+        const { token, secret, uid, recoveryKey } = req.body;
+        
+        try {
+          const isValid = authenticator.verify({ token, secret });
+
+          if (isValid) {
+            // If the token is valid, save the secret to the database
+            const db = getFirestoreInstance();
+            await db.collection('users').doc(uid).set({
+                totpSecret: secret,
+                recoveryKey: recoveryKey
+            }, { merge: true });
+        }
+      
+          res.json({ verified: isValid });
+        } catch (error) {
+          console.error('Error verifying token:', error);
+          res.status(500).send('Error verifying token');
+        }
+      });
+      
+
 router.post('/verifyTOTP', async (req, res) => {
     const { token, email, uid } = req.body;
     

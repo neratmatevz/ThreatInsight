@@ -26,6 +26,7 @@ import Nav from "react-bootstrap/Nav";
 import SidebarMenu from "react-bootstrap-sidebar-menu";
 import Header2 from "../../../../components/Common/VerticalHeader/VerticalHeader";
 import VerticalHeader from "../../../../components/Common/VerticalHeader/VerticalHeader";
+
 const UpdateEmailPage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();

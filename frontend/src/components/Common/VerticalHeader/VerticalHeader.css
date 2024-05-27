@@ -1,34 +1,59 @@
-.nav-link-box-vertical {
-
-    padding: 10px;
-    text-align: left;
-    color: #333;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px; 
-    margin: 0px 0;
+.vertical-nav {
+    background-color: #1b1b1b;
+    height: 100vh;
+  }
+  
+  .nav-link-box-vertical {
+    background-color: #1b1b1b; 
+    padding-left: 10px;
+    width: 100%;
+    height: 70px; 
+    text-align: left; 
     border-radius: 0;
+    display: flex;
+    align-items: center; 
+  }
+  
+  .nav-link-box-vertical p {
+    margin: 0; 
+    display: flex;
+    align-items: center; 
+    color:#E5E5E5;
+
   }
   
   .nav-link-box-vertical:hover {
-    background-color: #a3a3a362; 
-    color:#e5e7eb;
+    background-color: #1b1b1b; 
+
   }
   
   .activeVertical {
-    background-color: #a3a3a362;
-    color: white;
+    border-left: 5px solid #2BA8A4;
+    background-color: #1b1b1b !important;
   }
   
-.vertical-nav{
-  background-color: #252525;
-}
 
-.account-settings-button{
-  background-color: #252525;
-  border-color: #252525;
-}.account-settings-button:hover{
-  background-color: #252525;
-  border-color: #252525;
-}
+  .vertical-nav{
+    background-color: #1b1b1b !important;
+    height: 100vh;
+  }
+  .icon-spacing {
+    margin-right: 8px; 
+    font-size: 1.2em; 
+    color: #E5E5E5; 
+  } .icon-spacing:hover {
+    margin-right: 8px; 
+    color: #E5E5E5; 
+  }
+  .account-settings-button{
+    background-color: #252525 !important;
+    border-color: #252525!important;
+  }.account-settings-button:hover{
+    background-color: #252525!important;
+    border-color: #252525!important;
+  }
+
+  .account-settings-button:focus{
+    background-color: #252525!important;
+    border-color: #252525!important;
+  }

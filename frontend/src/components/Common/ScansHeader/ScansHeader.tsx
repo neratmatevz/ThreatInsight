@@ -243,7 +243,7 @@ setLoading(true);
         </Nav>
       )}
       {!loading && (
-        <div className="left-div">
+        <div className="left-div" style={{backgroundColor:'#1b1b1b'}}>
           <Button
          
             onClick={handleAddNewScan}

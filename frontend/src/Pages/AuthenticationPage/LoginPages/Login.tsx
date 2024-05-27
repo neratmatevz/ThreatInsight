@@ -102,7 +102,6 @@ const Login = () => {
       const totpExists = response.data.totp;
 
       if (totpExists) {
-        // setTotpExists(true);
         navigate("/authorization", {
           state: { totp: totpExists, email: email, password: password },
         });

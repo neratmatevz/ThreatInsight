@@ -21,6 +21,7 @@ import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
 import GenerateTOTP from "./Pages/AuthenticationPage/TwoFAPage/GenerateTOTP";
 import VerifyTOTP from "./Pages/AuthenticationPage/TwoFAPage/VerifyTOTP";
+import RecoveryKey from "./Pages/AuthenticationPage/TwoFAPage/RecoveryKey/RecoveryKey";
 
 function App() {
   const { user, loading } = useAuth();
@@ -119,6 +120,15 @@ function App() {
                   <VerifyTOTP />
                 </ProtectedRoute>
               }
+            />
+
+            <Route
+            path="qrcode/recoveryKey"
+            element={
+              <ProtectedRoute>
+                <RecoveryKey />
+              </ProtectedRoute>
+            }
             />
           </Routes>
         </div>
