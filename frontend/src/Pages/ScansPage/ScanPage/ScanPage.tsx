@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import './ScanPage.css'
 const ScanPage = () => {
   const { id } = useParams();
 
@@ -12,7 +12,8 @@ const ScanPage = () => {
     <div className="left-border">
       <h1>{}</h1>
       <p>Scan ID: {id}</p>
-
+      <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>
+      <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>  <p>Scan ID: {id}</p>
     </div>
   );
 };

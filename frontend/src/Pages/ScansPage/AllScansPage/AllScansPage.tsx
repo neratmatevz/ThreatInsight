@@ -8,17 +8,15 @@ import { useAuth } from '../../../context/AuthContext';
 import LoadingOverlay from '../../../components/Common/LoadingOverlay/LoadingOverlay';
 const AllScansPage = () => {
  const {user} = useAuth()
-  if (!user) {
-    return <LoadingOverlay />; 
-}
+
 
   return (
-    <Container fluid style={{ height: '100%' }}>
+    <Container fluid>
     <Row>
-      <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
+      <Col xs={12} sm={12} md={5} lg={2} >
         <ScansHeader />
       </Col>
-      <Col xs={12} sm={6} md={8}lg={10}>
+      <Col xs={12} sm={6} md={7}lg={10}>
         <Outlet />
       </Col>
     </Row>

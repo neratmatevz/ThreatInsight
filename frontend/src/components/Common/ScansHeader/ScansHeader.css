@@ -13,7 +13,7 @@
   }
   
   .fa-ellipsis-icon {
-    font-size: 1.2em; 
+    font-size: 1.4em; 
     color: #E5E5E5; 
     width: 30px;
   }
@@ -29,31 +29,33 @@
   }
 
   .activeScans{
-
-    background-color: #a3a3a362 !important; 
+    border-left: 5px solid #2BA8A4;
+    background-color: #1b1b1b !important;
   }
 
   .nav-link-box-scans {
-
-    padding: 10px;
-    color:#e5e7eb;
-    text-align: center;
-    text-decoration: none;
-    align-items: center;
-    gap: 8px; 
-    margin: 0px 0;
+  
+    padding-left: 10px;
     width: 100%;
     height: 70px; 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: left;
     background-color: #252525;
     border-radius: 0;
+    align-items: center  !important;
+
+  }
+
+  .dropdown-scans {
+    margin-left: auto;       
+  }
+  
+  .nav-link-box-scans p {
+    margin: 0;               
   }
   
   .nav-link-box-scans:hover {
-    background-color: #a3a3a362; 
-color:#e5e7eb;
+    background-color: #1b1b1b; 
+
   }
 
  
@@ -70,6 +72,7 @@ color:#e5e7eb;
     flex-direction: column;
 height: 100%;
 border-right: 1px solid #e5e7eb;
+
   }
   
   .nav-scrollable {
@@ -139,4 +142,56 @@ background-color: #252525;
 
 .offcanvas{
   background-color: #252525;
+}
+.pc-scans {
+  position: fixed;
+  height: 100%;
+  width: 400px;
+  max-width: 400px;
+  left:0; 
+  top: 75px;
+
+            border-right: 2px solid black;
+            border-top: 2px solid black;
+            border-color: #2BA8A4 !important;
+       background-color: #252525;
+      
+       font-family: 'Space Mono', monospace;
+}
+
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .pc-scans {
+    width: 170px; 
+  }
+}
+
+
+@media (max-width: 991px) and (min-width: 770px) {
+  .pc-scans {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 1500px) and (min-width: 1200px) {
+  .pc-scans {
+    width: 200px; 
+  }
+}
+@media (max-width: 1900px) and (min-width: 1500px) {
+  .pc-scans {
+    width: 250px; 
+  }
+}
+
+@media (max-width: 2300px) and (min-width: 1900px) {
+  .pc-scans {
+    width: 300px; 
+  }
+}
+
+@media (max-width: 2500px) and (min-width: 2300px) {
+  .pc-scans {
+    width: 350px; 
+  }
 }

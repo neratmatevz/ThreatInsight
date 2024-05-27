@@ -112,7 +112,7 @@ setLoading(true);
   };
 
   return (
-    <div>
+    <div    >
       
       <div
         className="d-flex justify-content-between align-items-center p-3"
@@ -215,7 +215,7 @@ setLoading(true);
                         : ''
                     }`}
                   >
-                    <p style={{ overflow: 'hidden' }}>{iskanje.name}</p>
+                    <p style={{ overflow: 'hidden' , color:'#E5E5E5'}}>{iskanje.name}</p>
                     <Dropdown className="dropdown-scans">
                       <Dropdown.Toggle variant="link" bsPrefix="p-0">
                         <FontAwesomeIcon
