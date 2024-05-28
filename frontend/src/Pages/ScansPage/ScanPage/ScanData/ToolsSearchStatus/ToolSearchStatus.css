@@ -1,0 +1,42 @@
+.tools-search-status {
+    padding: 14px;
+  }
+  
+  .tools-search-status h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    color: #e3e3e3;
+    margin-bottom: 14px;
+  }
+  
+  .tools-search-status ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .tool-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'Space Mono', monospace;
+  }
+  
+  .tool-item span {
+    font-size: 14px;
+    color: #e3e3e3;
+    margin-right: 10px;
+  }
+  
+  .tool-item i {
+    font-size: 14px;
+    align-items: center;
+  }
+  
+  .success {
+    color: rgb(0, 190, 0);
+  }
+  
+  .failure {
+    color: red;
+  }
+  

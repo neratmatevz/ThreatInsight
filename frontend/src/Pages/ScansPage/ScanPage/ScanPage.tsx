@@ -17,24 +17,45 @@ const ScanPage = () => {
 
   useEffect(() => {
     console.log(id);
-    // Fetch data based on ID
-    // Assuming fetchData is a function that fetches the scan data based on the ID
-    // fetchData(id).then(data => setScanData(data));
   }, [id]);
-
-
 
   return (
     <div className="scan-page">
-      <h1>Scan Results</h1>
-      <PermutatorEmails emails={scanData.permutatorEmails} />
-      <ToolsSearchStatus status={scanData.toolsSearchStatus} />
-      <Flags usefulInfoFlags={scanData.usefulInfoFlags} vulnerableInfoFlags={scanData.vulnerableInfoFlags} />
-      <EmailBreaches emailBreaches={scanData.emailBreaches} />
-      <PersonalData personalData={scanData.personalData} />
-      <DomainData domainData={scanData.domainData} />
-      <HostData hostData={scanData.hostData} />
-      <ScanMetadata creationDate={scanData.creationDate} notes={scanData.notes} name={scanData.name} />
+      <div className="top-section">
+        <div className="scan-metadata">
+          <ScanMetadata creationDate={scanData.creationDate} notes={scanData.notes} name={scanData.name} />
+        </div>
+        <div className="tools-search-status">
+          <ToolsSearchStatus status={scanData.toolsSearchStatus} />
+        </div>
+        <div className="flags">
+          <Flags usefulInfoFlags={scanData.usefulInfoFlags} vulnerableInfoFlags={scanData.vulnerableInfoFlags} />
+        </div>
+      </div>
+      <hr className='scan-separator' />
+      <div className="card-container">
+        <div className="card-row">
+          <div className="scan-page-card">
+            <PersonalData personalData={scanData.personalData} />
+          </div>
+          <div className="scan-page-card">
+            <EmailBreaches emailBreaches={scanData.emailBreaches} />
+          </div>
+        </div>
+        <div className="card-row">
+          <div className="scan-page-card full-width">
+            <DomainData domainData={scanData.domainData} />
+          </div>
+        </div>
+        <div className="card-row">
+          <div className="scan-page-card">
+            <HostData hostData={scanData.hostData} />
+          </div>
+          <div className="scan-page-card">
+            <PermutatorEmails emails={scanData.permutatorEmails} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

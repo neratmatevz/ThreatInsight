@@ -1,0 +1,25 @@
+.personal-data {
+    padding: 14px;
+  }
+  
+  .personal-data .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .personal-data h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    color: #e3e3e3;
+  }
+  
+ 
+  
+  .data-item {
+    margin-bottom: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: #e3e3e3;
+  }
+  
