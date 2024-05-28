@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../Firebase/firebase";
 import Button from "react-bootstrap/Button";
@@ -27,6 +27,8 @@ import {
   where,
 } from "firebase/firestore";
 import axios from "axios";
+import { Modal } from "react-bootstrap";
+import { firebaseErrorMessages } from "../../../context/FirebaseErrors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -47,16 +49,30 @@ const Login = () => {
     signInWithApple,
     signInWithMicrosoft,
     setErrorNull,
+    setErrorInComponent,
   } = useAuth();
-
+  const [isValid, setIsValid] = useState(false);
+  const [isTotp, setisTotp] = useState(false);
+  const [token, setToken] = useState<string>("");
+  const [showModal, setShowModal] = useState(false);
+  const [recoveryKey, setRecoveryKey] = useState<string>('')
 
   if (user) {
     navigate("/");
   }
 
   useEffect(() => {
-  
+    setErrorNull()
   }, []);
+
+  const openModal = (e: FormEvent) => {
+    //  e.preventDefault();
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleTogglePasswordVisibility = () => {
     setShowPasswordText(!showPasswordText);
@@ -64,13 +80,11 @@ const Login = () => {
 
   const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if(!email){
+
+    if (!email) {
       return null;
     }
     setLoadingLogin(true);
-
-
 
     setTimeout(() => {
       setLoadingLogin(false);
@@ -87,6 +101,66 @@ const Login = () => {
     setShowPassword(false);
   };
 
+  const verifyTOTP = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API_BASE_URL}/verifyTOTP`, {
+        token,
+        email,
+      });
+      setIsValid(response.data.verified);
+      if (response.data.verified === true) {
+        await signInWithEmailAndPassword(auth, email, password);
+      } else if (response.data.verified === false){
+        setErrorInComponent("Token is invalid. Please try again.");
+        closeModal()
+      }
+    } catch (error :any) {
+      console.error("Error verifying TOTP:", error);
+
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setErrorInComponent(firebaseErrorMessages[errorMessage]);
+      } else {
+        setErrorInComponent("An unexpected error occurred. Please try again.");
+      }
+      setToken('')
+      closeModal()
+    }
+  };
+
+  const verifyRecoveryKey = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const recoveryKeyInputted = recoveryKey;
+      const response = await axios.post(`${API_BASE_URL}/verifyRecoveryKey`, {
+        email,
+        recoveryKeyInputted
+      });
+      setIsValid(response.data.verified);
+      if (response.data.verified === true) {
+        await signInWithEmailAndPassword(auth, email, password);
+      } else if( response.data.verified === false){
+    
+        setErrorInComponent("Recovery key is invalid. Please try again. ");
+        closeModal()
+      }
+    } catch (error :any) {
+      console.error("Error verifying rec. key:", error);
+
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setErrorInComponent(firebaseErrorMessages[errorMessage]);
+      } else {
+        setErrorInComponent("An unexpected error occurred. Please try again.");
+      }
+      setRecoveryKey('')
+      closeModal()
+    }
+  }
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -94,27 +168,7 @@ const Login = () => {
       return null;
     }
 
-    try {
-      const response = await axios.post(`${API_BASE_URL}/TOTPexists`, {
-        email: email,
-      });
-      console.log(response);
-      const totpExists = response.data.totp;
-
-      if (totpExists) {
-        navigate("/authorization", {
-          state: { totp: totpExists, email: email, password: password },
-        });
-      } else {
-        const success = await signIn(email, password);
-        if (success) {
-          navigate("/your-work");
-        }
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle errors here
-    }
+    await signIn(email, password, navigate, openModal, e);
   };
 
   const handleGoogleLogin = async (e: any) => {
@@ -132,10 +186,9 @@ const Login = () => {
         <Col md={3} className="text-center">
           <h2>ThreatInsight </h2>
           <p>Sign in to continue. </p>
-          {error && <Alert  className="error">Error: {error}</Alert>}
+          {error && <Alert className="error">Error: {error}</Alert>}
           {/* Email Form */}
           <Form onSubmit={handleEmailSubmit}>
-            
             <InputGroup className="mb-3">
               <Form.Control
                 type="email"
@@ -147,7 +200,10 @@ const Login = () => {
                 className="input-black"
               />
               {!editable && (
-                <Button variant="outline-secondary button-black" onClick={handleEditClick}>
+                <Button
+                  variant="outline-secondary button-black"
+                  onClick={handleEditClick}
+                >
                   <i className="bi bi-pencil"></i>
                 </Button>
               )}
@@ -193,42 +249,91 @@ const Login = () => {
                 </Button>
               </InputGroup>
 
-      
-
-              <Button      variant="outline-dark"   size="lg" className="w-100 button-black" type="submit">
-                {loading ? <Spinner animation="border" size="sm" /> :   <span className="button-content"> LOGIN →</span>}
+              <Button
+                size='lg'
+                className="w-100 button-black"
+                type="submit"
+              >
+                {loading ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  <span className="button-content"> LOGIN →</span>
+                )}
               </Button>
-
             </Form>
-            
           )}
 
-       
           <Container className="continue-with">
             <p>OR continue with: </p>
 
             <Button
-             size='lg'
-             variant='secondary'
+              size="lg"
+              variant="secondary"
               onClick={handleGoogleLogin}
               className="w-100 d-flex align-items-center justify-content-center button-black"
             >
-           
               <img
                 src={googleLogo}
                 alt="Google Logo"
-            
                 className="mr-2"
-                style={{ width: "24px", height: "24px", marginRight:'10px'}}
+                style={{ width: "24px", height: "24px", marginRight: "10px" }}
               />
               Google
             </Button>
-
-          
           </Container>
-            <Link className='link-black'to="/register">Create an account</Link>
+          <Link className="link-black" to="/register">
+            Create an account
+          </Link>
         </Col>
       </Row>
+      <Modal show={showModal} onHide={closeModal}>
+  <Modal.Header closeButton>
+    <Modal.Title>Enter your code</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+<p>Check your authenticator app on your mobile device for the 6-digit code.</p>
+    {/* TOTP Token Form */}
+    <Form onSubmit={verifyTOTP}>
+      <Form.Group className="mb-3">
+
+        <Form.Control
+          type="text"
+          className='dark-input'
+          placeholder="Enter 6-digit code"
+          value={token}
+          onChange={(e) => setToken(e.target.value)}
+          required
+        />
+      </Form.Group>
+      <Button variant="dark"className='button-black' type="submit">
+        Verify
+      </Button>
+    </Form>
+<p>Or insert recovery key: </p>
+    {/* Recovery Key Form */}
+    <Form onSubmit={verifyRecoveryKey}>
+      <Form.Group className="mb-3">
+
+        <Form.Control
+          type="text"
+          className='dark-input'
+          placeholder="Enter Recovery Key"
+          value={recoveryKey}
+          onChange={(e) => setRecoveryKey(e.target.value)}
+          required
+        />
+      </Form.Group>
+      <Button variant="dark" className='button-black' type="submit">
+        Verify
+      </Button>
+    </Form>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={closeModal}>
+      Close
+    </Button>
+  </Modal.Footer>
+</Modal>
     </Container>
   );
 };

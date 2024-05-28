@@ -1,28 +1,68 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { appleProvider, auth, db, googleProvider, microsoftProvider } from '../Firebase/firebase';
-import { User, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth';
-import { NavigateFunction } from 'react-router-dom';
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
-import axios from 'axios';
-import { AnyARecord } from 'dns';
-import LoadingOverlay from '../components/Common/LoadingOverlay/LoadingOverlay';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  FormEvent,
+} from "react";
+import {
+  appleProvider,
+  auth,
+  db,
+  googleProvider,
+  microsoftProvider,
+} from "../Firebase/firebase";
+import {
+  User,
+  setPersistence,
+  browserLocalPersistence,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithPopup,
+  GoogleAuthProvider,
+  getRedirectResult,
+  signInWithRedirect,
+} from "firebase/auth";
+import { NavigateFunction } from "react-router-dom";
+import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import axios from "axios";
+import { AnyARecord } from "dns";
+import LoadingOverlay from "../components/Common/LoadingOverlay/LoadingOverlay";
+import { firebaseErrorMessages } from "./FirebaseErrors";
 
 interface AuthContextType {
   user: User | null;
-  signIn: (email: string, password: string) => Promise<boolean>;
+  signIn: (
+    email: string,
+    password: string,
+    navigate: NavigateFunction,
+    openModal: (e: FormEvent) => void,
+    e: FormEvent
+  ) => Promise<void>;
   logout: () => Promise<void>;
   error: string | null;
   loading: boolean | null;
-  createUser: (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => Promise<void>;
+  createUser: (
+    email: string,
+    password: string,
+    showPassword: boolean,
+    navigate: NavigateFunction
+  ) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signInWithApple: () => Promise<void>;
   signInWithMicrosoft: () => Promise<void>;
   setErrorNull: () => Promise<void>;
+  setErrorInComponent: (error: string) => void;
+  setLoadingTrue: () =>void;
+  setLoadingFalse: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  signIn: async () => false, 
+  signIn: async () => {},
   logout: async () => {},
   error: null,
   loading: null,
@@ -30,7 +70,10 @@ const AuthContext = createContext<AuthContextType>({
   signInWithGoogle: async () => {},
   signInWithApple: async () => {},
   signInWithMicrosoft: async () => {},
-  setErrorNull: async () => {}
+  setErrorNull: async () => {},
+  setErrorInComponent: async () => {},
+  setLoadingTrue: async () => {},
+  setLoadingFalse: async () => {}
 });
 
 export const useAuth = () => {
@@ -46,16 +89,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const API_BASE_URL = process.env.REACT_APP_API_URL;
+  const [isTtotpenabled, setIsTtotpenabled] = useState(false);
 
-  const firebaseErrorMessages: { [key: string]: string } = {
-    'Firebase: Password should be at least 6 characters (auth/weak-password).': 'Please choose a password with at least 6 characters.',
-    'auth/user-disabled': 'The user account has been disabled.',
-    'auth/user-not-found': 'There is no user corresponding to this email.',
-    'auth/wrong-password': 'The password is incorrect.',
 
-};
 
   useEffect(() => {
+    setError('')
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
@@ -63,147 +102,200 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     return () => {
       unsubscribe();
-
-    }; 
+    };
   }, []);
-  
-  const setErrorNull = async () =>{
-    setError(null)
+
+  const setErrorNull = async () => {
+    setError(null);
+  };
+
+  const setLoadingTrue = async () => {
+    setLoading(true)
   }
+
+  const setLoadingFalse = async () => {
+    setLoading(false)
+  }
+
   if (loading) {
-    return <LoadingOverlay />; 
-}
+    return <LoadingOverlay />;
+  }
+  const setErrorInComponent = (error: string): void => {
+    setError(error);
+  };
 
   const checkEmailVerified = async (email: string) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/checkEmailVerified`, {
-            email: email,
-        });
+      const response = await axios.post(`${API_BASE_URL}/checkEmailVerified`, {
+        email: email,
+      });
 
-        if(response.status === 200){
-            return response.data.emailVerified;
-        } else if (response.status === 404) {
-            return 'not_found';
-        } else {
-            return response.data;
-        }
+      if (response.status === 200) {
+        return response.data.emailVerified;
+      }
     } catch (error: any) {
-        if (error.response && error.response.status === 404) {
-            return 'not_found';
-        } else {
-            console.error('Error checking email verification:', error.response ? error.response.data.error : error.message);
-            setError(error.response ? error.response.data.error : 'Unknown error');
-            return 'error';
-        }
-    }
-};
-
-  const signIn = async (email: string, password: string): Promise<boolean> => {
-    try {   
-
-    setLoading(true)
-
-    const isEmailVerified = await checkEmailVerified(email);
-
-    if (isEmailVerified === 'not_found') {
-        setLoading(false);
-        setError('Account does not exist');
-        return false;
-    } else if (!isEmailVerified) {
-        setLoading(false);
-        setError('Your email is not verified');
-        return false;
-    }
-
-     if(isEmailVerified === true){
-      await signInWithEmailAndPassword(auth, email, password);
-    //  const user = userCredential.user;
-    
-  
-   
-      setLoading(false)
-      setError(null);
-      return true;
-     }else{
-      setLoading(false)
-      return false;
-     }
-    } catch (error: any) {
-      setLoading(false)
-      setError(error.message);
-      return false; 
+      setError(error);
     }
   };
-  
+
+  const checkEmailExists = async (email: string) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/checkEmailExists`, {
+        email: email,
+      });
+      console.log(response);
+      if (response.status === 200) {
+        return response.data;
+      }
+    } catch (error: any) {
+      setError(error.response?.data.error);
+    }
+  };
+
+  const totpExists = async (email: string) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/TOTPexists`, {
+        email: email,
+      });
+      const totpExists = response.data.totp;
+      return totpExists;
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle errors here
+    }
+  };
+
+  const signIn = async (
+    email: string,
+    password: string,
+    navigate: NavigateFunction,
+    openModal: (e: FormEvent) => void,
+    e: FormEvent
+  ): Promise<void> => {
+    try {
+      const emailExists = await checkEmailExists(email);
+
+      if (emailExists) {
+        const isEmailVerified = await checkEmailVerified(email);
+
+        if (isEmailVerified) {
+          const isTotpEnabled = await totpExists(email);
+
+          if (isTotpEnabled) {
+            openModal(e);
+            //     await signInWithEmailAndPassword(auth, email, password);
+          } else {
+            setLoading(true);
+            await signInWithEmailAndPassword(auth, email, password);
+            navigate("/your-work");
+          }
+        } else {
+          setError("Your email is not verified.");
+        }
+      } else {
+        setError("Email does not exist.");
+      }
+    } catch (error: any) {
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setError(firebaseErrorMessages[errorMessage]);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const logout = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       await auth.signOut();
-
-      console.log('You are logged out');
     } catch (error) {
       console.error("Error signing out:", error);
     }
   };
 
-
-  const createUser = async (email: string, password: string, showPassword: boolean, navigate: NavigateFunction) => {
+  const createUser = async (
+    email: string,
+    password: string,
+    showPassword: boolean,
+    navigate: NavigateFunction
+  ) => {
     try {
-   
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
-  
-      logout();
-       navigate('/register/emailverification'); 
-      await addUserToFirestore(user)
-      await sendEmailVerification(user);
- 
 
+      logout();
+      navigate("/register/emailverification");
+      await addUserToFirestore(user);
+      await sendEmailVerification(user);
     } catch (error: any) {
       const errorMessage = error.message;
-      console.log(errorMessage)
 
       if (firebaseErrorMessages[errorMessage]) {
-          setError(firebaseErrorMessages[errorMessage]);
+        setError(firebaseErrorMessages[errorMessage]);
       } else {
-          setError('An unexpected error occurred. Please try again.');
+        setError("An unexpected error occurred. Please try again.");
       }
- 
     }
-  }
+  };
 
   const addUserToFirestore = async (user: User) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/addUserToFirestore`, {
-            uid: user.uid,
-            email: user.email
-        });
+      const response = await axios.post(`${API_BASE_URL}/addUserToFirestore`, {
+        uid: user.uid,
+        email: user.email,
+      });
 
-        console.log(response.data); 
+      console.log(response.data);
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error('Error adding user to Firestore:', error.response?.data || error.message);
-        } else {
-            console.error('Unexpected error:', error);
-        }
+      if (axios.isAxiosError(error)) {
+        console.error(
+          "Error adding user to Firestore:",
+          error.response?.data || error.message
+        );
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
-};
+  };
 
   const signInWithGoogle = async () => {
     await signInWithRedirect(auth, googleProvider);
-  }
+  };
 
   const signInWithApple = async () => {
     await signInWithRedirect(auth, appleProvider);
   };
-  
+
   const signInWithMicrosoft = async () => {
     await signInWithRedirect(auth, microsoftProvider);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, logout, error, loading, createUser, signInWithGoogle, signInWithApple, signInWithMicrosoft, setErrorNull }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        signIn,
+        logout,
+        error,
+        loading,
+        createUser,
+        signInWithGoogle,
+        signInWithApple,
+        signInWithMicrosoft,
+        setErrorNull,
+        setErrorInComponent,
+        setLoadingTrue,
+        setLoadingFalse
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

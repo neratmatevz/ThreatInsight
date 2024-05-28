@@ -20,7 +20,6 @@ import AllScansPage from "./Pages/ScansPage/AllScansPage/AllScansPage";
 import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
 import GenerateTOTP from "./Pages/AuthenticationPage/TwoFAPage/GenerateTOTP";
-import VerifyTOTP from "./Pages/AuthenticationPage/TwoFAPage/VerifyTOTP";
 import RecoveryKey from "./Pages/AuthenticationPage/TwoFAPage/RecoveryKey/RecoveryKey";
 
 function App() {
@@ -45,9 +44,9 @@ function App() {
             <Route
               path="register/emailverification"
               element={
-                <ProtectedRoute>
-                  <EmailVerification />{" "}
-                </ProtectedRoute>
+         
+                  <EmailVerification />
+              
               }
             />
             <Route path="login" element={<Login />} />
@@ -112,15 +111,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="authorization"
-              element={
-                <ProtectedRoute>
-                  {" "}
-                  <VerifyTOTP />
-                </ProtectedRoute>
-              }
-            />
+        
 
             <Route
             path="qrcode/recoveryKey"

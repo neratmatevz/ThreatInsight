@@ -1,5 +1,5 @@
-.dark-input{
-    background-color: black;
-    border-radius: 0;
-    width: 35vh;
+.profile-container{
+    margin:0;
+    padding:0; 
+    overflow-x: hidden
 }

@@ -145,9 +145,8 @@ router.post('/checkEmailVerified', async(req,res) => {
 
     try {
         const userRecord = await getAuth().getUserByEmail(email);
-        console.log(userRecord)
+
         if(!userRecord){
-            console.log("ni ga")
             res.status(500).send({error: 'Account does not exist'})
         }
         const isEmailVerified = userRecord.emailVerified;
@@ -158,6 +157,22 @@ router.post('/checkEmailVerified', async(req,res) => {
         res.status(500).send({ error: error.message });
       }
     });
+
+
+    router.post('/checkEmailExists', async(req,res) => {
+        const {email} = req.body;
+    
+        try {
+            const userRecord = await getAuth().getUserByEmail(email);
+    
+        
+            console.log(userRecord)
+            res.status(200).send({userRecord});
+          } catch (error) {
+            res.status(500).send({ error: error.message });
+          }
+        });
+    
 
     router.post('/generateTOTPandQR', async (req, res) => {
         const { email } = req.body;
@@ -201,17 +216,14 @@ router.post('/checkEmailVerified', async(req,res) => {
       
 
 router.post('/verifyTOTP', async (req, res) => {
-    const { token, email, uid } = req.body;
+    const { token, email } = req.body;
     
     try {
 
       const db = getFirestoreInstance();
   
-      let userUid = uid;
-      if (!uid) {
         const userRecord = await getAuth().getUserByEmail(email);
         userUid = userRecord.uid;
-      }
   
       const userRef = db.collection('users').doc(userUid);
   
@@ -235,19 +247,27 @@ router.post('/verifyTOTP', async (req, res) => {
   
 // Verify Recovery Key
 router.post('/verifyRecoveryKey', async (req, res) => {
-    const { email, recoveryKey } = req.body;
+    const { email, recoveryKeyInputted } = req.body;
 
     try {
-        const userRef = db.collection('users').doc(email);
-        const doc = await userRef.get();
+        const db = getFirestoreInstance();
+  
+        const userRecord = await getAuth().getUserByEmail(email);
+        userUid = userRecord.uid;
+  
+      const userRef = db.collection('users').doc(userUid);
+  
+   
+      const doc = await userRef.get();
+  
+      if (!doc.exists) {
+        return res.status(404).send('User not found');
+      }
 
-        if (!doc.exists) {
-            return res.status(404).send('User not found');
-        }
+  
+      const { recoveryKey } = doc.data();
 
-        const user = doc.data();
-
-        if (user.recoveryKey === recoveryKey) {
+        if (recoveryKey === recoveryKeyInputted) {
             res.json({ verified: true });
         } else {
             res.json({ verified: false });
@@ -260,7 +280,6 @@ router.post('/verifyRecoveryKey', async (req, res) => {
 router.post('/TOTPexists', async (req, res) => {
     try {
       const { email } = req.body;
-  console.log("Klican")
 
       const result = await TOTPexists(email);
 console.log(result)

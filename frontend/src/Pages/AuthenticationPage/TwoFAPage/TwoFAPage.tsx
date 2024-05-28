@@ -1,17 +1,19 @@
 // src/App.tsx
 import React, { useEffect, useState } from "react";
 import GenerateTOTP from "./GenerateTOTP";
-import VerifyTOTP from "./VerifyTOTP";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "../../../context/AuthContext";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/firebase";
+import { Spinner } from "react-bootstrap";
 
 const TwoFAPage: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [totpExists, setTotpExists] = useState<boolean>(false);
+  const [loading2FA, setLoading2FA] = useState<boolean>(true);
+
   useEffect(() => {
     TOTPexists();
   }, [user]);
@@ -21,6 +23,7 @@ const TwoFAPage: React.FC = () => {
   };
 
   const TOTPexists = async () => {
+    setLoading2FA(true)
     try {
       const uid = user?.uid;
       if (!uid) {
@@ -43,6 +46,8 @@ const TwoFAPage: React.FC = () => {
       }
     } catch (error) {
       console.error("Error checking TOTP secret:", error);
+    }finally{
+      setLoading2FA(false)
     }
   };
   const delete2FA = async () => {
@@ -57,9 +62,9 @@ const TwoFAPage: React.FC = () => {
 console.log(userRef)
       await updateDoc(userRef, {
         totpSecret: deleteField(),
-        qrCode: deleteField(),
         recoveryKey: deleteField(),
       });
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting TOTP secret:", error);
     }
@@ -67,13 +72,27 @@ console.log(userRef)
 
   return (
     <div>
-      {totpExists ? (
-        <p>You already have 2FA Enabled</p>
-      ) : (
-        <Button onClick={handleGenerateTOTP}>Enable</Button>
-      )}
-      {totpExists ? <Button variant="danger" onClick={delete2FA}> Remove 2FA</Button> : null}
-    </div>
+    {loading2FA ? (
+      <div className="text-center">
+        <Spinner animation="border" role="status" variant="light">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
+    ) : (
+      <>
+        {totpExists ? (
+          <p>You already have 2FA Enabled</p>
+        ) : (
+          <Button size='lg' className='button-black' onClick={handleGenerateTOTP}>Enable</Button>
+        )}
+        {totpExists && (
+          <Button variant="danger" size="lg" className='red-button' onClick={delete2FA}>
+            Remove 2FA
+          </Button>
+        )}
+      </>
+    )}
+  </div>
   );
 };
 

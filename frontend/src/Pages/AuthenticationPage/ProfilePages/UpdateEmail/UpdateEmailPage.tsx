@@ -26,6 +26,7 @@ import Nav from "react-bootstrap/Nav";
 import SidebarMenu from "react-bootstrap-sidebar-menu";
 import Header2 from "../../../../components/Common/VerticalHeader/VerticalHeader";
 import VerticalHeader from "../../../../components/Common/VerticalHeader/VerticalHeader";
+import { firebaseErrorMessages } from "../../../../context/FirebaseErrors";
 
 const UpdateEmailPage = () => {
   const { user, logout } = useAuth();
@@ -37,54 +38,57 @@ const UpdateEmailPage = () => {
   const [showModalEmail, setShowModalEmail] = useState(false);
 
   const handleEmailUpdate = async (password: string) => {
-    setError("");
     try {
       if (!auth.currentUser) {
         return null;
       }
-      const reauthError = await reauthenticateUser(password);
-      if (reauthError) {
-        console.error('Reauthentication failed:', reauthError);
-        setError(reauthError);
-        return;
-      }
+      await reauthenticateUser(password);
 
       await verifyBeforeUpdateEmail(auth.currentUser, newEmail);
       setError(
         "A verification email has been sent to your new email address. Please verify to complete the email update."
       );
     } catch (error: any) {
-      setError(error.message);
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setError(firebaseErrorMessages[errorMessage]);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
-  const reauthenticateUser = async (
-    password: string
-  ): Promise<string | null> => {
+  const reauthenticateUser = async (password: string): Promise<void> => {
     try {
       if (!auth.currentUser || !auth.currentUser.email) {
-        console.error("User not authenticated");
-        return "User not authenticated";
+        console.error('User not authenticated');
+        return;
       }
 
-      //   if(auth.currentUser.providerData.some(provider =>provider.providerId ==='google.com')){
-      //       reauthenticateWithRedirect(auth.currentUser, googleProvider)
-      //       return null;
-      //     }
-
+   //   if(auth.currentUser.providerData.some(provider =>provider.providerId ==='google.com')){
+ //       reauthenticateWithRedirect(auth.currentUser, googleProvider)
+ //       return null;
+ //     }
+  
       const credential = EmailAuthProvider.credential(
         auth.currentUser.email,
         password
       );
-
+  
       await reauthenticateWithCredential(auth.currentUser, credential);
+  
     
-      return null; 
-    } catch (errorCatch: any) {
-      console.error("Error reauthenticating user:", errorCatch);
-
-      setError(errorCatch.message);
-      return errorCatch.message; 
+    } catch (error:any) {
+      console.error('Error reauthenticating user:', error);
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setError(firebaseErrorMessages[errorMessage]);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+      throw error; 
     }
   };
 
@@ -96,7 +100,7 @@ const UpdateEmailPage = () => {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className='profile-container'>
     <Row>
       <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
         <VerticalHeader />
@@ -104,21 +108,21 @@ const UpdateEmailPage = () => {
       <Col xs={12} sm={12} md={8} lg={10} style={{ height: '100%' }}>
         <Container fluid className='mt-4'>
      
-          <p className='mb-4' style={{ fontSize: '30px', marginTop: '30px' }}>Update your email</p>
+          <p className='mb-4' style={{ fontSize: '30px', marginTop: '30px' , color:'white'}}>Update your email</p>
           {error && <Alert className="error">{error}</Alert>}
           <Form className='mt-4'>
             <p>Your current e-mail: {user && user.email}</p>
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} htmlFor="new-email">
-                New e-mail:
+                <p>New e-mail:</p>
               </Form.Label>
-              <Col sm={10}>
+              <Col sm={3}>
                 <Form.Control
                   type="email"
                   id="new-email"
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
-                  className="dark-input"
+                  className="input-black"
                   required
                 />
               </Col>

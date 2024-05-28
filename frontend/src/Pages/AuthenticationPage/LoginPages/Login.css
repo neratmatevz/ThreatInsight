@@ -4,23 +4,36 @@
   }
 
   .input-black{
-    background-color: #252525;
-    border-color: #2BA8A4;
-    color: #e5e7eb;
-    font-family: 'Space Grotesk', sans-serif;
-    
+    padding: 8px;
+    border-radius: 0;
+    border: 1px solid #e3e3e3;
+    background-color: #1e1e1e;
+    color: #e3e3e3;
+    font-size: 16px;
   }
 
+
   .input-black:focus {
-    background-color: #252525;
-    border-color: #2BA8A4;
-    color:white;
+    padding: 8px;
+    border-radius: 0;
+    border: 1px solid #e3e3e3;
+    background-color: #1e1e1e;
+    color: #e3e3e3;
+    font-size: 16px;
+    outline: none !important;
+    box-shadow: none !important;
+
 }
 
 
 .input-black:not(:focus) {
   background-color: #252525;
   color:#e5e7eb;
+}
+
+.red-button{
+  border-radius: 0;
+  font-family: 'Space Grotesk', sans-serif;
 }
 .button-black {
   background-color: #2BA8A4 !important;
@@ -31,9 +44,22 @@
 }
 
 .button-black:hover {
-  background-color: #2BA8A4 !important;
   color: white !important;
-  border-color: #2BA8A4 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #b3dfde !important;
+  background-color: #249591  !important;
+}
+
+
+.button-black:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important; 
+}.button-black:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important; 
 }
 
 .continue-with{
@@ -42,9 +68,9 @@
 }
 
 .error{
-  background-color: #2BA8A4;
+  background-color: #252525;
   color: white;
-  border-color: #252525;
+  border-color: #2BA8A4;
   margin-top: 20px;
 }
 

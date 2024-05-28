@@ -126,19 +126,6 @@ background-color: #1b1b1b;
   cursor: pointer;
 }
 
-.button-black {
-  background-color: #2BA8A4 !important;
-  color: white !important;
-  border-color: #2BA8A4 !important;
-  font-family:  'Space Grotesk', sans-serif !important;
-  border-radius: 0 !important;
-}
-
-.button-black:hover {
-  background-color: #2BA8A4 !important;
-  color: white !important;
-  border-color: #2BA8A4 !important;
-}
 
 .offcanvas{
   background-color: #252525;

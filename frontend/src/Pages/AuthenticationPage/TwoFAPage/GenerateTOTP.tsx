@@ -137,7 +137,7 @@ const navigate = useNavigate();
               placeholder="Enter 6-digit code"
               value={token}
               maxLength={6}
-              className='dark-input'
+              className='input-black'
               onChange={(e) => setToken(e.target.value)}
             />
           </Form.Group>

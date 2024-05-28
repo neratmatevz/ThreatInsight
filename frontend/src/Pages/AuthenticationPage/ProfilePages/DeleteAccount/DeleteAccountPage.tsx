@@ -18,6 +18,7 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 
 import VerticalHeader from '../../../../components/Common/VerticalHeader/VerticalHeader';
 import PromptForCredentials from '../PromptForCredentials/PromptForCredentials';
+import { firebaseErrorMessages } from '../../../../context/FirebaseErrors';
 
 const DeleteAccountPage = () => {
   const { user, logout } = useAuth();
@@ -40,22 +41,24 @@ const DeleteAccountPage = () => {
       }
       await reauthenticateUser(password)
       await deleteUser(auth.currentUser);
-      console.log('User account deleted successfully');
-    } catch (errorCatch : any) {
-      console.error('Error deleting user account:', errorCatch);
-      // Handle error appropriately (e.g., display error message to user)
-      
-      setError(errorCatch.message)
+    } catch (error : any) {
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setError(firebaseErrorMessages[errorMessage]);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
 
 
-  const reauthenticateUser = async (password: string): Promise<string | null> => {
+  const reauthenticateUser = async (password: string): Promise<void> => {
     try {
       if (!auth.currentUser || !auth.currentUser.email) {
         console.error('User not authenticated');
-        return 'User not authenticated';
+        throw new Error('User not authenticated');
       }
 
    //   if(auth.currentUser.providerData.some(provider =>provider.providerId ==='google.com')){
@@ -69,15 +72,18 @@ const DeleteAccountPage = () => {
       );
   
       await reauthenticateWithCredential(auth.currentUser, credential);
-      logout()
-      // Reauthentication successful
-      return null; // Return null to indicate success
+  
     
-    } catch (errorCatch:any) {
-      console.error('Error reauthenticating user:', errorCatch);
-      // Handle error appropriately (e.g., display error message to user)
-      setError(errorCatch.message)
-      return errorCatch.message; // Return error message
+    } catch (error:any) {
+      console.error('Error reauthenticating user:', error);
+      const errorMessage = error.message;
+      console.log(error.message)
+      if (firebaseErrorMessages[errorMessage]) {
+        setError(firebaseErrorMessages[errorMessage]);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+      throw error; 
     }
   };
   
@@ -92,21 +98,21 @@ const DeleteAccountPage = () => {
 
 
   return (
-    <>
+    <Container fluid className='profile-container'>
      <Row>
-          {/* Header2 Column */}
-          <Col sm={1} lg={2}>
-    <VerticalHeader />
-    </Col>
+          <Col xs={12} sm={12} md={4} lg={2}>
+          <VerticalHeader />
+        </Col>
 
-    <Col >
+        <Col xs={12} sm={12} md={8} lg={5} style={{ height: '100%' }}>
     <Container fluid className='mt-4'>
       
-      <h3 className='mb-4'>Account preferences</h3>
-      <h4 className='mb-4'>Delete your account</h4>
+
+    <p className='mb-4' style={{ fontSize: '30px', color:'white' }}>Delete your account</p>
       <p>Deleting your ThreatInsight account means you'll lose access to all ThreatInsight services, 
         and we'll permanently remove your personal data from our system.</p>
-      <Button variant='danger' onClick={handleShowModalDelete}>
+        {error && <Alert className=" error">{error}</Alert>}
+      <Button variant='danger' size='lg' className='red-button' onClick={handleShowModalDelete}>
         Delete Account
       </Button>
 
@@ -116,14 +122,14 @@ const DeleteAccountPage = () => {
         handleClose={handleCloseModalDelete} 
         handleConfirm={handleDeleteUser} 
       />  
-         {error && <Alert variant='danger'>{error}</Alert>}
+       
          </Container>
 </Col>
 
 
   
     </Row>
-    </>
+    </Container>
   );
 };
 

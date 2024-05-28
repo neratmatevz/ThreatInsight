@@ -115,15 +115,17 @@ const TOTPexists = async (email) => {
       const querySnapshot = await db.collection('users').where('email', '==', email).get();
   
 
-      let firstDocTotp = null;
+      let totpExists = false;
 
-      querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc) => {
+            if (doc.data().totpSecret) {
+                totpExists = true;
+                // If you only need to check for existence, you can exit the loop after finding one document
+                return;
+            }
+        });
 
-        firstDocTotp = doc.data().totpSecret;
-      });
-  
-
-      return firstDocTotp;
+        return totpExists;
     } catch (error) {
       console.error('Error checking TOTP secret:', error);
 

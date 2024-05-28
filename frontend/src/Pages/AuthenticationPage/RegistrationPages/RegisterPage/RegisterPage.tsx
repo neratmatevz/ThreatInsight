@@ -26,7 +26,9 @@ const RegisterPage = () => {
   const [editable, setEditable] = useState(true);
   const [showPasswordText, setShowPasswordText] = useState(false);
 
-
+  useEffect(() => {
+    setErrorNull()
+  }, []);
 
   if (user) {
     navigate("/");
