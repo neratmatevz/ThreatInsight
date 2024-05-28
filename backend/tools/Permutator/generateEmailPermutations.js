@@ -46,6 +46,20 @@ const generateEmailPermutations = (email) => {
       localVariations.add(`${last}_${first[0]}`);
   } else if (parts.length === 1) {
       localVariations.add(parts[0]);
+      localVariations.add(`${parts[0]}1`);
+      localVariations.add(`${parts[0]}123`);
+      localVariations.add(`${parts[0]}${new Date().getFullYear()}`);
+      localVariations.add(`123${parts[0]}`);
+      localVariations.add(`${new Date().getFullYear()}${parts[0]}`);
+      localVariations.add(parts[0].replace(/o/g, '0'));
+      localVariations.add(parts[0].replace(/l/g, '1'));
+      localVariations.add(parts[0].replace(/e/g, '3'));
+      localVariations.add(`info${parts[0]}`);
+      localVariations.add(`admin${parts[0]}`);
+      localVariations.add(`${parts[0]}info`);
+      localVariations.add(`${parts[0]}admin`);
+      localVariations.add(parts[0].toUpperCase());
+      localVariations.add(parts[0].charAt(0).toUpperCase() + parts[0].slice(1));
   }
 
   // Add each local variation with domain

@@ -61,8 +61,8 @@ const basicCommandStructure = (scanResult, scanID) => {
         return {
             port: parseInt(port?.split('/')[0]),
             protocol: port?.split('/')[1],
-            state,
-            service
+            state: state || null,
+            service: service || null
         };
     }).filter(port => !isNaN(port.port));
 
@@ -110,9 +110,9 @@ const osinfoStructure = (scanResult, scanID) => {
         const portDetails = {
             port: parseInt(port?.split('/')[0]),
             protocol: port?.split('/')[1],
-            state: state, // Correcting state extraction
-            service,
-            version
+            state: state || null, // Correcting state extraction
+            service: service || null,
+            version: version || null
         };
 
         if (portDetails.port === 3306) { // Additional info for port 3306 (MySQL)
@@ -163,8 +163,8 @@ const osinfoStructure = (scanResult, scanID) => {
     const osCPE = osCPELine ? osCPELine.split(': ')[1].trim() : 'No exact OS matches for host (test conditions non-ideal).';
 
     // Extract traceroute information
-    const tracerouteIndex = lines.findIndex(line => line.startsWith('TRACEROUTE (using port'));
-    const tracerouteLines = lines.slice(tracerouteIndex + 1, lines.indexOf('OS and Service detection performed.'));
+    const tracerouteIndex = lines.findIndex(line => line.startsWith('HOP') && line.includes('RTT') && line.includes('ADDRESS'));
+    const tracerouteLines = lines.slice(tracerouteIndex + 1, lines.indexOf('OS and Service detection performed.') - 1);
     const traceroute = tracerouteLines.join('\n'); // Concatenate all traceroute lines into one string
 
     // Return structured response
@@ -213,8 +213,8 @@ const osdetectStructure = (scanResult, scanID) => {
         return {
             port: parseInt(port?.split('/')[0]),
             protocol: port?.split('/')[1],
-            state,
-            service
+            state: state || null,
+            service: service || null
         };
     }).filter(port => !isNaN(port.port));
 
