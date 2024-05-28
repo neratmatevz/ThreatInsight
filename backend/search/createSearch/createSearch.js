@@ -25,6 +25,10 @@ const saveFinalDataStructure = require("./saveFinalDataStructure");
  * @throws {Error} - Throws an error if any step in the process fails.
  */
 const createSearch = async (jsonData) => {
+
+    // Check structure of incoming json data
+    if(!checkRequestStructure(jsonData)) throw new Error("Request body not structured properly! Scan won't start!")
+
     // Check if parameter exists
     if (!jsonData) throw new Error("Data for search creation not provided!");
 

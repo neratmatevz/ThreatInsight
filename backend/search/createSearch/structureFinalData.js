@@ -1,4 +1,4 @@
-const { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag, allPortsFlag, tlsProtocolsFlag } = require('./parameterFlags');
+const { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag, allPortsFlag, tlsProtocolsFlag, dnssecFlag } = require('./parameterFlags');
 
 /**
  * Structures the final data based on the provided input data.
@@ -118,7 +118,7 @@ const structureFinalData = (data, toolsSearchStatus) => {
             },
             dnsSec: {
                 dnsSec: data.TLSDNSSEC?.dnsSec != null ? data.TLSDNSSEC.dnsSec : null,
-                flag: updateFlagCounters(data.TLSDNSSEC?.dnsSec ? 0 : 1)                                   //FLAG: dnsSec configured -> 0, dnssec not configured -> 1
+                flag: updateFlagCounters(dnssecFlag(data.TLSDNSSEC?.dnsSec))                                   //FLAG: dnsSec configured -> 0, dnssec not configured -> 1
             },
             tlsProtocols: {
                 tls10: {

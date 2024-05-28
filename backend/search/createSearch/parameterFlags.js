@@ -131,13 +131,33 @@ const allPortsFlag = (portVulnFlags, portUsefulFlags) => {
  */
 const tlsProtocolsFlag = (tls) => {
 
-    if(tls === null || tls === undefined) {
+    if (tls === null || tls === undefined) {
         return null;
-    }else if(tls === true){
+    } else if (tls === true) {
         return null;
-    }else if (tls === false){
+    } else if (tls === false) {
         return 0;
     }
 }
 
-module.exports = { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag, allPortsFlag, tlsProtocolsFlag }
+/**
+ * Determines the flag value for TLS/DNSSec based on the input.
+ * 
+ * This function evaluates the TLS/DNSSec input to determine the appropriate flag.
+ * 
+ * @param {boolean|null|undefined} dnssec - The input indicating the status of TLS protocols.
+ * @returns {number|null} - Returns 1 if the input is false, and 0 if the input is true.
+ *                          Returns null if input null or undefined
+ */
+const dnssecFlag = (dnssec) => {
+
+    if (dnssec === null || dnssec === undefined) {
+        return null;
+    } else if (dnssec === true) {
+        return 0;
+    } else if (dnssec === false) {
+        return 1;
+    }
+}
+
+module.exports = { domainExpiryFlag, tlsExpiryFlag, emailsFlag, emailBreachesFlag, allPortsFlag, tlsProtocolsFlag, dnssecFlag }
