@@ -1,0 +1,43 @@
+.host-data {
+    padding: 14px;
+  }
+  
+  .host-data .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .host-data h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    color: #e3e3e3;
+  }
+  
+  .data-item {
+    margin-bottom: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+  }
+  
+  .descriptor {
+    color: #ffffff;
+  }
+  
+  .data {
+    color: #a3a3a3;
+  }
+  
+  .flag-icon {
+    margin-left: 10px;
+  }
+  
+  .ellipsis {
+    color: #2ba8a4;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 5px;
+    display: block;
+    text-align: center;
+  }
+  

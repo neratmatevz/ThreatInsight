@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PersonalData.css';
+import Modal from '../Modal/Modal';
 
 interface PersonalDataProps {
   personalData: {
@@ -27,6 +28,16 @@ const getFlagClassName = (flag: number) => {
 };
 
 const PersonalData: React.FC<PersonalDataProps> = ({ personalData }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="personal-data">
       <div className="header">
@@ -37,23 +48,38 @@ const PersonalData: React.FC<PersonalDataProps> = ({ personalData }) => {
       </div>
       <hr />
       <div className="data-item">
-        <strong>Name:</strong> {personalData.name}
+        <span className="descriptor">Name:</span> <span className="data">{personalData.name}</span>
       </div>
       <div className="data-item">
-        <strong>Website:</strong> {personalData.website}
+        <span className="descriptor">Website:</span> <span className="data">{personalData.website}</span>
       </div>
       <div className="data-item">
-        <strong>Address:</strong> {personalData.address.address}
+        <span className="descriptor">Address:</span> <span className="data">{personalData.address.address}</span>
       </div>
       <div className="data-item">
-        <strong>Size:</strong> {personalData.size.size}
+        <span className="descriptor">Size:</span> <span className="data">{personalData.size.size}</span>
       </div>
       <div className="data-item">
-        <strong>Description:</strong> {personalData.description.description}
+        <span className="descriptor">Description:</span> <span className="data">
+          {personalData.description.description.length > 200 
+            ? `${personalData.description.description.substring(0, 200)}...`
+            : personalData.description.description}
+        </span>
+        {personalData.description.description.length > 200 && (
+          <div className="ellipsis" onClick={handleOpenModal}>
+            <i className="fas fa-plus"></i>
+          </div>
+        )}
       </div>
       <div className="data-item">
-        <strong>Industry:</strong> {personalData.industry}
+        <span className="descriptor">Industry:</span> <span className="data">{personalData.industry}</span>
       </div>
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        content={personalData.description.description} 
+        title="Description"
+      />
     </div>
   );
 };

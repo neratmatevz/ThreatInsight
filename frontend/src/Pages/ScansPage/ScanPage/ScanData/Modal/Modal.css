@@ -13,7 +13,8 @@
   
   .modal-container {
     background-color: #171717;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     width: 80%;
     max-width: 600px;
     border: 1px solid #2ba8a4;
@@ -28,6 +29,12 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #171717;
+    z-index: 10;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .modal-header h2 {
@@ -45,7 +52,13 @@
   }
   
   .modal-content {
+    background-color: #171717;
+    color: #a3a3a3; 
     font-size: 14px;
     line-height: 1.6;
+    padding: 10px; 
+    display: block; 
+
   }
   
+ 

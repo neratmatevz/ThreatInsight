@@ -14,12 +14,26 @@
     color: #e3e3e3;
   }
   
- 
-  
   .data-item {
     margin-bottom: 10px;
     font-family: 'Space Mono', monospace;
     font-size: 14px;
-    color: #e3e3e3;
   }
   
+  .descriptor {
+    color: #ffffff;
+  }
+  
+  .data {
+    color: #a3a3a3;
+  }
+  
+  .ellipsis {
+    color:  #2ba8a4;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
