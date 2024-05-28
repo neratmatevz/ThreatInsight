@@ -5,6 +5,7 @@ const { getAuth } = require('firebase-admin/auth');
 const getIntermediateData = require("./getIntermediateData");
 const structureFinalData = require("./structureFinalData");
 const saveFinalDataStructure = require("./saveFinalDataStructure");
+const checkRequestStructure = require('./checkRequestStructure');
 
 /**
  * Creates a new search instance, processes the choosen tools, and saves the final data structure.

@@ -2,6 +2,7 @@ const express = require('express');
 const { validateToken } = require('../../authentication/auth');
 const createSearch = require('../../search/createSearch/createSearch');
 const getSearch = require('../../search/getSearch/getSearch');
+const updateSearch = require('../../search/updateSearch/updateSearch');
 
 let router = express.Router();
 
