@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToolPicker from './ToolPicker/ToolPicker';
 import SearchForm from './SearchForm/SearchForm';
+import Loader from './Loader/Loader';
 import { useAuth } from '../../context/AuthContext';
+import { auth } from '../../Firebase/firebase'; 
 import './SearchPage.css';
 
 const SearchPage = () => {
-    const { user } = useAuth(); // Get the user from the AuthContext
+    const { user } = useAuth(); 
+    const [token, setToken] = useState<string | null>(null); 
     const [selectedTools, setSelectedTools] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         email: '',
@@ -16,8 +19,19 @@ const SearchPage = () => {
         title: ''
     });
     const [showNotes, setShowNotes] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false); 
 
-    const handleStartScanning = () => {
+    useEffect(() => {
+        if (user) {
+            auth.currentUser?.getIdToken(true).then((idToken) => {
+                setToken(idToken);
+            }).catch((error) => {
+                console.error('Error getting token:', error);
+            });
+        }
+    }, [user]);
+
+    const handleStartScanning = async () => {
         // Perform validation checks
         if (!formData.title) {
             alert("Please enter a title.");
@@ -37,6 +51,11 @@ const SearchPage = () => {
             return;
         }
 
+        if (selectedTools.includes("IP Geolocation") && !formData.ip) {
+            alert("Please enter an IP address for IP Geolocation.");
+            return;
+        }
+
         if (selectedTools.includes("Nmap") && !formData.nmapScanType) {
             alert("Please select an Nmap scan type.");
             return;
@@ -47,8 +66,13 @@ const SearchPage = () => {
             return;
         }
 
+        if (!token) {
+            alert('Token not available');
+            return;
+        }
+
         const runTemplate = {
-            userUID: user?.uid || 'No UID', // Get the UID from the user context
+            userUID: user?.uid,
             name: formData.title,
             notes: formData.notes,
             nmap: {
@@ -86,11 +110,41 @@ const SearchPage = () => {
                 email: formData.email
             },
         };
-        console.log(runTemplate);
+
+
+        try {
+            setIsLoading(true); 
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/search`, { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` 
+                },
+                body: JSON.stringify(runTemplate)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.path) {
+                    window.location.href = result.path;
+                } else {
+                    alert('Path not found in the response.');
+                }
+            } else {
+                console.error('Failed to reach the endpoint. Status:');
+                alert('Failed to reach the endpoint. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            setIsLoading(false); // Hide the loader after the request is complete
+        }
     };
 
     return (
         <div className="scans-page-container">
+            {isLoading && <Loader />} {/* Show the loader if isLoading is true */}
             <div className="scans-container container-fluid">
                 <div className="row flex-grow-1">
                     <div className="col-lg-2 col-md-12 toolpicker-container">

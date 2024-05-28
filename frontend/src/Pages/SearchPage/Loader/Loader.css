@@ -1,0 +1,34 @@
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.733);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-logo {
+    width: 100px; 
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.logotext {
+    font-family: 'Space Mono', monospace;
+    color: white;
+    animation: blinkingText 1.5s infinite; 
+}
+
+@keyframes blinkingText {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

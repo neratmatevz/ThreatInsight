@@ -144,6 +144,13 @@ background-color: #1b1b1b;
        font-family: 'Space Mono', monospace;
 }
 
+/* Hide the main div on desktop */
+@media (min-width: 768px) {
+  .removeline {
+    display: none !important;
+  }
+}
+
 
 @media (max-width: 1200px) and (min-width: 992px) {
   .pc-scans {

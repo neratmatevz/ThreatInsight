@@ -115,7 +115,7 @@ setLoading(true);
     <div    >
       
       <div
-        className="d-flex justify-content-between align-items-center p-3"
+        className="d-flex justify-content-between align-items-center p-3 removeline"
         style={{ backgroundColor: "#252525" }}
       >
         <Button

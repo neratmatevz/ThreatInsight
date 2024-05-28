@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useAuth } from '../../../context/AuthContext';
-import LoadingOverlay from '../../../components/Common/LoadingOverlay/LoadingOverlay';
+
 const AllScansPage = () => {
  const {user} = useAuth()
 
