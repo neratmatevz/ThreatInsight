@@ -111,7 +111,6 @@ const SearchPage = () => {
             },
         };
 
-        console.log(runTemplate);
 
         try {
             setIsLoading(true); 
