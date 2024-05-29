@@ -6,6 +6,7 @@
     width: 350px;
     z-index: 1000; 
     height: 100%;
+    background-color: #1b1b1b;
   }
 
 
@@ -17,13 +18,12 @@
     background-color: #1b1b1b;
     border-radius: 0;
     align-items: center  !important;
-
+    display: flex;
   }
 
   .nav-link-box-docs p {
     margin: 0; 
-    display: flex;
-    align-items: center; 
+
     color:#E5E5E5;
     font-size: 15px;
   }
@@ -33,5 +33,20 @@
     background-color: #1b1b1b; 
 
   }
+  .nav-link-box-docs:hover { 
+    border: 1px solid #2BA8A4 !important;
+  }
 
- 
+ .p-docs{
+  font-size: 15px;  
+  font-weight: normal;  
+  align-items: center; 
+ }.icon-blue {
+  color: #2BA8A4;
+}
+.p-header-scan{
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: normal;
+  color:#2BA8A4
+}

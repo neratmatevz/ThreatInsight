@@ -6,7 +6,6 @@ import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './OurTools.css'
 
-
 const DomainSearch = () => {
   return (
     <div>
@@ -16,7 +15,7 @@ const DomainSearch = () => {
         </Col>
       </Row>
       <Row className="my-3">
-          <p className='description-docs'>DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.
+          <p className='description-docs' >DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.
           DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool. </p>
       </Row>
       <Row>

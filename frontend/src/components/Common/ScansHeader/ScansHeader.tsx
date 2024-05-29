@@ -161,7 +161,7 @@ const ScansHeader = () => {
         className="d-md-none offcanvas"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Scans</Offcanvas.Title>
+          <Offcanvas.Title style={{fontWeight: 'normal'}}>Scans</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column flex-grow-1">
@@ -178,7 +178,7 @@ const ScansHeader = () => {
                 >
                   <p>{iskanje.name}</p>
                   <Dropdown className="dropdown-scans">
-                    <Dropdown.Toggle variant="link" bsPrefix="p-0">
+                    <Dropdown.Toggle variant="link" bsPrefix="p-0" >
                       <FontAwesomeIcon
                         icon={faEllipsisV}
                         className="fa-ellipsis-icon"
@@ -238,7 +238,7 @@ const ScansHeader = () => {
                     >
                       <p style={{ overflow: 'hidden', color: '#E5E5E5' }}>{iskanje.name}</p>
                       <Dropdown className="dropdown-scans">
-                        <Dropdown.Toggle variant="link" bsPrefix="p-0">
+                        <Dropdown.Toggle variant="link" bsPrefix="p-0" className='dropdown-toogle'>
                           <FontAwesomeIcon
                             icon={faEllipsisV}
                             className="fa-ellipsis-icon"

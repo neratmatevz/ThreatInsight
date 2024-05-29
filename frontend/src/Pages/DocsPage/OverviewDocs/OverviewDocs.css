@@ -1,7 +1,7 @@
 .description-docs{
     margin-top: 20px;
     color: white;
-    
+    font-weight: normal !important;    
 }
 
 .header-docs{
@@ -9,6 +9,7 @@
     text-decoration: underline;
     text-decoration-color: #2BA8A4;
     font-size:30px;
+    font-weight: normal;    
 }
 
 
@@ -16,4 +17,5 @@
 .sub-header-docs{
     color: white;
     font-size: 25px;
+    font-weight: normal;    
 }
