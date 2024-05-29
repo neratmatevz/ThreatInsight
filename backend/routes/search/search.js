@@ -28,8 +28,8 @@ router.post('/', validateToken, async (req, res) => {
 router.get('/', validateToken, async (req, res) => {
 
     try {
-        let userUID = req.body.userUID;
-        let searchUID = req.body.searchUID;
+        let userUID = req.query.userUID;
+        let searchUID = req.query.searchUID;
 
         let scanData = await getSearch(userUID, searchUID);
 
@@ -43,7 +43,7 @@ router.get('/', validateToken, async (req, res) => {
 
         }
 
-        res.status(400).json({ message: "Bad request!" });
+        res.status(400).json({ message: error.message });
 
     }
 })
