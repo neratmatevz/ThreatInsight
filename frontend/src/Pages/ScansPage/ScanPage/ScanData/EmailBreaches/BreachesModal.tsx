@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify';
 interface EmailBreach {
   isFabricated: boolean;
   isMalware: boolean;
-  flag: number;
+  flag: number | null;
   isVerified: boolean;
   domain: string | null;
   logoPath: string;
@@ -24,6 +24,13 @@ interface BreachesModalProps {
   title: string;
 }
 
+const getFlagClassName = (flag: number | null) => {
+  if (flag === null) {
+    return 'no-flag';
+  }
+  return flag === 0 ? 'fas fa-flag useful-flag' : 'fas fa-flag vulnerable-flag';
+};
+
 const BreachesModal: React.FC<BreachesModalProps> = ({ isOpen, onClose, breaches, title }) => {
   if (!isOpen) return null;
 
@@ -41,6 +48,9 @@ const BreachesModal: React.FC<BreachesModalProps> = ({ isOpen, onClose, breaches
             <div key={index} className="breach-item">
               <div className="data-item">
                 <span className="descriptor">Name:</span> <span className="data">{breach.name}</span>
+                <span className="flag-icon">
+                  <i className={getFlagClassName(breach.flag)}></i>
+                </span>
               </div>
               <div className="data-item">
                 <span className="descriptor">Domain:</span> <span className="data">{breach.domain || 'N/A'}</span>

@@ -6,7 +6,7 @@ interface Port {
   flag: number;
   port: number;
   service: string;
-  state: string;
+  state: string | null;
   version: string | null;
 }
 
@@ -42,14 +42,14 @@ const HostDataModal: React.FC<HostDataModalProps> = ({ isOpen, onClose, ports })
                 <span className="descriptor">Service:</span> <span className="data">{port.service}</span>
               </div>
               <div className="data-line">
-                <span className="descriptor">State:</span> <span className="data">{port.state}</span>
+                <span className="descriptor">State:</span> <span className="data">{port.state ?? '/'}</span>
               </div>
               <div className="data-line">
                 <span className="descriptor">Version:</span> <span className="data">{port.version ?? '/'}</span>
               </div>
               <div className="data-line">
                 <span className="flag-icon">
-                  <i className={getFlagClassName(port.flag)}></i>
+                  <i className={port.flag !== null ? getFlagClassName(port.flag) : 'no-flag'}></i>
                 </span>
               </div>
               <hr />

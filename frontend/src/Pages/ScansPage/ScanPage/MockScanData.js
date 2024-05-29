@@ -149,25 +149,6 @@ const mockScanData = {
       industry: "Higher Education"
     },
   
-    personalData: {
-      website: "https://www.um.si/",
-      address: {
-        address: "Slomškov trg 15, Maribor",
-        flag: 0
-      },
-      size: {
-        flag: 0,
-        size: "1001-5000"
-      },
-      name: "Univerza v Mariboru",
-      logo: "https://assets-prospeo.s3.us-east-2.amazonaws.com/company_GUEAYHKKAYJYKSS7JIUB.jpg",
-      description: {
-        flag: 0,
-        description: "The University of Maribor was established in 1975. With its 17 Faculties, the University Library Maribor and the Student Dormitories, it is the second largest and second oldest university in Slovenia with a long tradition. During these years, it became a successful scientific institution, the primary mission and guiding principle of which is the dissemination and enrichment of knowledge. It is rapidly developing new areas of activity, testing new study methods, and seeking new ways of integrating with its environment."
-      },
-      industry: "Higher Education"
-    },
-  
     domainData: {
       dnsSec: {
         dnsSec: false,

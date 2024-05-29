@@ -7,7 +7,7 @@ interface Port {
   flag: number;
   port: number;
   service: string;
-  state: string;
+  state: string | null;
   version: string | null;
 }
 
@@ -44,42 +44,46 @@ const HostData: React.FC<HostDataProps> = ({ hostData }) => {
     <div className="host-data">
       <div className="header">
         <h2>Host Data</h2>
-        <span className="flag-icon">
-          <i className={getFlagClassName(hostData.deviceType.flag ?? 0)}></i>
-        </span>
       </div>
       <hr />
       <div className="data-item">
-        <span className="descriptor">Device Type:</span> <span className="data">{hostData.deviceType.deviceType}</span>
+        <span className="descriptor">Device Type:</span> <span className="data">{hostData.deviceType.deviceType ?? '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(hostData.deviceType.flag ?? 0)}></i>
+          <i className={hostData.deviceType.flag !== null ? getFlagClassName(hostData.deviceType.flag) : 'no-flag'}></i>
         </span>
       </div>
       <div className="data-item">
         <span className="descriptor">Is Up:</span> <span className="data">{hostData.isUp ? 'Yes' : 'No'}</span>
       </div>
       <div className="data-item">
-        <span className="descriptor">OS CPE:</span> <span className="data">{hostData.osCPE.osCPE}</span>
+        <span className="descriptor">OS CPE:</span> <span className="data">{hostData.osCPE.osCPE ?? '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(hostData.osCPE.flag ?? 0)}></i>
+          <i className={hostData.osCPE.flag !== null ? getFlagClassName(hostData.osCPE.flag) : 'no-flag'}></i>
         </span>
       </div>
       <div className="data-item">
-        <span className="descriptor">OS Details:</span> <span className="data">{hostData.osDetails.osDetails}</span>
+        <span className="descriptor">OS Details:</span> <span className="data">{hostData.osDetails.osDetails ?? '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(hostData.osDetails.flag ?? 0)}></i>
+          <i className={hostData.osDetails.flag !== null ? getFlagClassName(hostData.osDetails.flag) : 'no-flag'}></i>
         </span>
       </div>
       <div className="data-item">
-        <span className="descriptor">Traceroute:</span> <span className="data">{hostData.traceroute.traceroute}</span>
+        <span className="descriptor">Traceroute:</span> <span className="data">{hostData.traceroute.traceroute ?? '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(hostData.traceroute.flag ?? 0)}></i>
+          <i className={hostData.traceroute.flag !== null ? getFlagClassName(hostData.traceroute.flag) : 'no-flag'}></i>
         </span>
       </div>
       <div className="data-item">
         <span className="descriptor">Ports:</span>
         <span className="data">
-          {portsToShow.map(port => `${port.protocol}/${port.port} (${port.service})`).join(', ')}
+          {portsToShow.map(port => (
+            <div key={port.port}>
+              {port.protocol}/{port.port} ({port.service})
+              <span className="flag-icon">
+                <i className={port.flag !== null ? getFlagClassName(port.flag) : 'no-flag'}></i>
+              </span>
+            </div>
+          ))}
         </span>
         {hasMorePorts && (
           <div className="ellipsis" onClick={handleOpenModal}>

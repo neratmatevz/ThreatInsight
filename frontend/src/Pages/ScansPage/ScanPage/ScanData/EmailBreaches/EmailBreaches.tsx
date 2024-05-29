@@ -54,18 +54,25 @@ const EmailBreaches: React.FC<EmailBreachesProps> = ({ emailBreaches }) => {
     setIsBreachesModalOpen(false);
   };
 
+  if (!emailBreaches || !emailBreaches.emailBreaches || emailBreaches.emailBreaches.length === 0) {
+    return <div className="email-breaches"><h2>No Email Breaches Found</h2></div>;
+  }
+
   const firstBreach = emailBreaches.emailBreaches[0];
 
   const renderBreach = (breach: EmailBreach) => {
-    const sanitizedDescription = DOMPurify.sanitize(breach.description);
-    const truncatedDescription = sanitizedDescription.length > 200 
-      ? `${sanitizedDescription.substring(0, 200)}...` 
+    const sanitizedDescription = DOMPurify.sanitize(breach.description || '');
+    const truncatedDescription = sanitizedDescription.length > 200
+      ? `${sanitizedDescription.substring(0, 200)}...`
       : sanitizedDescription;
 
     return (
       <div key={breach.name} className="breach-item">
         <div className="data-item">
           <span className="descriptor">Name:</span> <span className="data">{breach.name}</span>
+          <span className="flag-icon">
+            <i className={getFlagClassName(emailBreaches.flag)}></i>
+          </span>
         </div>
         <div className="data-item">
           <span className="descriptor">Domain:</span> <span className="data">{breach.domain || 'N/A'}</span>
@@ -109,10 +116,10 @@ const EmailBreaches: React.FC<EmailBreachesProps> = ({ emailBreaches }) => {
           <i className="fas fa-eye"></i> View All Breaches
         </div>
       )}
-      <DescModalBreaches 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-        content={modalContent} 
+      <DescModalBreaches
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        content={modalContent}
         title="Description"
       />
       <BreachesModal
