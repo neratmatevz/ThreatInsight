@@ -19,10 +19,6 @@ const search = require('./routes/search/search.js');
 app.use('/search', search);
 
 
-
-
-
-
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)
 })

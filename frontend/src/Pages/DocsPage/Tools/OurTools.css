@@ -1,0 +1,9 @@
+.ul-docs{
+    color:white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size:20px;
+}
+
+.li-docs::marker{
+    color:#2BA8A4;
+}

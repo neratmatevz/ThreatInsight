@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Common/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PasswordInput from "./Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage";
 import Login from "./Pages/AuthenticationPage/LoginPages/Login";
 import { User } from "firebase/auth";
@@ -21,6 +21,17 @@ import ScanPage from "./Pages/ScansPage/ScanPage/ScanPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
 import GenerateTOTP from "./Pages/AuthenticationPage/TwoFAPage/GenerateTOTP";
 import RecoveryKey from "./Pages/AuthenticationPage/TwoFAPage/RecoveryKey/RecoveryKey";
+import DocsPage from "./Pages/DocsPage/DocsPage";
+import OverviewDocs from "./Pages/DocsPage/OverviewDocs/OverviewDocs";
+import Vision from "./Pages/DocsPage/Vision/Vision";
+import DomainSearch from "./Pages/DocsPage/Tools/DomainSearch";
+import EmailPermutator from "./Pages/DocsPage/Tools/EmailPermutator";
+import HaveIBeenPwned from "./Pages/DocsPage/Tools/HaveIBeenPwned";
+import IpGeolocation from "./Pages/DocsPage/Tools/IpGeolocation";
+import Nmap from "./Pages/DocsPage/Tools/Nmap";
+import TlsDns from "./Pages/DocsPage/Tools/TlsDns";
+import WhoIs from "./Pages/DocsPage/Tools/WhoIs";
+
 
 function App() {
   const { user, loading } = useAuth();
@@ -121,6 +132,27 @@ function App() {
               </ProtectedRoute>
             }
             />
+
+<Route
+              path="docs"
+              element={
+                <ProtectedRoute>
+                  <DocsPage />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to="overview" replace />} />
+              <Route path="overview" element={<OverviewDocs />} />
+              <Route path="vision" element={<Vision />} />
+              <Route path="domain-search" element={<DomainSearch />} />
+              <Route path="email-permutator" element={<EmailPermutator />} />
+              <Route path="haveibeenpwned" element={<HaveIBeenPwned />} />
+              <Route path="ip-geolocation" element={<IpGeolocation />} />
+              <Route path="nmap" element={<Nmap />} />
+              <Route path="tlsdns" element={<TlsDns />} />
+              <Route path="whois" element={<WhoIs />} />
+            </Route>
+            
           </Routes>
         </div>
       </BrowserRouter>

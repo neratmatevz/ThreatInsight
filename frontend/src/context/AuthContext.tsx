@@ -161,7 +161,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       return totpExists;
     } catch (error) {
       console.error("Error:", error);
-      // Handle errors here
     }
   };
 
