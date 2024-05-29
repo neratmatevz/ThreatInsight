@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 export interface Iskanje {
     id: string;
     name: string;
+    notes: string;
     creationDate: string;
 }
 
@@ -41,6 +42,7 @@ const RecentScans: React.FC = () => {
                 const iskanjaList: Iskanje[] = iskanjaQuerySnapshot.docs.map(doc => ({
                     id: doc.id,
                     name: doc.data().name,
+                    notes: doc.data().notes,
                     creationDate: getDuration(currentTimestamp, doc.data().creationDate.seconds)
                 }));
     
