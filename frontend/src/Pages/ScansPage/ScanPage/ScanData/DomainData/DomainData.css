@@ -38,3 +38,18 @@
     vertical-align: middle;
   }
   
+  .useful-flag {
+    color: orange;
+  }
+  
+  .vulnerable-flag {
+    color: red;
+  }
+
+  .no-flag{
+    display:none;
+  }
+
+  .data-section h3{
+    font-size: 20px;
+  }

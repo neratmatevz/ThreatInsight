@@ -48,6 +48,9 @@ const BreachesModal: React.FC<BreachesModalProps> = ({ isOpen, onClose, breaches
             <div key={index} className="breach-item">
               <div className="data-item">
                 <span className="descriptor">Name:</span> <span className="data">{breach.name}</span>
+                <span className="data">
+                  {breach.logoPath ? <img src={breach.logoPath} alt="Logo" className="logo" /> : 'No logo'}
+                </span>
                 <span className="flag-icon">
                   <i className={getFlagClassName(breach.flag)}></i>
                 </span>
@@ -70,7 +73,16 @@ const BreachesModal: React.FC<BreachesModalProps> = ({ isOpen, onClose, breaches
               <div className="data-item">
                 <span className="descriptor">Data Classes:</span> <span className="data">{breach.dataClasses.join(', ')}</span>
               </div>
-              <hr></hr>
+              <div className="data-item">
+                <span className="descriptor">Verified:</span> <span className="data">{breach.isVerified ? 'Yes' : 'No'}</span>
+              </div>
+              <div className="data-item">
+                <span className="descriptor">Fabricated:</span> <span className="data">{breach.isFabricated ? 'Yes' : 'No'}</span>
+              </div>
+              <div className="data-item">
+                <span className="descriptor">Malware:</span> <span className="data">{breach.isMalware ? 'Yes' : 'No'}</span>
+              </div>
+              <hr />
             </div>
           ))}
         </div>

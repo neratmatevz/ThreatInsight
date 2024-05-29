@@ -43,3 +43,15 @@
   .view-all i {
     margin-right: 5px;
   }
+
+  .no-flag {
+    display: none;
+  }
+  
+  .useful-flag {
+    color: orange;
+  }
+  
+  .vulnerable-flag {
+    color: red;
+  }

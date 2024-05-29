@@ -4,8 +4,8 @@ import './ToolPicker.css';
 interface ToolPickerProps {
     selectedTools: string[];
     setSelectedTools: React.Dispatch<React.SetStateAction<string[]>>;
-    onStartScanning: () => void; // Add this prop
-    setShowNotes: React.Dispatch<React.SetStateAction<boolean>>; // Add this prop
+    onStartScanning: () => void;
+    setShowNotes: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools, onStartScanning, setShowNotes }) => {
@@ -36,7 +36,7 @@ const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools
                     onClick={() => handleCheckboxChange(tool)}
                 >
                     <div className="d-flex justify-content-between align-items-center">
-                        <label className="form-check-label mb-0" htmlFor={`checkbox-${tool}`}>
+                        <label className="form-check-label mb-0" htmlFor={`checkbox-${tool}`} onClick={() => handleCheckboxChange(tool)}>
                             {tool}
                         </label>
                         <input

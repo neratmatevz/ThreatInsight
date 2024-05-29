@@ -147,7 +147,7 @@ const SearchPage = () => {
             {isLoading && <Loader />} {/* Show the loader if isLoading is true */}
             <div className="scans-container container-fluid">
                 <div className="row flex-grow-1">
-                    <div className="col-lg-2 col-md-12 toolpicker-container">
+                    <div className="col-lg-2 col-md-4 col-sm-12 toolpicker-container">
                         <ToolPicker
                             selectedTools={selectedTools}
                             setSelectedTools={setSelectedTools}
@@ -155,7 +155,7 @@ const SearchPage = () => {
                             setShowNotes={setShowNotes}
                         />
                     </div>
-                    <div className="col-lg-10 col-md-12 results-container">
+                    <div className="col-lg-10 col-md-8 col-sm-12 results-container">
                         <SearchForm
                             selectedTools={selectedTools}
                             setFormData={setFormData}

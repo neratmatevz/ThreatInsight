@@ -22,7 +22,10 @@ interface HostDataProps {
   };
 }
 
-const getFlagClassName = (flag: number) => {
+const getFlagClassName = (flag: number | null) => {
+  if (flag === null) {
+    return 'no-flag';
+  }
   return flag === 0 ? 'fas fa-flag useful-flag' : 'fas fa-flag vulnerable-flag';
 };
 
@@ -75,6 +78,7 @@ const HostData: React.FC<HostDataProps> = ({ hostData }) => {
       </div>
       <div className="data-item">
         <span className="descriptor">Ports:</span>
+        <i className={getFlagClassName(hostData.ports.flag)}></i>
         <span className="data">
           {portsToShow.map(port => (
             <div key={port.port}>

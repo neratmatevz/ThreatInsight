@@ -41,3 +41,15 @@
     display: none;
   }
   
+  .useful-flag {
+    color: orange;
+  }
+  
+  .vulnerable-flag {
+    color: red;
+  }
+
+  .logo-personal{
+    height: 40px;
+    width: auto;
+  }

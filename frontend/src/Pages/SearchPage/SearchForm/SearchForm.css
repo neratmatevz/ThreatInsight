@@ -113,3 +113,27 @@ textarea.custom-form-control {
     resize: none;
     height: 80px;
 }
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .search-form-container {
+        padding: 10px; /* Reduce horizontal padding on mobile */
+    }
+
+    .custom-title-input {
+        width: 80%; /* Increase width to 80% on mobile */
+        font-size: 14px; /* Smaller text on placeholder for mobile */
+    }
+
+    .custom-form-group {
+        width: 90%; /* Increase width of form groups on mobile */
+    }
+
+    .custom-form-control {
+        font-size: 14px; /* Smaller text size for inputs on mobile */
+    }
+
+    .custom-form-label {
+        font-size: 14px; /* Smaller label text on mobile */
+    }
+}

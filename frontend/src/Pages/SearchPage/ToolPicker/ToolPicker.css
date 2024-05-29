@@ -9,6 +9,10 @@
     border-radius: 0;
 }
 
+.form-check-label{
+    cursor: pointer;
+}
+
 .toolpicker-container::before {
     content: '';
     position: absolute;
@@ -105,8 +109,6 @@
     background-color: #1b1b1b; 
 }
 
-
-
 .btn-hacker {
     display: inline-block;
     padding: 6px 12px;
@@ -133,5 +135,14 @@
 @media (max-width: 991.98px) {
     .toolpicker-container {
         margin-bottom: 0;
+    }
+    .tool-entry {
+        margin: 0 10px 10px 10px; 
+        padding: 10px; 
+        font-size: 14px; 
+    }
+    .form-checkbox {
+        width: 20px; 
+        height: 20px;
     }
 }

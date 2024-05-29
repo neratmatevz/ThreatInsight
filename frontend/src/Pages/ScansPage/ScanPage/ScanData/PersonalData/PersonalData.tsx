@@ -44,11 +44,16 @@ const PersonalData: React.FC<PersonalDataProps> = ({ personalData = {} }) => {
   return (
     <div className="personal-data">
       <div className="header">
-        <h2>Personal Data</h2>
+        <h2>Personal Data </h2>
+        <span className="data">
+          {personalData.logo ? <img src={personalData.logo} alt="Logo" className="logo-personal" /> : '/'}
+        </span>
       </div>
       <hr />
+
       <div className="data-item">
-        <span className="descriptor">Name:</span> <span className="data">{personalData.name || '/'}</span>
+        <span className="descriptor">Name:</span> <span className="data">{personalData.name || '/'}        
+        </span>
       </div>
       <div className="data-item">
         <span className="descriptor">Website:</span> <span className="data">{personalData.website || '/'}</span>
@@ -56,13 +61,13 @@ const PersonalData: React.FC<PersonalDataProps> = ({ personalData = {} }) => {
       <div className="data-item">
         <span className="descriptor">Address:</span> <span className="data">{personalData.address?.address || '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(personalData.address?.flag || null)}></i>
+          <i className={getFlagClassName(personalData.address?.flag ?? null)}></i>
         </span>
       </div>
       <div className="data-item">
         <span className="descriptor">Size:</span> <span className="data">{personalData.size?.size || '/'}</span>
         <span className="flag-icon">
-          <i className={getFlagClassName(personalData.size?.flag || null)}></i>
+          <i className={getFlagClassName(personalData.size?.flag ?? null)}></i>
         </span>
       </div>
       <div className="data-item">
@@ -72,7 +77,7 @@ const PersonalData: React.FC<PersonalDataProps> = ({ personalData = {} }) => {
             : personalData.description?.description || '/'}
         </span>        
         <span className="flag-icon">
-          <i className={getFlagClassName(personalData.description?.flag || null)}></i>
+          <i className={getFlagClassName(personalData.description?.flag ?? null)}></i>
         </span>
         {personalData.description?.description && personalData.description.description.length > 200 && (
           <div className="ellipsis" onClick={handleOpenModal}>

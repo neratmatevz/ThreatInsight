@@ -8,7 +8,7 @@ import DescModalBreaches from './DescModalBreaches';
 interface EmailBreach {
   isFabricated: boolean;
   isMalware: boolean;
-  flag: number;
+  flag: number | null;
   isVerified: boolean;
   domain: string | null;
   logoPath: string;
@@ -22,12 +22,15 @@ interface EmailBreach {
 
 interface EmailBreachesProps {
   emailBreaches: {
-    flag: number;
+    flag: number | null;
     emailBreaches: EmailBreach[];
   };
 }
 
-const getFlagClassName = (flag: number) => {
+const getFlagClassName = (flag: number | null) => {
+  if (flag === null) {
+    return 'no-flag';
+  }
   return flag === 0 ? 'fas fa-flag useful-flag' : 'fas fa-flag vulnerable-flag';
 };
 
@@ -70,8 +73,11 @@ const EmailBreaches: React.FC<EmailBreachesProps> = ({ emailBreaches }) => {
       <div key={breach.name} className="breach-item">
         <div className="data-item">
           <span className="descriptor">Name:</span> <span className="data">{breach.name}</span>
+          <span className="data">
+            {breach.logoPath ? <img src={breach.logoPath} alt="Logo" className="logo" /> : 'No logo'}
+          </span>
           <span className="flag-icon">
-            <i className={getFlagClassName(emailBreaches.flag)}></i>
+            <i className={getFlagClassName(breach.flag)}></i>
           </span>
         </div>
         <div className="data-item">
@@ -96,6 +102,15 @@ const EmailBreaches: React.FC<EmailBreachesProps> = ({ emailBreaches }) => {
         </div>
         <div className="data-item">
           <span className="descriptor">Data Classes:</span> <span className="data">{breach.dataClasses.join(', ')}</span>
+        </div>
+        <div className="data-item">
+          <span className="descriptor">Verified:</span> <span className="data">{breach.isVerified ? 'Yes' : 'No'}</span>
+        </div>
+        <div className="data-item">
+          <span className="descriptor">Fabricated:</span> <span className="data">{breach.isFabricated ? 'Yes' : 'No'}</span>
+        </div>
+        <div className="data-item">
+          <span className="descriptor">Malware:</span> <span className="data">{breach.isMalware ? 'Yes' : 'No'}</span>
         </div>
       </div>
     );

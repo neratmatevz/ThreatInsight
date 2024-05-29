@@ -70,6 +70,19 @@
   color: #e3e3e3;
 }
 
+.descriptor{
+  color: #22e6df;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.data {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: white;
+}
+
+
 @media (max-width: 768px) {
   .scan-page {
     padding: 16px; 
