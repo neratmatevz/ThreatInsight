@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Common/Header/Header";
+import Footer from "./components/Common/Footer/Footer";
 import HomePage from "./Pages/HomePage/HomePage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PasswordInput from "./Pages/AuthenticationPage/RegistrationPages/RegisterPage/RegisterPage";
@@ -154,7 +155,8 @@ function App() {
             </Route>
             
           </Routes>
-        </div>
+           <Footer />
+        </div>   
       </BrowserRouter>
     </AuthProvider>
   );

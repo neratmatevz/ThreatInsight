@@ -23,9 +23,9 @@ const DomainDataModal: React.FC<DomainDataModalProps> = ({ isOpen, onClose, emai
         <div className="modal-content">
           {emails.map((email, index) => (
             <div key={index} className="data-item">
-              <span className="descriptor">Type:</span> <span className="data">{email.email_type}</span>
+              <span className="descriptor">Email:</span> <span className="data">{email.email}</span> 
               <br />
-              <span className="descriptor">Email:</span> <span className="data">{email.email}</span>
+              <span className="descriptor">Type:</span> <span className="data">{email.email_type}</span>
               <hr />
             </div>
           ))}

@@ -20,23 +20,7 @@
     font-size: 14px;
   }
   
-  .descriptor {
-    color: #ffffff;
-  }
-  
-  .data {
-    color: #a3a3a3;
-  }
-  
-  .ellipsis {
-    color:  #2ba8a4;
-    font-size: 22px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-  }
+
   .no-flag {
     display: none;
   }

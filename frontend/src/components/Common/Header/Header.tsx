@@ -35,6 +35,12 @@ const Header: React.FC = () => {
         navigate('/profile');
     };
 
+    const navigateToScans = () => {
+        setIsProfileOpen(false);
+        setIsMobileMenuOpen(false);
+        navigate('/scans');
+    };
+
     return (
         <nav className="navbar">
             <div className="header-content">
@@ -68,7 +74,10 @@ const Header: React.FC = () => {
                                 Manage account
                                 <i className="fas fa-external-link-alt"></i>
                             </div>
-                            
+                            <div className="dropdown-item" onClick={navigateToScans}>
+                                My Scans
+                                <i className="fas fa-search"></i>
+                            </div>
                             <button onClick={handleLogout} className="dropdown-item logout-button">
                                 Logout <i className="fas fa-sign-out-alt"></i>
                             </button>
@@ -85,15 +94,14 @@ const Header: React.FC = () => {
                                 <div className="dropdown-menu show">
                                     <div className="dropdown-item-account">Account</div>
                                     <div className="dropdown-item-email">{user?.email}</div>
-                                    <div className="dropdown-item">
-                                        My Searches
+                                    <div className="dropdown-item" onClick={navigateToScans}>
+                                        My Scans
                                         <i className="fas fa-search"></i>
                                     </div>
                                     <div className="dropdown-item" onClick={navigateToProfile}>
                                         Manage account
                                         <i className="fas fa-external-link-alt"></i>
                                     </div>
-                                   
                                     <button onClick={handleLogout} className="dropdown-item logout-button">
                                         Logout <i className="fas fa-sign-out-alt"></i>
                                     </button>

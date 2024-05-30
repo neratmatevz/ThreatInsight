@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Modal/Modal.css';
 import DOMPurify from 'dompurify';
+import './EmailBreaches.css';
 
 interface EmailBreach {
   isFabricated: boolean;
@@ -82,7 +83,7 @@ const BreachesModal: React.FC<BreachesModalProps> = ({ isOpen, onClose, breaches
               <div className="data-item">
                 <span className="descriptor">Malware:</span> <span className="data">{breach.isMalware ? 'Yes' : 'No'}</span>
               </div>
-              <hr />
+              <hr className="breach-separator" />
             </div>
           ))}
         </div>

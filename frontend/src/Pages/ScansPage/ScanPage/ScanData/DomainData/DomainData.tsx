@@ -10,7 +10,7 @@ interface DomainDataProps {
       flag: number | null;
     };
     emails: {
-      emails: { email_type: string; email: string }[];
+      emails: { email: string; email_type: string }[];
       flag: number | null;
       totalFoundEmails: number;
     };
@@ -175,22 +175,25 @@ const DomainData: React.FC<DomainDataProps> = ({ domainData }) => {
       <hr />
       <div className="data-section">
         <h3>Email Information</h3>
+
         <div className="data-item">
-          <span className="descriptor">Emails:</span>
+          <span className="descriptor">Total Found Emails:</span> <span className="data">{domainData.emails.totalFoundEmails}</span>
+        </div>
+        <div className="data-item">
+          <span className="descriptor">Emails: </span>
           <span className="data">
             {emailsToShow.map(email => email.email).join(', ')}...
           </span>
           <span className="flag-icon">
             <i className={getFlagClassName(domainData.emails.flag)}></i>
           </span>
-          {hasMoreEmails && (
-            <div className="ellipsis" onClick={handleOpenEmailsModal}>
-              <i className="fas fa-plus"></i>
-            </div>
-          )}
-        </div>
-        <div className="data-item">
-          <span className="descriptor">Total Found Emails:</span> <span className="data">{domainData.emails.totalFoundEmails}</span>
+          <div>
+            {hasMoreEmails && (
+              <div className="ellipsis" onClick={handleOpenEmailsModal}>
+                <i className="fas fa-plus"></i>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <hr />
