@@ -9,6 +9,54 @@
     background-color: #1b1b1b;
   }
 
+    @media (max-width: 800px) and (min-width: 760px) {
+      .docs-header {
+     left:0px;
+     width: 220px;
+      }
+      .nav-link-box-docs{
+        width: 190px;
+        
+      }
+    }
+
+    
+    @media (max-width: 900px) and (min-width: 800px) {
+      .docs-header {
+     left:0px;
+     width: 250px;
+      }
+      .nav-link-box-docs{
+        width: 220px;
+        
+      }
+    }
+
+        
+    @media (max-width: 1100px) and (min-width: 900px) {
+      .docs-header {
+     left:0px;
+     width: 300px;
+      }
+      .nav-link-box-docs{
+        width: 260px;
+        
+      }
+    }
+    
+    @media (max-width: 1400px) and (min-width: 1100px) {
+      .docs-header {
+     left:0px;
+     width: 350px;
+      }
+      .nav-link-box-docs{
+        width: 320px;
+        
+      }
+    }
+    
+
+
 
   .nav-link-box-docs {
   

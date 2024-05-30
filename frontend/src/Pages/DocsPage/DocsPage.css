@@ -1,3 +1,12 @@
 .full-height-div {
     height: 100vh;
   }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;  
+  }
+  

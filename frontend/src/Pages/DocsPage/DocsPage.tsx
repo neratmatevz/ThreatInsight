@@ -10,19 +10,19 @@ const DocsPage = () => {
   return (
 
     <div className="full-height-div">
-    <Container fluid className='h-100'>
-      <Row className='h-100'>
-        <Col xs={1} lg={1}></Col>
-        <Col xs={2} lg={2} className="h-100">
+    <Container fluid >
+      <Row>
+        <Col xs={0} sm={0} md={1} lg={1}></Col>
+        <Col xs={11}sm={11} md={2} lg={2}>
           <DocsHeader /> 
         </Col>
-        <Col xs={1} lg={1}></Col>
-        <Col xs={5} lg={6} className="overflow-auto"> 
+        <Col xs={0} sm={0} md={1} lg={1}></Col>
+        <Col xs={12} sm={12} md={8} lg={6} > 
           <div className="main-content p-4">
             <Outlet />
           </div>
         </Col>
-        <Col xs={3} lg={2}></Col>
+        <Col xs={0} sm={0} md={0} lg={2}></Col>
       </Row>
     </Container>
   </div>
