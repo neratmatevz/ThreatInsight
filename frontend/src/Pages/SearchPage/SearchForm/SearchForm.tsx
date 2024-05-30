@@ -109,7 +109,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="normal">Normal</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Default scan type."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Default nmap scan, that uses TCP SYN packets for scanning. Command: nmap [domain]"></i>
                         </div>
                         <div className="custom-radio">
                             <input
@@ -122,7 +122,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="fast">Fast</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Fast scan, fewer ports."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Scans top 100 most commonly used ports. Command: nmap -F [domain]"></i>
                         </div>
                         <div className="custom-radio">
                             <input
@@ -135,7 +135,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="ping">Ping</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Ping scan to check hosts."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Basic ping, that checks the online status of the host. Command: nmap -sP [domain]"></i>
                         </div>
                         <div className="custom-radio">
                             <input
@@ -148,7 +148,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="port">Port</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Scans specific ports."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Scans selected ports: FTP(21), SSH(22), SMTP(25), HTTP(80), POP(110), IMAP(143), HTTPS(443), SMB(445). Command: nmap -sV -p 21,22,25,80,110,143,443,445 [domain]"></i>
                         </div>
                         <div className="custom-radio">
                             <input
@@ -161,7 +161,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="osinfo">OS Info</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Gets OS info."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Most in depth scan of the host. Besides port discovery, it also performs OS detection and traceroute. Command: nmap -A [domain]"></i>
                         </div>
                         <div className="custom-radio">
                             <input
@@ -174,7 +174,7 @@ const SearchForm = ({ selectedTools, setFormData, showNotes }: SearchFormProps) 
                                 required
                             />
                             <label htmlFor="osdetect">OS Detect</label>
-                            <i className="fa fa-info-circle info-icon" data-tooltip="Detects OS with probes."></i>
+                            <i className="fa fa-info-circle info-icon" data-tooltip="Primarily for OS detection, also discovers ports, but with less info than 'OS Info'. Command: nmap -O [domain]"></i>
                         </div>
                     </div>
                 </div>

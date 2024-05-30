@@ -1,5 +1,5 @@
 .overview-section {
-    background: transparent; /* Background image is handled by HomePage */
+    background: transparent;
     padding: 200px 0px;
     color: #060606;
 }
@@ -10,17 +10,17 @@
 }
 
 h2 {
-    font-family: 'Space Grotesk', sans-serif; /* Added fallback fonts */
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 60px;
     color: #e5e5e5;
     margin-bottom: 10px;
 }
 
 p {
-    font-family: 'Space Mono', monospace; /* Added fallback fonts */
+    font-family: 'Space Mono', monospace; 
     font-size: 20px;
     color: #a3a3a3;
-    line-height: 1; /* Adjusted line height for less space between lines */
+    line-height: 1; 
 }
 
 .img-fluid {
@@ -42,9 +42,9 @@ p {
 }
 
 .overview-section .explore-button::after {
-    content: '→'; /* Arrow symbol */
+    content: '→';
     margin-left: 10px;
-    font-size: 24px; /* Increase the font size for a bigger arrow */
+    font-size: 24px; 
 }
 
 .overview-section .explore-button:hover {

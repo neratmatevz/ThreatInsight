@@ -14,19 +14,26 @@ import './ScanPage.css';
 import axios from 'axios';
 
 const ScanPage = () => {
+  // Extract the searchUID from the URL parameters
   const { id: searchUID } = useParams();
+  // Get the current user from AuthContext
   const { user } = useAuth();
+  // State to store the authentication token
   const [token, setToken] = useState<string | null>(null);
-  const [scanData, setScanData] = useState<any | null>(null); // Changed to 'any'
+  // State to store the scan data fetched from the backend
+  const [scanData, setScanData] = useState<any | null>(null); 
 
+  // Effect to fetch the token and scan data when the component mounts or user/searchUID changes
   useEffect(() => {
     const fetchTokenAndData = async () => {
       if (user) {
         try {
+          // Get the authentication token for the current user
           const idToken = await user.getIdToken(true);
           setToken(idToken);
           console.log(user);
 
+          // Fetch scan data from the backend if token, user UID, and searchUID are available
           if (idToken && user.uid && searchUID) {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/search`, {
               headers: {
@@ -39,7 +46,7 @@ const ScanPage = () => {
               }
             });
 
-            // Handle successful response
+            // Handle successful response and set scan data
             console.log('Response:', response.data);
             setScanData(response.data);
           }
@@ -52,6 +59,7 @@ const ScanPage = () => {
     fetchTokenAndData();
   }, [user, searchUID]);
 
+  // Return null if scan data is not yet available
   if (!scanData) return null;
 
   return (

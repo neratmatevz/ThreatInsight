@@ -7,9 +7,9 @@ import { auth } from '../../Firebase/firebase';
 import './SearchPage.css';
 
 const SearchPage = () => {
-    const { user } = useAuth(); 
-    const [token, setToken] = useState<string | null>(null); 
-    const [selectedTools, setSelectedTools] = useState<string[]>([]);
+    const { user } = useAuth(); // Get the current user from AuthContext
+    const [token, setToken] = useState<string | null>(null); // State to store the auth token
+    const [selectedTools, setSelectedTools] = useState<string[]>([]); // State to store selected tools
     const [formData, setFormData] = useState({
         email: '',
         domain: '',
@@ -17,19 +17,19 @@ const SearchPage = () => {
         nmapScanType: '',
         notes: '',
         title: ''
-    });
-    const [showNotes, setShowNotes] = useState<boolean>(false);
+    }); // State to store form data
+    const [showNotes, setShowNotes] = useState<boolean>(false); 
     const [isLoading, setIsLoading] = useState<boolean>(false); 
 
     useEffect(() => {
         if (user) {
             auth.currentUser?.getIdToken(true).then((idToken) => {
-                setToken(idToken);
+                setToken(idToken); // Set the auth token
             }).catch((error) => {
                 console.error('Error getting token:', error);
             });
         }
-    }, [user]);
+    }, [user]); // Fetch token whenever the user changes
 
     const handleStartScanning = async () => {
         // Perform validation checks
@@ -111,7 +111,6 @@ const SearchPage = () => {
             },
         };
 
-
         try {
             setIsLoading(true); 
             const response = await fetch(`${process.env.REACT_APP_API_URL}/search`, { 
@@ -126,7 +125,7 @@ const SearchPage = () => {
             if (response.ok) {
                 const result = await response.json();
                 if (result.path) {
-                    window.location.href = result.path;
+                    window.location.href = result.path; 
                 } else {
                     alert('Path not found in the response.');
                 }
@@ -138,16 +137,16 @@ const SearchPage = () => {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
         } finally {
-            setIsLoading(false); // Hide the loader after the request is complete
+            setIsLoading(false); 
         }
     };
 
     return (
         <div className="scans-page-container">
-            {isLoading && <Loader />} {/* Show the loader if isLoading is true */}
+            {isLoading && <Loader />} 
             <div className="scans-container container-fluid">
                 <div className="row flex-grow-1">
-                    <div className="col-lg-2 col-md-4 col-sm-12 toolpicker-container">
+                    <div className="col-lg-2 toolpicker-container">
                         <ToolPicker
                             selectedTools={selectedTools}
                             setSelectedTools={setSelectedTools}
