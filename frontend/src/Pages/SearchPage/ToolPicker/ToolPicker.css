@@ -1,27 +1,15 @@
 .toolpicker-container {
     position: relative;
-    background: url('../../../../public/images/toolbg.jpg') no-repeat center center/cover;
+    background-color: rgba(0, 0, 0, 0.123);
     border: 1px solid #2ba8a4;
     font-family: 'Space Mono', monospace;
     color: #e3e3e3;
-    padding: 0;
-    margin: 0;
+
     border-radius: 0;
 }
 
-.form-check-label{
+.form-check-label {
     cursor: pointer;
-}
-
-.toolpicker-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.521); /* Black background with transparency */
-    z-index: 1;
 }
 
 .toolpicker-header {
@@ -90,7 +78,7 @@
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
+    justify-content: center; 
 }
 
 .btn-notes {

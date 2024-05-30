@@ -21,21 +21,21 @@
 }
 
 .purpose-card i {
-    color: rgb(54, 210, 205); /* Icon color */
+    color: rgb(54, 210, 205);
 }
 
 .purpose-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 24px;
     color: #e3e3e3;
-    margin-top: 15px; /* Add some space between the icon and heading */
+    margin-top: 15px; 
 }
 
 .purpose-card p {
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     color: #a3a3a3;
-    margin-top: 10px; /* Add some space between the heading and paragraph */
+    margin-top: 10px; 
 }
 
 .features-heading h2 {

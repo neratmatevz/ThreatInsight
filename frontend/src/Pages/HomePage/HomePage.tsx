@@ -12,10 +12,8 @@ const HomePage = () => {
     const { user, loading } = useAuth();
           
     useEffect(()=> {
-        console.log(user)
         auth.currentUser?.getIdToken(true)
         .then(function(idToken){
-            console.log(idToken)
         });
         
     }, [user]);

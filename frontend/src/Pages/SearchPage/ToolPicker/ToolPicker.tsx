@@ -27,7 +27,7 @@ const ToolPicker: React.FC<ToolPickerProps> = ({ selectedTools, setSelectedTools
     const tools = ["Nmap", "WhoIs", "HaveIBeenPwned", "IP Geolocation", "TLS/DNSSec Scan", "Domain Search", "E-mail Permutator"];
 
     return (
-        <div className="toolpicker-container">
+        <div >
             <h3 className="toolpicker-header"><i className="fa fa-wrench tool-icon" aria-hidden="true"></i> Available tools:</h3>
             {tools.map((tool, index) => (
                 <div
