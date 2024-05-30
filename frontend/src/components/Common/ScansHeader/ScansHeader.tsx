@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldAlt,
@@ -40,7 +40,7 @@ const ScansHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<{ id: string, name: string, notes: string }>({ id: "", name: "", notes: "" });
   const [reloadComp, setReloadComp] = useState(false);
-
+  const navigate = useNavigate();
 
   const handleOpenModal = (id: string, name: string, notes: string) => {
     setModalContent({ id, name, notes });
@@ -83,6 +83,9 @@ const ScansHeader = () => {
     fetchIskanja();
   }, [user, reloadComp]);
 
+const handleNewScan = async () =>{
+  navigate('/newscan')
+}
 
 
 
@@ -120,7 +123,6 @@ const ScansHeader = () => {
     try {
       await deleteDoc(doc(db, "users", user.uid, "iskanje", id));
 
-      // Remove the scan from local state
       setIskanja((prevIskanja) =>
         prevIskanja.filter((iskanje) => iskanje.id !== id)
       );
@@ -147,7 +149,7 @@ const ScansHeader = () => {
           <Button
 
             className="d-md-none btn-lg button-black"
-            onClick={handleAddNewScan}
+            onClick={handleNewScan}
           >
             {" "}
             <FontAwesomeIcon icon={faPlus} />
@@ -272,7 +274,7 @@ const ScansHeader = () => {
           <div className="left-div" style={{ backgroundColor: '#1b1b1b' }}>
             <Button
 
-              onClick={handleAddNewScan}
+              onClick={handleNewScan}
               size="lg"
               className="button-black"
             >

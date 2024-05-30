@@ -33,7 +33,7 @@ const FrequencyTable = () => {
             // TODO : DODAJ ŠE PREOSTALE 
             //** */
 
-            if (key !== "name" && key !== "creationDate"&& key !== "finalResult") {
+            if (key !== "name" && key !== "creationDate" && key !== "FINALRESULT" && key !== 'notes') {
             counts[key] = (counts[key] || 0) + 1;
           }
         });
