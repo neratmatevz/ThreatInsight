@@ -19,3 +19,17 @@
     font-size: 25px;
     font-weight: normal;    
 }
+
+.tools-title{
+    font-family: "Space Mono";
+}
+
+.tools-listitem{
+    text-decoration: none;
+
+}
+
+.tools-listitem:hover{
+    text-decoration: underline;
+    text-decoration-color: #2BA8A4;
+}

@@ -1,9 +1,6 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
-import ListGroup from 'react-bootstrap/ListGroup';
 import './OurTools.css'
 
 const DomainSearch = () => {
@@ -11,29 +8,39 @@ const DomainSearch = () => {
     <div>
       <Row>
         <Col>
-        <h2 className='header-docs'>Domain Search</h2>
+          <h2 className='header-docs'>Domain Search</h2>
         </Col>
       </Row>
+
       <Row className="my-3">
-          <p className='description-docs' >DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.
-          DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool. </p>
-      </Row>
-      <Row>
-
-      <p className='sub-header-docs'>Bulletpoints</p>
-      <Container>
+        <p className='description-docs' >
+          Domain Search is a service that discovers email addresses from the inputed domain. Besided the emails we also discover company data.
+        </p>
+        <div>
+          <img src="/images/docs/domainSearch.png" alt="Domain Search" className="img-docs" />
+        </div>
+        <p>
+          <br />
+          <h4 className='tools-title'>Input:</h4>
           <ul className='ul-docs' >
-            <li className='li-docs'>Tool 1: Description</li>
-            <li className='li-docs'>Tool 2: Description</li>
-            <li className='li--docs'>Tool 3: Description</li>
+            <li className='li-docs'>
+              domain name
+            </li>
           </ul>
-          </Container>
-      </Row>
+        </p>
+        <p>
+          <h4 className='tools-title'>Output:</h4>
+          <ul className='ul-docs' >
+            <li className='li-docs'>
+              list of all found emails
+            </li>
+            <li className='li-docs'>
+              company information
+            </li>
+          </ul>
+        </p>
 
-      <Row>
-      <img src="/images/overview.jpg" alt="Domain Search" className="img-fluid" />
-
-      </Row>
+      </Row>      
     </div>
   );
 };

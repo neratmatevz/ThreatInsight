@@ -2,39 +2,43 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
-import ListGroup from 'react-bootstrap/ListGroup';
 import './OurTools.css'
 
 const EmailPermutator = () => {
   return (
     <div>
-    <Row>
-      <Col>
-      <h2 className='header-docs'>Email Permutator</h2>
-      </Col>
-    </Row>
-    <Row className="my-3">
-        <p className='description-docs'>DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.
-        DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool.DomainSearch is a tool. </p>
-    </Row>
-    <Row>
+      <Row>
+        <Col>
+          <h2 className='header-docs'>Email Permutator</h2>
+        </Col>
+      </Row>
+      <Row className="my-3">
+        <p className='description-docs'>
+          Email permutator is our self implemented feature, that generates a list of permutated email addresses, which can be used for phishing attacks.
+        </p>
+        <div>
+          <img src="/images/docs/emailPermutator.png" alt="emailPermutator" className="img-docs" />
+        </div>
+      </Row>
+      <Row>
 
-    <p className='sub-header-docs'>Bulletpoints</p>
-    <Container>
-    <ul className='ul-docs' >
-            <li className='li-docs'>Tool 1: Description</li>
-            <li className='li-docs'>Tool 2: Description</li>
-            <li className='li--docs'>Tool 3: Description</li>
+        <p className='sub-header-docs'>Input:</p>
+        <Container>
+          <ul className='ul-docs' >
+            <li className='li-docs'>email address</li>
           </ul>
         </Container>
-    </Row>
+      </Row>
+      <Row>
 
-    <Row>
-    <img src="/images/overview.jpg" alt="Email Permutator" className="img-fluid" />
-
-    </Row>
-  </div>
+        <p className='sub-header-docs'>Output:</p>
+        <Container>
+          <ul className='ul-docs' >
+            <li className='li-docs'>list of permutated email addresses</li>
+          </ul>
+        </Container>
+      </Row>
+    </div>
   );
 };
 

@@ -7,3 +7,25 @@
 .li-docs::marker{
     color:#2BA8A4;
 }
+
+.tools-title{
+    font-family: "Space Mono";
+    color: white;
+    font-size: 25px;
+}
+
+.img-docs{
+    height: 25rem;
+    width: auto;
+}
+
+@media (max-width: 768px) { /* Adjust the breakpoint as needed */
+    .img-docs {
+        height: 13rem;
+        width: auto;
+    }
+}
+
+.nmap-desc{
+    color: #a3a3a3;
+}

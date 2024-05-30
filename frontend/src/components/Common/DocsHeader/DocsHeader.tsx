@@ -23,9 +23,8 @@ const DocsHeader = () => {
             <Nav.Link
               as={NavLink}
               to="overview"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/overview" ? "activeScans" : ""
-              }`}
+              className={`nav-link-box-docs ${location.pathname === "/docs/overview" ? "activeScans" : ""
+                }`}
             >
               <p className="p-docs">👀 Overview</p>
             </Nav.Link>
@@ -34,9 +33,8 @@ const DocsHeader = () => {
             <Nav.Link
               as={NavLink}
               to="vision"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/vision" ? "activeScans" : ""
-              }`}
+              className={`nav-link-box-docs ${location.pathname === "/docs/vision" ? "activeScans" : ""
+                }`}
             >
               <p className="p-docs">🔮 Vision</p>
             </Nav.Link>
@@ -44,90 +42,12 @@ const DocsHeader = () => {
 
           <Nav.Item>
             <p className="p-header-scan">ThreatInsight Tools</p>
-            <Nav.Link
-              as={NavLink}
-              to="domain-search"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/domain-search" ? "activeScans" : ""
-              }`}
-            >
-              <p className="p-docs">
-                <i
-                  className="fas fa-envelope-open-text icon-blue"
-                  style={{ marginRight: "8px" }}
-                ></i>{" "}
-                Domain Search
-              </p>
-            </Nav.Link>
-          </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link
-              as={NavLink}
-              to="email-permutator"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/email-permutator"
-                  ? "activeScans"
-                  : ""
-              }`}
-            >
-              <p className="p-docs">
-                <i
-                  className="fas fa-user-plus icon-blue"
-                  style={{ marginRight: "8px" }}
-                ></i>{" "}
-                E-mail Permutator
-              </p>
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              as={NavLink}
-              to="haveibeenpwned"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/haveibeenpwned"
-                  ? "activeScans"
-                  : ""
-              }`}
-            >
-              <p className="p-docs">
-                <i
-                  className="fas fa-user-secret icon-blue"
-                  style={{ marginRight: "8px" }}
-                ></i>{" "}
-                HaveIBeenPwned
-              </p>
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Nav.Link
-              as={NavLink}
-              to="ip-geolocation"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/ip-geolocation"
-                  ? "activeScans"
-                  : ""
-              }`}
-            >
-              <p className="p-docs">
-                <i
-                  className="fas fa-map-marked-alt icon-blue"
-                  style={{ marginRight: "8px" }}
-                ></i>{" "}
-                IP Geolocation
-              </p>
-            </Nav.Link>
-          </Nav.Item>
-
-          <Nav.Item>
             <Nav.Link
               as={NavLink}
               to="nmap"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/nmap" ? "activeScans" : ""
-              }`}
+              className={`nav-link-box-docs ${location.pathname === "/docs/nmap" ? "activeScans" : ""
+                }`}
             >
               <p className="p-docs">
                 <i
@@ -142,10 +62,45 @@ const DocsHeader = () => {
           <Nav.Item>
             <Nav.Link
               as={NavLink}
+              to="domain-search"
+              className={`nav-link-box-docs ${location.pathname === "/docs/domain-search" ? "activeScans" : ""
+                }`}
+            >
+              <p className="p-docs">
+                <i
+                  className="fas fa-envelope-open-text icon-blue"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                Domain Search
+              </p>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              as={NavLink}
+              to="ip-geolocation"
+              className={`nav-link-box-docs ${location.pathname === "/docs/ip-geolocation"
+                ? "activeScans"
+                : ""
+                }`}
+            >
+              <p className="p-docs">
+                <i
+                  className="fas fa-map-marked-alt icon-blue"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                IP Geolocation
+              </p>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              as={NavLink}
               to="tlsdns"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/tlsdns" ? "activeScans" : ""
-              }`}
+              className={`nav-link-box-docs ${location.pathname === "/docs/tlsdns" ? "activeScans" : ""
+                }`}
             >
               <p className="p-docs">
                 <i
@@ -161,9 +116,8 @@ const DocsHeader = () => {
             <Nav.Link
               as={NavLink}
               to="whois"
-              className={`nav-link-box-docs ${
-                location.pathname === "/docs/whois" ? "activeScans" : ""
-              }`}
+              className={`nav-link-box-docs ${location.pathname === "/docs/whois" ? "activeScans" : ""
+                }`}
             >
               <p className="p-docs">
                 {" "}
@@ -172,6 +126,44 @@ const DocsHeader = () => {
                   style={{ marginRight: "8px" }}
                 ></i>{" "}
                 WhoIs
+              </p>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              as={NavLink}
+              to="haveibeenpwned"
+              className={`nav-link-box-docs ${location.pathname === "/docs/haveibeenpwned"
+                ? "activeScans"
+                : ""
+                }`}
+            >
+              <p className="p-docs">
+                <i
+                  className="fas fa-user-secret icon-blue"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                HaveIBeenPwned
+              </p>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link
+              as={NavLink}
+              to="email-permutator"
+              className={`nav-link-box-docs ${location.pathname === "/docs/email-permutator"
+                ? "activeScans"
+                : ""
+                }`}
+            >
+              <p className="p-docs">
+                <i
+                  className="fas fa-user-plus icon-blue"
+                  style={{ marginRight: "8px" }}
+                ></i>{" "}
+                E-mail Permutator
               </p>
             </Nav.Link>
           </Nav.Item>
@@ -204,9 +196,8 @@ const DocsHeader = () => {
               <Nav.Link
                 as={NavLink}
                 to="overview"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/overview" ? "activeScans" : ""
-                }`}
+                className={`nav-link-box-docs ${location.pathname === "/docs/overview" ? "activeScans" : ""
+                  }`}
               >
                 <p className="p-docs">👀 Overview</p>
               </Nav.Link>
@@ -215,9 +206,8 @@ const DocsHeader = () => {
               <Nav.Link
                 as={NavLink}
                 to="vision"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/vision" ? "activeScans" : ""
-                }`}
+                className={`nav-link-box-docs ${location.pathname === "/docs/vision" ? "activeScans" : ""
+                  }`}
               >
                 <p className="p-docs">🔮 Vision</p>
               </Nav.Link>
@@ -225,92 +215,12 @@ const DocsHeader = () => {
 
             <Nav.Item>
               <p className="p-header-scan">ThreatInsight Tools</p>
-              <Nav.Link
-                as={NavLink}
-                to="domain-search"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/domain-search"
-                    ? "activeScans"
-                    : ""
-                }`}
-              >
-                <p className="p-docs">
-                  <i
-                    className="fas fa-envelope-open-text icon-blue"
-                    style={{ marginRight: "8px" }}
-                  ></i>{" "}
-                  Domain Search
-                </p>
-              </Nav.Link>
-            </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="email-permutator"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/email-permutator"
-                    ? "activeScans"
-                    : ""
-                }`}
-              >
-                <p className="p-docs">
-                  <i
-                    className="fas fa-user-plus icon-blue"
-                    style={{ marginRight: "8px" }}
-                  ></i>{" "}
-                  E-mail Permutator
-                </p>
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="haveibeenpwned"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/haveibeenpwned"
-                    ? "activeScans"
-                    : ""
-                }`}
-              >
-                <p className="p-docs">
-                  <i
-                    className="fas fa-user-secret icon-blue"
-                    style={{ marginRight: "8px" }}
-                  ></i>{" "}
-                  HaveIBeenPwned
-                </p>
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="ip-geolocation"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/ip-geolocation"
-                    ? "activeScans"
-                    : ""
-                }`}
-              >
-                <p className="p-docs">
-                  <i
-                    className="fas fa-map-marked-alt icon-blue"
-                    style={{ marginRight: "8px" }}
-                  ></i>{" "}
-                  IP Geolocation
-                </p>
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
               <Nav.Link
                 as={NavLink}
                 to="nmap"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/nmap" ? "activeScans" : ""
-                }`}
+                className={`nav-link-box-docs ${location.pathname === "/docs/nmap" ? "activeScans" : ""
+                  }`}
               >
                 <p className="p-docs">
                   <i
@@ -325,10 +235,45 @@ const DocsHeader = () => {
             <Nav.Item>
               <Nav.Link
                 as={NavLink}
+                to="domain-search"
+                className={`nav-link-box-docs ${location.pathname === "/docs/domain-search" ? "activeScans" : ""
+                  }`}
+              >
+                <p className="p-docs">
+                  <i
+                    className="fas fa-envelope-open-text icon-blue"
+                    style={{ marginRight: "8px" }}
+                  ></i>{" "}
+                  Domain Search
+                </p>
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="ip-geolocation"
+                className={`nav-link-box-docs ${location.pathname === "/docs/ip-geolocation"
+                  ? "activeScans"
+                  : ""
+                  }`}
+              >
+                <p className="p-docs">
+                  <i
+                    className="fas fa-map-marked-alt icon-blue"
+                    style={{ marginRight: "8px" }}
+                  ></i>{" "}
+                  IP Geolocation
+                </p>
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
                 to="tlsdns"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/tlsdns" ? "activeScans" : ""
-                }`}
+                className={`nav-link-box-docs ${location.pathname === "/docs/tlsdns" ? "activeScans" : ""
+                  }`}
               >
                 <p className="p-docs">
                   <i
@@ -344,9 +289,8 @@ const DocsHeader = () => {
               <Nav.Link
                 as={NavLink}
                 to="whois"
-                className={`nav-link-box-docs ${
-                  location.pathname === "/docs/whois" ? "activeScans" : ""
-                }`}
+                className={`nav-link-box-docs ${location.pathname === "/docs/whois" ? "activeScans" : ""
+                  }`}
               >
                 <p className="p-docs">
                   {" "}
@@ -355,6 +299,44 @@ const DocsHeader = () => {
                     style={{ marginRight: "8px" }}
                   ></i>{" "}
                   WhoIs
+                </p>
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="haveibeenpwned"
+                className={`nav-link-box-docs ${location.pathname === "/docs/haveibeenpwned"
+                  ? "activeScans"
+                  : ""
+                  }`}
+              >
+                <p className="p-docs">
+                  <i
+                    className="fas fa-user-secret icon-blue"
+                    style={{ marginRight: "8px" }}
+                  ></i>{" "}
+                  HaveIBeenPwned
+                </p>
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="email-permutator"
+                className={`nav-link-box-docs ${location.pathname === "/docs/email-permutator"
+                  ? "activeScans"
+                  : ""
+                  }`}
+              >
+                <p className="p-docs">
+                  <i
+                    className="fas fa-user-plus icon-blue"
+                    style={{ marginRight: "8px" }}
+                  ></i>{" "}
+                  E-mail Permutator
                 </p>
               </Nav.Link>
             </Nav.Item>
