@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-04-22T12:09:20.726Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" etag="zBdQveIWvXVfLfzh8ltf" version="24.2.7" type="device">
+<mxfile host="app.diagrams.net" modified="2024-05-31T11:10:39.977Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="nbDXfPZejXLbJQK9BtX4" version="24.4.11" type="device">
   <diagram name="Page-1" id="R5PdUQdGmvO8FqCiypS0">
-    <mxGraphModel dx="2193" dy="747" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2261" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -124,302 +124,250 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-33" value="Poročila o opravljenem delu" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="120" y="220" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-34" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="DDdhfqyS9CRwHlB18A0V-33" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="130" y="180" as="sourcePoint" />
-            <mxPoint x="260" y="410" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="130" y="200" />
-              <mxPoint x="180" y="200" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-35" value="Zaključni dokumenti" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="304" y="220" width="120" height="60" as="geometry" />
+          <mxGeometry x="214" y="220" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-36" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="DDdhfqyS9CRwHlB18A0V-35" edge="1">
+        <mxCell id="DDdhfqyS9CRwHlB18A0V-36" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" target="DDdhfqyS9CRwHlB18A0V-35" edge="1" source="DDdhfqyS9CRwHlB18A0V-2">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="130" y="180" as="sourcePoint" />
-            <mxPoint x="340" y="320" as="targetPoint" />
+            <mxPoint x="40" y="180" as="sourcePoint" />
+            <mxPoint x="250" y="320" as="targetPoint" />
             <Array as="points">
               <mxPoint x="130" y="200" />
-              <mxPoint x="364" y="200" />
+              <mxPoint x="274" y="200" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-37" value="Poročilo o zaključku projekta" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="304" y="310" width="120" height="60" as="geometry" />
+          <mxGeometry x="214" y="310" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-38" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-37" target="DDdhfqyS9CRwHlB18A0V-35" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="230" y="290" as="sourcePoint" />
-            <mxPoint x="300" y="250" as="targetPoint" />
+            <mxPoint x="140" y="290" as="sourcePoint" />
+            <mxPoint x="210" y="250" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="270" y="340" />
-              <mxPoint x="270" y="250" />
+              <mxPoint x="180" y="340" />
+              <mxPoint x="180" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-39" value="Po-projektne dejavnosti" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="304" y="400" width="120" height="60" as="geometry" />
+          <mxGeometry x="214" y="400" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-40" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-39" target="DDdhfqyS9CRwHlB18A0V-35" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="230" y="380" as="sourcePoint" />
-            <mxPoint x="300" y="340" as="targetPoint" />
+            <mxPoint x="140" y="380" as="sourcePoint" />
+            <mxPoint x="210" y="340" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="270" y="430" />
-              <mxPoint x="270" y="250" />
+              <mxPoint x="180" y="430" />
+              <mxPoint x="180" y="250" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-42" value="Analiza trga" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="524" y="220" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-43" value="Analiza obstoječih rešitev" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="524" y="310" width="120" height="60" as="geometry" />
+          <mxGeometry x="400" y="220" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-44" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-43" target="DDdhfqyS9CRwHlB18A0V-42" edge="1">
+        <mxCell id="DDdhfqyS9CRwHlB18A0V-47" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-43" target="DDdhfqyS9CRwHlB18A0V-5" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="450" y="290" as="sourcePoint" />
-            <mxPoint x="520" y="250" as="targetPoint" />
+            <mxPoint x="426" y="170" as="sourcePoint" />
+            <mxPoint x="586" y="180" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="490" y="340" />
-              <mxPoint x="490" y="250" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-45" value="Poročilo analize trga" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="524" y="400" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-46" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-45" target="DDdhfqyS9CRwHlB18A0V-42" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="450" y="380" as="sourcePoint" />
-            <mxPoint x="520" y="340" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="490" y="430" />
-              <mxPoint x="490" y="250" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-47" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-42" target="DDdhfqyS9CRwHlB18A0V-5" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="540" y="190" as="sourcePoint" />
-            <mxPoint x="590" y="140" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="584" y="200" />
+              <mxPoint x="460" y="200" />
               <mxPoint x="710" y="200" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-48" value="Načrti" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="874" y="220" width="120" height="60" as="geometry" />
+          <mxGeometry x="750" y="220" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-49" value="Načrt implementacije" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="874" y="310" width="120" height="60" as="geometry" />
+          <mxGeometry x="750" y="310" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-50" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-49" target="DDdhfqyS9CRwHlB18A0V-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="800" y="290" as="sourcePoint" />
-            <mxPoint x="870" y="250" as="targetPoint" />
+            <mxPoint x="676" y="290" as="sourcePoint" />
+            <mxPoint x="746" y="250" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="840" y="340" />
-              <mxPoint x="840" y="250" />
+              <mxPoint x="716" y="340" />
+              <mxPoint x="716" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-51" value="Načrt testiranja" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="874" y="400" width="120" height="60" as="geometry" />
+          <mxGeometry x="750" y="400" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-52" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-51" target="DDdhfqyS9CRwHlB18A0V-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="800" y="380" as="sourcePoint" />
-            <mxPoint x="870" y="340" as="targetPoint" />
+            <mxPoint x="676" y="380" as="sourcePoint" />
+            <mxPoint x="746" y="340" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="840" y="430" />
-              <mxPoint x="840" y="250" />
+              <mxPoint x="716" y="430" />
+              <mxPoint x="716" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-53" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-5" target="DDdhfqyS9CRwHlB18A0V-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="840" y="180" as="sourcePoint" />
-            <mxPoint x="890" y="130" as="targetPoint" />
+            <mxPoint x="586" y="180" as="sourcePoint" />
+            <mxPoint x="766" y="130" as="targetPoint" />
             <Array as="points">
               <mxPoint x="710" y="200" />
-              <mxPoint x="934" y="200" />
+              <mxPoint x="810" y="200" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-54" value="SZPO" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="690" y="220" width="120" height="60" as="geometry" />
+          <mxGeometry x="566" y="220" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-55" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-5" target="DDdhfqyS9CRwHlB18A0V-54" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="850" y="90" as="sourcePoint" />
-            <mxPoint x="900" y="40" as="targetPoint" />
+            <mxPoint x="586" y="180" as="sourcePoint" />
+            <mxPoint x="776" y="40" as="targetPoint" />
             <Array as="points">
               <mxPoint x="710" y="200" />
-              <mxPoint x="750" y="200" />
+              <mxPoint x="626" y="200" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-56" value="Načrt podatkovne baze" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="874" y="490" width="120" height="60" as="geometry" />
+          <mxGeometry x="750" y="490" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-57" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-56" target="DDdhfqyS9CRwHlB18A0V-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="800" y="470" as="sourcePoint" />
-            <mxPoint x="874" y="430" as="targetPoint" />
+            <mxPoint x="676" y="470" as="sourcePoint" />
+            <mxPoint x="750" y="430" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="840" y="520" />
-              <mxPoint x="840" y="250" />
+              <mxPoint x="716" y="520" />
+              <mxPoint x="716" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-58" value="Načrt vzpostavitve" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="874" y="580" width="120" height="60" as="geometry" />
+          <mxGeometry x="750" y="580" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-59" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-58" target="DDdhfqyS9CRwHlB18A0V-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="800" y="550" as="sourcePoint" />
-            <mxPoint x="874" y="510" as="targetPoint" />
+            <mxPoint x="676" y="550" as="sourcePoint" />
+            <mxPoint x="750" y="510" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="840" y="610" />
-              <mxPoint x="840" y="250" />
+              <mxPoint x="716" y="610" />
+              <mxPoint x="716" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-61" value="Programska oprema&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="1074" y="320" width="120" height="60" as="geometry" />
+          <mxGeometry x="950" y="320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-62" value="Uporabniški vmesnik spletne aplikacije" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1074" y="410" width="120" height="60" as="geometry" />
+          <mxGeometry x="950" y="410" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-63" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-62" target="DDdhfqyS9CRwHlB18A0V-61" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1000" y="390" as="sourcePoint" />
-            <mxPoint x="1070" y="350" as="targetPoint" />
+            <mxPoint x="876" y="390" as="sourcePoint" />
+            <mxPoint x="946" y="350" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1040" y="440" />
-              <mxPoint x="1040" y="350" />
+              <mxPoint x="916" y="440" />
+              <mxPoint x="916" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-64" value="Zaledje spletne aplikacije" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1074" y="500" width="120" height="60" as="geometry" />
+          <mxGeometry x="950" y="500" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-65" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-64" target="DDdhfqyS9CRwHlB18A0V-61" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1000" y="480" as="sourcePoint" />
-            <mxPoint x="1070" y="440" as="targetPoint" />
+            <mxPoint x="876" y="480" as="sourcePoint" />
+            <mxPoint x="946" y="440" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1040" y="530" />
-              <mxPoint x="1040" y="350" />
+              <mxPoint x="916" y="530" />
+              <mxPoint x="916" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-66" value="Podatkovna baza spletne aplikacije" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1074" y="590" width="120" height="60" as="geometry" />
+          <mxGeometry x="950" y="590" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-67" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-66" target="DDdhfqyS9CRwHlB18A0V-61" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1000" y="560" as="sourcePoint" />
-            <mxPoint x="1074" y="520" as="targetPoint" />
+            <mxPoint x="876" y="560" as="sourcePoint" />
+            <mxPoint x="950" y="520" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1040" y="620" />
-              <mxPoint x="1040" y="350" />
+              <mxPoint x="916" y="620" />
+              <mxPoint x="916" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-68" value="Pr. oprema in dokumentacija" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="1194" y="220" width="120" height="60" as="geometry" />
+          <mxGeometry x="1070" y="220" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-69" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-5" target="DDdhfqyS9CRwHlB18A0V-68" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670" y="230" as="sourcePoint" />
-            <mxPoint x="1130" y="400" as="targetPoint" />
+            <mxPoint x="586" y="180" as="sourcePoint" />
+            <mxPoint x="1006" y="400" as="targetPoint" />
             <Array as="points">
               <mxPoint x="710" y="200" />
-              <mxPoint x="1254" y="200" />
+              <mxPoint x="1130" y="200" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-71" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-68" target="DDdhfqyS9CRwHlB18A0V-61" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1230" y="120" as="sourcePoint" />
-            <mxPoint x="1280" y="70" as="targetPoint" />
+            <mxPoint x="1106" y="120" as="sourcePoint" />
+            <mxPoint x="1156" y="70" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1254" y="300" />
-              <mxPoint x="1134" y="300" />
+              <mxPoint x="1130" y="300" />
+              <mxPoint x="1010" y="300" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-72" value="Dokumentacija PO" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="1314" y="320" width="120" height="60" as="geometry" />
+          <mxGeometry x="1190" y="320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-73" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-68" target="DDdhfqyS9CRwHlB18A0V-72" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1370" y="300" as="sourcePoint" />
-            <mxPoint x="1420" y="250" as="targetPoint" />
+            <mxPoint x="1246" y="300" as="sourcePoint" />
+            <mxPoint x="1296" y="250" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1254" y="300" />
-              <mxPoint x="1374" y="300" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-74" value="Dokumentacija podatkovne baze" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1314" y="410" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-75" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-74" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1240" y="390" as="sourcePoint" />
-            <mxPoint x="1314" y="350" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="1280" y="440" />
-              <mxPoint x="1280" y="350" />
+              <mxPoint x="1130" y="300" />
+              <mxPoint x="1250" y="300" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-76" value="Dokumentacija kode" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1314" y="500" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="DDdhfqyS9CRwHlB18A0V-77" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-76" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1240" y="480" as="sourcePoint" />
-            <mxPoint x="1314" y="350" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="1280" y="530" />
-              <mxPoint x="1280" y="350" />
-            </Array>
-          </mxGeometry>
+          <mxGeometry x="1190" y="410" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-78" value="Dokumentacija testiranja" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1314" y="590" width="120" height="60" as="geometry" />
+          <mxGeometry x="1190" y="500" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-79" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-78" target="DDdhfqyS9CRwHlB18A0V-72" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1240" y="560" as="sourcePoint" />
-            <mxPoint x="1314" y="350" as="targetPoint" />
+            <mxPoint x="1116" y="470" as="sourcePoint" />
+            <mxPoint x="1190" y="260" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1280" y="620" />
-              <mxPoint x="1280" y="350" />
+              <mxPoint x="1156" y="530" />
+              <mxPoint x="1156" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-82" value="Uporabniški priročnik" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="1410" y="220" width="120" height="60" as="geometry" />
+          <mxGeometry x="1286" y="220" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DDdhfqyS9CRwHlB18A0V-83" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="DDdhfqyS9CRwHlB18A0V-5" target="DDdhfqyS9CRwHlB18A0V-82" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1020" y="150" as="sourcePoint" />
-            <mxPoint x="1070" y="100" as="targetPoint" />
+            <mxPoint x="586" y="180" as="sourcePoint" />
+            <mxPoint x="946" y="100" as="targetPoint" />
             <Array as="points">
               <mxPoint x="710" y="200" />
-              <mxPoint x="1470" y="200" />
+              <mxPoint x="1346" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BYTxmViqiaGDUrzovwwK-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DDdhfqyS9CRwHlB18A0V-76" target="DDdhfqyS9CRwHlB18A0V-72">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="876" y="430" as="sourcePoint" />
+            <mxPoint x="926" y="380" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1156" y="440" />
+              <mxPoint x="1156" y="350" />
             </Array>
           </mxGeometry>
         </mxCell>
