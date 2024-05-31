@@ -37,24 +37,41 @@
     z-index: 1;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1400px) {
     .scans-container {
         flex-direction: row;
     }
 
     .toolpicker-container {
-        flex: 0 0 16.6667%;
+        flex: 0 0 16.6667%; 
+        max-width: 16.6667%;
     }
 
     .results-container {
-        flex: 0 0 83.3333%;
+        flex: 0 0 83.3333%; 
+        max-width: 83.3333%;
+    }
+}
+
+
+@media (max-width: 1599.98px) and (min-width: 1400px) {
+    .scans-container {
+        flex-direction: row;
+    }
+
+    .toolpicker-container {
+        flex: 0 0 30%; /* 3 columns */
+        max-width: 30%;
+    }
+
+    .results-container {
+        flex: 0 0 70%; /* 7 columns */
+        max-width: 70%;
     }
 }
 
 @media (max-width: 991.98px) {
-    .scans-container {
-        flex-direction: column;
-    }
+
 
     .toolpicker-container, .results-container {
         padding: 10px;

@@ -31,7 +31,6 @@ const ScanPage = () => {
           // Get the authentication token for the current user
           const idToken = await user.getIdToken(true);
           setToken(idToken);
-          console.log(user);
 
           // Fetch scan data from the backend if token, user UID, and searchUID are available
           if (idToken && user.uid && searchUID) {
@@ -46,8 +45,6 @@ const ScanPage = () => {
               }
             });
 
-            // Handle successful response and set scan data
-            console.log('Response:', response.data);
             setScanData(response.data);
           }
         } catch (error) {
