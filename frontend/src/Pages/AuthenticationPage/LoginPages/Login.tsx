@@ -50,6 +50,7 @@ const Login = () => {
     signInWithMicrosoft,
     setErrorNull,
     setErrorInComponent,
+    syncUserEmail
   } = useAuth();
   const [isValid, setIsValid] = useState(false);
   const [isTotp, setisTotp] = useState(false);
@@ -111,6 +112,11 @@ const Login = () => {
       setIsValid(response.data.verified);
       if (response.data.verified === true) {
         await signInWithEmailAndPassword(auth, email, password);
+        if(!auth.currentUser){
+          throw new Error('No user.');
+        }
+        syncUserEmail(email, auth.currentUser?.uid)
+        navigate("/your-work");
       } else if (response.data.verified === false){
         setErrorInComponent("Token is invalid. Please try again.");
         closeModal()
@@ -141,6 +147,11 @@ const Login = () => {
       setIsValid(response.data.verified);
       if (response.data.verified === true) {
         await signInWithEmailAndPassword(auth, email, password);
+        if(!auth.currentUser){
+          throw new Error('No user.');
+        }
+        syncUserEmail(email, auth.currentUser?.uid)
+        navigate("/your-work");
       } else if( response.data.verified === false){
     
         setErrorInComponent("Recovery key is invalid. Please try again. ");
@@ -182,9 +193,10 @@ const Login = () => {
 
   return (
     <Container fluid className="container-md login-container">
-      <Row className="justify-content-center">
+      <Row className="justify-content-center text-center">
+      <p className="h2-login">ThreatInsight</p>
         <Col md={3} className="text-center">
-          <h2>ThreatInsight </h2>
+  
           <p>Sign in to continue. </p>
           {error && <Alert className="error">Error: {error}</Alert>}
           {/* Email Form */}
@@ -286,7 +298,8 @@ const Login = () => {
           </Link>
         </Col>
       </Row>
-      <Modal show={showModal} onHide={closeModal}>
+
+      <Modal show={showModal} onHide={closeModal} className='modal-container2'>
   <Modal.Header closeButton>
     <Modal.Title>Enter your code</Modal.Title>
   </Modal.Header>
@@ -298,7 +311,7 @@ const Login = () => {
 
         <Form.Control
           type="text"
-          className='dark-input'
+          className='input-black'
           placeholder="Enter 6-digit code"
           value={token}
           onChange={(e) => setToken(e.target.value)}
@@ -309,6 +322,7 @@ const Login = () => {
         Verify
       </Button>
     </Form>
+    <br></br>
 <p>Or insert recovery key: </p>
     {/* Recovery Key Form */}
     <Form onSubmit={verifyRecoveryKey}>
@@ -316,7 +330,7 @@ const Login = () => {
 
         <Form.Control
           type="text"
-          className='dark-input'
+          className='input-black'
           placeholder="Enter Recovery Key"
           value={recoveryKey}
           onChange={(e) => setRecoveryKey(e.target.value)}
@@ -333,7 +347,9 @@ const Login = () => {
       Close
     </Button>
   </Modal.Footer>
+  
 </Modal>
+
     </Container>
   );
 };

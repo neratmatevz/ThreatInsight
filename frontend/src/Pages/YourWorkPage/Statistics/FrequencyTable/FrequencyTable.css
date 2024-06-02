@@ -8,10 +8,10 @@
   }
   
   .table-custom tbody tr:nth-child(even) {
-    background-color: #222; /* Darker shade for even rows */
+    background-color: #222; 
   }
   
   .table-custom tbody tr:nth-child(odd) {
-    background-color: black; /* Ensure odd rows are black */
+    background-color: black;
   }
   

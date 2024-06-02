@@ -8,6 +8,7 @@ import {
   faUserCog,
   faBars,
   faPlus,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import "./ScansHeader.css";
 import { Iskanje } from "../../../Pages/YourWorkPage/FrequentScans/RecentScans";
@@ -136,14 +137,14 @@ const handleNewScan = async () =>{
 
       <div
         className="d-flex justify-content-between align-items-center p-3 removeline"
-        style={{ backgroundColor: "#252525" }}
+        style={{ backgroundColor: "#252525", width:'100%' }}
       >
         <Button
 
           className="d-md-none btn-lg button-black"
           onClick={handleShowOffCanvas}
         >
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon icon={faSearch} />
         </Button>
         <div className="d-flex d-md-none ms-2">
           <Button

@@ -14,12 +14,12 @@ interface CredentialModalProps {
 
   const handleSubmit = () => {
     handleConfirm(password);
-    setPassword(''); // Clear password after submission
+    setPassword(''); 
     handleClose();
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} className='modal-container2'>
     <Modal.Header closeButton>
       <Modal.Title>{title}</Modal.Title>
     </Modal.Header>
@@ -28,6 +28,7 @@ interface CredentialModalProps {
         type="password"
         placeholder="Enter your password to confirm"
         value={password}
+        className='input-black'
         onChange={(e) => setPassword(e.target.value)}
       />
     </Modal.Body>
@@ -35,7 +36,7 @@ interface CredentialModalProps {
       <Button variant="secondary" onClick={handleClose}>
         Cancel
       </Button>
-      <Button variant="primary" onClick={handleSubmit}>
+      <Button variant="dark" className='button-black'onClick={handleSubmit}>
         Confirm
       </Button>
     </Modal.Footer>

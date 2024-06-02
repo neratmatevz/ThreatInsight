@@ -114,8 +114,9 @@ const RecentScans: React.FC = () => {
                 className="mb-4 card-custom"
                 onClick={() => handleCardClick(iskanje.id)}
               >
-                <Card.Body>
-                  <Card.Title>{iskanje.name}</Card.Title>
+                <Card.Body >
+                <Card.Title style={{ paddingTop: '15px', overflow: 'hidden', maxHeight:'60px' }}>{iskanje.name}</Card.Title>
+
                 </Card.Body>
                 <Card.Footer>
                   <Card.Body>{iskanje.creationDate}</Card.Body>

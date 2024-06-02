@@ -74,13 +74,14 @@ const RegisterPage = () => {
 
   return (
     <Container fluid className="container-md login-container">
-    <Row className="justify-content-center">
+         <Row className="justify-content-center text-center">
+      <p className="h2-login">ThreatInsight</p>
       <Col md={3} className="text-center">
-        <h2>ThreatInsight </h2>
+
         <p>Sign in to continue. </p>
         {error && <Alert  className="error">Error: {error}</Alert>}
         {/* Email Form */}
-        <Form onSubmit={handleEmailSubmit}>
+        <Form  onSubmit={handleEmailSubmit}>
           
           <InputGroup className="mb-3">
             <Form.Control
@@ -92,6 +93,7 @@ const RegisterPage = () => {
               className="input-black"
               required={true}
             />
+          
             {!editable && (
               <Button variant="outline-secondary button-black" onClick={handleEditClick}>
                 <i className="bi bi-pencil"></i>
@@ -122,6 +124,7 @@ const RegisterPage = () => {
                 type={showPasswordText ? "text" : "password"}
                 placeholder="Enter password"
                 value={password}
+                minLength={8}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input-black"
                   required={true}

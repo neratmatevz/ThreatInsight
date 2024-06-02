@@ -43,7 +43,7 @@ const BarChart: React.FC<BarChartProps> = ({ counts }) => {
         newChartInstance = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Counts'], // Single label for the dataset
+            labels: ['Counts'], 
             datasets: data,
           },
           options: {
@@ -56,7 +56,7 @@ const BarChart: React.FC<BarChartProps> = ({ counts }) => {
             scales: {
               x: {
                 beginAtZero: true,
-         
+              
                 ticks: {
                   color: '#e5e7eb',
                 },
@@ -65,6 +65,7 @@ const BarChart: React.FC<BarChartProps> = ({ counts }) => {
                 beginAtZero: true,
                 ticks: {
                   color: '#e5e7eb',
+                  stepSize: 1,
                 },
               },
             },

@@ -92,7 +92,7 @@ router.get('/createCustomToken', async (req, res) => {
 
     try {
         const customToken = await createCustomToken(uid);
-        res.send(customToken); // Send token back to client
+        res.send(customToken);
     } catch (error) {
         console.log('Error creating custom token:', error);
         res.status(500).send("Error creating custom token");
@@ -199,7 +199,7 @@ router.post('/checkEmailVerified', async(req,res) => {
           const isValid = authenticator.verify({ token, secret });
 
           if (isValid) {
-            // If the token is valid, save the secret to the database
+
             const db = getFirestoreInstance();
             await db.collection('users').doc(uid).set({
                 totpSecret: secret,
@@ -245,7 +245,6 @@ router.post('/verifyTOTP', async (req, res) => {
     }
   });
   
-// Verify Recovery Key
 router.post('/verifyRecoveryKey', async (req, res) => {
     const { email, recoveryKeyInputted } = req.body;
 
@@ -282,14 +281,33 @@ router.post('/TOTPexists', async (req, res) => {
       const { email } = req.body;
 
       const result = await TOTPexists(email);
-console.log(result)
+
 res.json({totp: result})
 
     } catch (error) {
-      // Handle unexpected errors
+
       console.error('Unexpected error:', error);
       res.status(500).json({ status: 'error', message: 'An unexpected error occurred.' });
     }
   });
+
+  router.put('/syncUserEmail', async (req, res) => {
+    try {
+        const { email, uid } = req.body;
+
+        if (!email || !uid) {
+            return res.status(400).json({ status: 'error', message: 'Email and UID are required.' });
+        }
+
+        const db = getFirestoreInstance();
+   
+        const userDocRef = db.collection('users').doc(uid);
+        await userDocRef.update({ email });
+        return res.status(200).json({ status: 'success', message: 'User email synchronized successfully.' });
+    } catch (error) {
+        console.error('Unexpected error:', error);
+        return res.status(500).json({ status: 'error', message: 'An unexpected error occurred.' });
+    }
+});
 
 module.exports = router;

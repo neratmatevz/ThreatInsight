@@ -10,6 +10,7 @@ import {
   EmailAuthProvider,
   updatePassword,
   deleteUser,
+  reauthenticateWithPopup,
 } from "firebase/auth";
 import { auth, googleProvider } from "../../../../Firebase/firebase";
 import Button from "react-bootstrap/Button";
@@ -50,7 +51,7 @@ const UpdateEmailPage = () => {
       );
     } catch (error: any) {
       const errorMessage = error.message;
-      console.log(error.message)
+      console.log(error.message);
       if (firebaseErrorMessages[errorMessage]) {
         setError(firebaseErrorMessages[errorMessage]);
       } else {
@@ -62,33 +63,34 @@ const UpdateEmailPage = () => {
   const reauthenticateUser = async (password: string): Promise<void> => {
     try {
       if (!auth.currentUser || !auth.currentUser.email) {
-        console.error('User not authenticated');
+        console.error("User not authenticated");
         return;
       }
 
-   //   if(auth.currentUser.providerData.some(provider =>provider.providerId ==='google.com')){
- //       reauthenticateWithRedirect(auth.currentUser, googleProvider)
- //       return null;
- //     }
-  
-      const credential = EmailAuthProvider.credential(
-        auth.currentUser.email,
-        password
-      );
-  
-      await reauthenticateWithCredential(auth.currentUser, credential);
-  
-    
-    } catch (error:any) {
-      console.error('Error reauthenticating user:', error);
+      if (
+        auth.currentUser.providerData.some(
+          (provider) => provider.providerId === "google.com"
+        )
+      ) {
+        await reauthenticateWithPopup(auth.currentUser, googleProvider);
+      } else {
+        const credential = EmailAuthProvider.credential(
+          auth.currentUser.email,
+          password
+        );
+
+        await reauthenticateWithCredential(auth.currentUser, credential);
+      }
+    } catch (error: any) {
+      console.error("Error reauthenticating user:", error);
       const errorMessage = error.message;
-      console.log(error.message)
+      console.log(error.message);
       if (firebaseErrorMessages[errorMessage]) {
         setError(firebaseErrorMessages[errorMessage]);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
-      throw error; 
+      throw error;
     }
   };
 
@@ -99,54 +101,71 @@ const UpdateEmailPage = () => {
     setShowModalEmail(true);
   };
 
+  const isGoogleProvider = user?.providerData.some(
+    (provider) => provider.providerId === "google.com"
+  );
+
   return (
-    <Container fluid className='profile-container'>
-    <Row>
-      <Col xs={12} sm={12} md={4} lg={2} style={{ height: '100%' }}>
-        <VerticalHeader />
-      </Col>
-      <Col xs={12} sm={12} md={8} lg={10} style={{ height: '100%' }}>
-        <Container fluid className='mt-4'>
-     
-          <p className='mb-4' style={{ fontSize: '30px', marginTop: '30px' , color:'white'}}>Update your email</p>
-          {error && <Alert className="error">{error}</Alert>}
-          <Form className='mt-4'>
-            <p>Your current e-mail: {user && user.email}</p>
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2} htmlFor="new-email">
-                <p>New e-mail:</p>
-              </Form.Label>
-              <Col sm={3}>
-                <Form.Control
-                  type="email"
-                  id="new-email"
-                  value={newEmail}
-                  onChange={(e) => setNewEmail(e.target.value)}
-                  className="input-black"
-                  required
-                />
-              </Col>
-            </Form.Group>
-            <Button
-              type="submit"
-              variant='dark' size='lg' className='button-black'
-              onClick={handleShowModalEmail}
+    <Container fluid className="profile-container">
+      <Row>
+        <Col xs={12} sm={12} md={4} lg={2} style={{ height: "100%" }}>
+          <VerticalHeader />
+        </Col>
+        <Col xs={12} sm={12} md={8} lg={10} style={{ height: "100%" }}>
+          <Container fluid className="mt-4">
+            <p
+              className="mb-4"
+              style={{ fontSize: "30px", marginTop: "30px", color: "white" }}
             >
-              Update Email
-            </Button>
+              Update your email
+            </p>
+            {error && <Alert className="error">{error}</Alert>}
+            <Form className="mt-4">
+              <p>Your current e-mail: {user && user.email}</p>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm={2} lg={1} htmlFor="new-email">
+                  <p>New e-mail:</p>
+                </Form.Label>
+                <Col sm={3}>
+                  <Form.Control
+                    type="email"
+                    id="new-email"
+                    style={{ width: "300px" }}
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    className="input-black"
+                    required
+                    disabled={isGoogleProvider} 
+                  />
+                  {isGoogleProvider && (
+                    <Form.Text className="text-muted">
+                      Email update disabled for Google providers.
+                    </Form.Text>
+                  )}
+                </Col>
+              </Form.Group>
+              <Button
+                type="submit"
+                variant="dark"
+                size="lg"
+                className="button-black"
+                onClick={handleShowModalEmail}
+                disabled={isGoogleProvider}
+              >
+                Update Email
+              </Button>
 
-            <PromptForCredentials
-              title={"To update your email, please confirm your password."}
-              show={showModalEmail}
-              handleClose={handleCloseModalEmail}
-              handleConfirm={handleEmailUpdate}
-            />
-          </Form>
-
-        </Container>
-      </Col>
-    </Row>
-  </Container>
+              <PromptForCredentials
+                title={"To update your email, please confirm your password."}
+                show={showModalEmail}
+                handleClose={handleCloseModalEmail}
+                handleConfirm={handleEmailUpdate}
+              />
+            </Form>
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

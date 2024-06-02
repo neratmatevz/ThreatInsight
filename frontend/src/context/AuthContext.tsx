@@ -56,8 +56,10 @@ interface AuthContextType {
   signInWithMicrosoft: () => Promise<void>;
   setErrorNull: () => Promise<void>;
   setErrorInComponent: (error: string) => void;
-  setLoadingTrue: () =>void;
+  setLoadingTrue: () => void;
   setLoadingFalse: () => void;
+  deleteUserFromCollection: (uid: string) => Promise<void>;
+  syncUserEmail: (uid:string, email:string)=> Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -73,7 +75,9 @@ const AuthContext = createContext<AuthContextType>({
   setErrorNull: async () => {},
   setErrorInComponent: async () => {},
   setLoadingTrue: async () => {},
-  setLoadingFalse: async () => {}
+  setLoadingFalse: async () => {},
+  deleteUserFromCollection: async () => {},
+  syncUserEmail: async () =>{}
 });
 
 export const useAuth = () => {
@@ -91,10 +95,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const API_BASE_URL = process.env.REACT_APP_API_URL;
   const [isTtotpenabled, setIsTtotpenabled] = useState(false);
 
-
-
   useEffect(() => {
-    setError('')
+    setError("");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
@@ -110,12 +112,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const setLoadingTrue = async () => {
-    setLoading(true)
-  }
+    setLoading(true);
+  };
 
   const setLoadingFalse = async () => {
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   if (loading) {
     return <LoadingOverlay />;
@@ -184,8 +186,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             openModal(e);
             //     await signInWithEmailAndPassword(auth, email, password);
           } else {
-            setLoading(true);
+          //  setLoading(true);
             await signInWithEmailAndPassword(auth, email, password);
+            if(!auth.currentUser){
+              throw new Error('No user.');
+            }
+            syncUserEmail(email, auth.currentUser?.uid)
             navigate("/your-work");
           }
         } else {
@@ -196,7 +202,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
     } catch (error: any) {
       const errorMessage = error.message;
-      console.log(error.message)
+      console.log(error.message);
       if (firebaseErrorMessages[errorMessage]) {
         setError(firebaseErrorMessages[errorMessage]);
       } else {
@@ -265,10 +271,49 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const syncUserEmail = async (email: string, uid: string) => {
+    try {
+        const response = await axios.put(`${API_BASE_URL}/syncUserEmail`, {
+            email: email, 
+            uid: uid 
+        });
+        console.log(response.data); 
+    } catch (error) {
+        console.error('Error synchronizing user email:', error);
+
+    }
+};
+
   const signInWithGoogle = async () => {
-    await signInWithRedirect(auth, googleProvider);
+    signInWithPopup(auth, googleProvider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+
+      const user = result.user;
+      addUserToFirestore(user)
+
+ 
+    }).catch((error) => {
+    
+     setErrorInComponent(error)
+ 
+    });
+  
   };
 
+  const deleteUserFromCollection = async (uid:string) => {
+    try {
+        const response = await axios.delete(`${API_BASE_URL}/deleteUser`, {
+            params: { uid: uid }
+        });
+        console.log(response.data); 
+    } catch (error: any) {
+        console.error('Error deleting user:', error);
+        setError(error.message)
+    }
+};
   const signInWithApple = async () => {
     await signInWithRedirect(auth, appleProvider);
   };
@@ -292,7 +337,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setErrorNull,
         setErrorInComponent,
         setLoadingTrue,
-        setLoadingFalse
+        setLoadingFalse,
+        deleteUserFromCollection,
+        syncUserEmail
       }}
     >
       {children}

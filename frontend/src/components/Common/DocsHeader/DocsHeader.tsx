@@ -170,17 +170,17 @@ const DocsHeader = () => {
         </Nav>
       </div>
 
-      <Button
-        className="d-md-none btn-lg button-black"
-        onClick={handleShowOffCanvas}
-      >
-        <FontAwesomeIcon icon={faBars} />
+   
+
+      <Button onClick={handleShowOffCanvas} className="d-lg-none account-settings-button" >
+        <p style={{color: '#E5E5E5'}}>← Docs</p>
       </Button>
 
       <Offcanvas
         show={showOffCanvas}
         onHide={handleCloseOffCanvas}
         className="d-md-none offcanvas"
+        style={{backgroundColor:'#1b1b1b'}}
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title style={{ fontWeight: "normal" }}>

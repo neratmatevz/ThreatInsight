@@ -9,7 +9,6 @@ console.log(uid)
     getAuth()
     .getUser(uid)
     .then((userRecord) => {
-      // See the UserRecord reference doc for the contents of userRecord.
       console.log('Successfully fetched user data:', userRecord.toJSON());
 
     })
@@ -30,41 +29,47 @@ const createUser = async (email, password) => {
       const user = await getAuth().getUser(userRecord.uid);
 getAuth().sendCustomVerificationEmail()
       console.log('Successfully created new user:', user.uid);
-      return user; // Return the User object
+      return user; 
   } catch (error) {
       console.log('Error creating new user:', error);
-      throw error; // Rethrow the error to be caught by the caller
+      throw error; 
   }
 };
 
 
 // IZBRIŠI UPORABNIKA
 const deleteUser = async (uid) => {
-    console.log(uid)
+    console.log(uid);
 
-    getAuth()
-    .deleteUser(uid)
-    .then(() => {
-      console.log('Successfully deleted user');
-    })
-    .catch((error) => {
-      console.log('Error deleting user:', error);
-    });
-        
+    try {
+        await getAuth().deleteUser(uid);
+        console.log('Successfully deleted user from Firebase Authentication');
+    } catch (error) {
+        console.log('Error deleting user from Firebase Authentication:', error);
+        return; 
     }
+
+    try {
+        const db= getFirestoreInstance()
+        const userDocRef = db.collection('users').doc(uid);
+        await userDocRef.delete();
+        console.log('Successfully deleted user data from Firestore');
+    } catch (error) {
+        console.log('Error deleting user data from Firestore:', error);
+    }
+};
+
 
 // POSODOBI UPORABNIKA
 
 const updateUser = async (uid, email, phoneNumber, password) => {
     try {
-        // Get user details
         const userRecord = await getUser(uid);
 
-        // Update user details
         const updatedUserRecord = await getAuth().updateUser(uid, {
             email: email || userRecord.email,
             phoneNumber: phoneNumber || userRecord.phoneNumber,
-            password: password || undefined, // Password is optional, if not provided, it won't be updated
+            password: password || undefined, 
         });
 
         console.log('Successfully updated user:', updatedUserRecord.toJSON());
@@ -120,7 +125,6 @@ const TOTPexists = async (email) => {
         querySnapshot.forEach((doc) => {
             if (doc.data().totpSecret) {
                 totpExists = true;
-                // If you only need to check for existence, you can exit the loop after finding one document
                 return;
             }
         });

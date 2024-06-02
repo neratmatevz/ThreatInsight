@@ -43,11 +43,11 @@ const VerticalHeader = () => {
         </Nav.Link>
       </Nav>
 
-      <Button onClick={handleToggle} className="d-lg-none account-settings-button" variant='dark' style={{ color: 'white' }}>
-        <p>← Account Settings</p>
+      <Button onClick={handleToggle} className="d-lg-none account-settings-button" >
+        <p style={{color: '#E5E5E5'}}>← Account Settings</p>
       </Button>
 
-      <Offcanvas show={show} onHide={handleToggle} placement="start" className="d-lg-none">
+      <Offcanvas show={show} onHide={handleToggle} placement="start" style={{backgroundColor:'#1b1b1b'}} className="d-lg-none">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>

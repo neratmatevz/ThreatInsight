@@ -48,14 +48,22 @@
     color: #E5E5E5; 
   }
   .account-settings-button{
-    background-color: #252525 !important;
-    border-color: #252525!important;
+    background-color: transparent !important;
+    color: #E5E5E5 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important; 
   }.account-settings-button:hover{
-    background-color: #252525!important;
-    border-color: #252525!important;
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important; 
   }
 
   .account-settings-button:focus{
-    background-color: #252525!important;
-    border-color: #252525!important;
+    background-color: transparent !important;
+
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important; 
   }

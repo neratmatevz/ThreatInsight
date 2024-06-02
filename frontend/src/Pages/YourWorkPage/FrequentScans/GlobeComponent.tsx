@@ -15,7 +15,6 @@ const GlobeComponent: React.FC = () => {
     }));
 
     if (globeEl.current) {
-      // Check if globeEl.current has pointsData method before calling it
       if (typeof globeEl.current.pointsData === 'function') {
         globeEl.current.pointsData(gData)
           .globeImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-night.jpg');

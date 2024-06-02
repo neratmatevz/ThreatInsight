@@ -1,6 +1,6 @@
 .login-container {
     margin-top: 100px;
-    
+    align-items: center;
   }
 
   .input-black{
@@ -72,6 +72,7 @@
   color: white;
   border-color: #2BA8A4;
   margin-top: 20px;
+  max-width: 500px;
 }
 
 .link-black{
@@ -82,4 +83,33 @@
 .link-black:hover{
   color: #2BA8A4;
   font-family: 'Space Grotesk', sans-serif;
+}
+
+.h2-login{
+  font-size: 40px;
+  color: #e3e3e3;
+  font-family: 'Space Mono', monospace;
+}
+
+
+.modal-container2 .modal-dialog {
+  background-color: #171717;
+  border: 1px solid #2ba8a4;
+  color: #e3e3e3;
+  font-family: 'Space Mono', monospace;
+  max-height: 50%;
+}
+
+
+
+.modal-container2 .modal-header .btn-close {
+  background-color: #2BA8A4;
+  border: none;
+  opacity: 1;
+}
+
+.offcanvas .btn-close{
+  color:'red';
+  background-color: #2ba8a4;
+  fill:'red'
 }
