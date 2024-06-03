@@ -1,5 +1,5 @@
 # ThreatInsight
-A web application that offers multiple cybersecurity tools/services in one place for gathering information about a 'target' (Google, UM, target company, etc.), which the user will then save and receive advice about the state of the 'target' or possible vulnerabilities
+A web application offers multiple cybersecurity tools/services in one place for gathering information about a 'target' (Google, UM, target company, etc.), which the user will then save and receive advice about the state of the 'target' or possible vulnerabilities
 
 ![Cybersecurity Tools](README_picture.png)
 
