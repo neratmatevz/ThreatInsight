@@ -1,5 +1,7 @@
 # ThreatInsight
-A web application offers multiple cybersecurity tools/services in one place for gathering information about a 'target' (Google, UM, target company, etc.), which the user will then save and receive advice about the state of the 'target' or possible vulnerabilities
+Welcome to ThreatInsight, your all-in-one cyber defense platform. With ThreatInsight, you gain access to a comprehensive web application that centralizes multiple cybersecurity tools and services, offering unparalleled convenience in gathering information about your targets.
+
+Whether you're scrutinizing tech giants like Google, academic institutions such as UM, or specific companies, ThreatInsight equips you with intuitive tools to efficiently collect, analyze, and store pertinent data. Receive tailored insights and advice on the state of your targets, along with proactive suggestions to address potential vulnerabilities.
 
 ![Cybersecurity Tools](README_picture.png)
 
