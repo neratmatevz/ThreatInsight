@@ -1,11 +1,17 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import firebaseConfig from './firebase-config.json';
+//import firebaseConfig from "../firebase-config.json";
 import { GoogleAuthProvider } from "firebase/auth";
 import { OAuthProvider } from "firebase/auth";
 
+const firebaseConfigString = process.env.REACT_APP_FIREBASE_CONFIG;
 
+if (!firebaseConfigString) {
+  throw new Error('Missing Firebase configuration');
+}
+
+const firebaseConfig = JSON.parse(firebaseConfigString);
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
